@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/Screens/order_repair.dart';
 
 import 'profile.dart';
 
 class CustomerScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery
@@ -23,7 +25,9 @@ class CustomerScreen extends StatelessWidget {
               children: [
                 SizedBox(height: size.height * 0.2),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => OrderRepairScreen()));
+                  },
                   child: const Text(
                     "Order repair",
                     style: TextStyle(

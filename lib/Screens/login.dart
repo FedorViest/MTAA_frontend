@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:frontend/Screens/customer.dart';
 import 'package:frontend/Screens/register.dart';
 
 class LoginScreen extends StatelessWidget{
@@ -61,7 +62,9 @@ class LoginScreen extends StatelessWidget{
             Container(
               alignment: Alignment.center,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => CustomerScreen()));
+                },
                 child: const Text('SIGN IN'),
                 style: ElevatedButton.styleFrom(
                     fixedSize: const Size(200, 60), primary: Color(0xFF1E5F74)),
@@ -77,14 +80,14 @@ class LoginScreen extends StatelessWidget{
                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegisterScreen()));
                   },
                   child: RichText(
-                    text: TextSpan(
-                      style: const TextStyle(
+                    text: const TextSpan(
+                      style: TextStyle(
                         fontSize: 14,
                         color: Colors.grey,
                       ),
                       children: <TextSpan>[
                         TextSpan(text: 'Don\'t have an account? '),
-                        TextSpan(text: 'Register here!', style: const TextStyle(fontWeight: FontWeight.bold)),
+                        TextSpan(text: 'Register here!', style: TextStyle(fontWeight: FontWeight.bold)),
                       ],
                     ),
                   )
