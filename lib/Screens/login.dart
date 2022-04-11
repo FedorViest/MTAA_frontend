@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter/services.dart';
 import 'package:frontend/Screens/register.dart';
 
 class LoginScreen extends StatelessWidget{
@@ -8,25 +8,17 @@ class LoginScreen extends StatelessWidget{
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.black54,
-      ),
       body: Container(
-        color: Colors.black,
+        color: Color(0xFF133B5C),
         child: Column(
           children: <Widget>[
             Container(
+              height: size.height * 0.3,
+              color: Color(0xFF1E5F74)
+            ),
+            Container(
               alignment: Alignment.topCenter,
               margin: EdgeInsets.only(top: 20),
-              child: const Text(
-                "LOGIN",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  fontSize: 36,
-                ),
-                textAlign: TextAlign.center,
-              ),
             ),
 
             Container(
@@ -37,10 +29,13 @@ class LoginScreen extends StatelessWidget{
                   color: Colors.white,
                 ),
                 decoration: InputDecoration(
-                  labelText: "email",
-                  filled: true,
-                  fillColor: Colors.white60,
-                ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    filled: true,
+                    hintStyle: TextStyle(color: Colors.grey[800]),
+                    hintText: "Email",
+                    fillColor: Colors.white70),
               ),
             ),
 
@@ -50,10 +45,13 @@ class LoginScreen extends StatelessWidget{
               margin: EdgeInsets.only(left: 20, right: 20, top: 30),
               child: TextField(
                 decoration: InputDecoration(
-                  labelText: "password",
-                  filled: true,
-                  fillColor: Colors.white60,
-                ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    filled: true,
+                    hintStyle: TextStyle(color: Colors.grey[800]),
+                    hintText: "Password",
+                    fillColor: Colors.white70),
                 obscureText: true,
               ),
             ),
@@ -62,47 +60,36 @@ class LoginScreen extends StatelessWidget{
 
             Container(
               alignment: Alignment.center,
-              child: RaisedButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegisterScreen()));
-                },
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                color: Colors.white60,
-                textColor: Colors.white,
-                child: Text(
-                  "LOGIN",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    color: Colors.white,
-                  ),
-                ),
+              child: ElevatedButton(
+                onPressed: () {},
+                child: const Text('SIGN IN'),
+                style: ElevatedButton.styleFrom(
+                    fixedSize: const Size(200, 60), primary: Color(0xFF1E5F74)),
               ),
-            ),
+              ),
 
-            SizedBox(height: size.height * 0.05),
+            SizedBox(height: size.height * 0.01),
 
             Container(
-              alignment: Alignment.centerRight,
-              margin: EdgeInsets.symmetric(horizontal: 25, vertical: 0),
-              child: RaisedButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegisterScreen()));
-                },
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                color: Colors.white60,
-                textColor: Colors.white,
-                child: Text(
-                  "Register",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
+              alignment: Alignment.center,
+              child: TextButton(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegisterScreen()));
+                  },
+                  child: RichText(
+                    text: TextSpan(
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(text: 'Don\'t have an account? '),
+                        TextSpan(text: 'Register here!', style: const TextStyle(fontWeight: FontWeight.bold)),
+                      ],
+                    ),
+                  )
+              )
             ),
-
           ],
         ),
       )
