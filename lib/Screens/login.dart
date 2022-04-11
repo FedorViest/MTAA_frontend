@@ -63,7 +63,9 @@ class LoginScreen extends StatelessWidget{
             Container(
               alignment: Alignment.center,
               child: RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegisterScreen()));
+                },
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
                 color: Colors.white60,
                 textColor: Colors.white,
