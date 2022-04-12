@@ -54,7 +54,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         fillColor: Colors.white70),
                         validator: (value){
                           if(value == null || value.isEmpty){
-                            return "Kokot";
+                            return "This field is required.";
                           }
                         },
                   ),
@@ -77,7 +77,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         fillColor: Colors.white70),
                         validator: (value){
                           if(value == null || value.isEmpty){
-                            return "Kokot";
+                            return "This field is required.";
                           }
                         },
                   ),
@@ -100,7 +100,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         fillColor: Colors.white70),
                         validator: (value) {
                           if(value == null || value.isEmpty){
-                            return "Kokot";
+                            return "This field is required.";
                           }
                         },
                   ),
