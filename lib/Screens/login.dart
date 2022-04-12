@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Screens/customer.dart';
+import 'package:frontend/Screens/employee.dart';
 import 'package:frontend/Screens/register.dart';
 import 'package:frontend/Screens/admin.dart';
 
@@ -31,8 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
         return Navigator.of(context).push(MaterialPageRoute(builder: (context) => AdminScreen()));
       }
       else if(_position == positions[1]){
-        return null;
-        return Navigator.of(context).push(MaterialPageRoute(builder: (context) => CustomerScreen()));
+        return Navigator.of(context).push(MaterialPageRoute(builder: (context) => EmployeeScreen()));
       }
       else if(_position == positions[2]){
         return Navigator.of(context).push(MaterialPageRoute(builder: (context) => CustomerScreen()));
