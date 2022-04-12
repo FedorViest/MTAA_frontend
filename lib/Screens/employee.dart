@@ -21,7 +21,7 @@ class _EmployeeScreenState extends State<EmployeeScreen>{
   String? _state;
 
   final List orders = [
-    Order(date: "2020-02-28", technician: "Robert", status: "Pendind"),
+    Order(date: "2020-02-28", technician: "Robert", status: "Pending"),
     Order(date: "2019-01-27", technician: "a", status: "Finished"),
     Order(date: "2018-01-27", technician: "R", status: "Finished"),
     Order(date: "2022-01-27", technician: "obert", status: "Finished"),
@@ -75,6 +75,8 @@ class _EmployeeScreenState extends State<EmployeeScreen>{
                               padding: const EdgeInsets.all(0),
                               child: ListTile(
                                 selected: index == _selectedIndex,
+                                selectedTileColor: Color(0xffc8a2c8),
+                                selectedColor: Color(0xFFFCDAB7),
                                 onTap: () {
                                   setState(() {
                                     _selectedIndex = index;
@@ -105,7 +107,7 @@ class _EmployeeScreenState extends State<EmployeeScreen>{
                             orders[_selectedIndex].status = "Pending";
                         });
                       },
-                      child: Text(
+                      child: const Text(
                         "Finish selected repair",
                         style: TextStyle(
                           fontSize: 20,
