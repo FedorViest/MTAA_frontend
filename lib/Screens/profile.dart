@@ -7,7 +7,7 @@ class Profile extends StatelessWidget {
 
     return Container(
         alignment: Alignment.topCenter,
-        color: Colors.indigo[200],
+        color: Color(0xFF1D2D50),
         child: Column(
         children: [
           SizedBox(height: size.height * 0.02),
@@ -16,21 +16,23 @@ class Profile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               CircleAvatar(
-                backgroundColor: Colors.black,
+                backgroundColor: Colors.blue,
                 backgroundImage: AssetImage("assets/images/unknown.png"),
               ),
               Text(
                 "admin Admin",
                 style: TextStyle(
                   fontSize: size.width / 20,
-                  fontWeight: FontWeight.bold
+                  fontWeight: FontWeight.bold,
+                    color: Colors.white
                 ),
               ),
               Text(
                 "customer@gmail.com",
                 style: TextStyle(
                     fontSize: size.width / 20,
-                    fontWeight: FontWeight.bold
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white
                 ),
               ),
             ],
