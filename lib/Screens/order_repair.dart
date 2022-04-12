@@ -32,6 +32,8 @@ class _OrderRepairScreenState extends State<OrderRepairScreen>{
       ),
       body: SingleChildScrollView(
       child: Container(
+        color: Colors.indigo[200],
+        height: size.height,
         child: Column(
           children: [
             Profile(),
@@ -81,6 +83,8 @@ class _OrderRepairScreenState extends State<OrderRepairScreen>{
                 SizedBox(height: size.height * 0.1),
                 TextField(
                   maxLength: 50,
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:frontend/Screens/rate_technician.dart';
 
 
 import 'customer.dart';
@@ -57,7 +58,9 @@ class MyOrdersScreen extends StatelessWidget {
                 children: [
                   SizedBox(height: size.height * 0.1),
                   ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => RateTechnicianScreen()));
+                      },
                       child: const Text(
                         "Rate technician",
                         style: TextStyle(
@@ -69,7 +72,7 @@ class MyOrdersScreen extends StatelessWidget {
                   ),
                   SizedBox(height: size.height * 0.1),
                   Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.blueGrey,
                     ),
                     child:SizedBox(
