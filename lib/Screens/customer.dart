@@ -14,9 +14,10 @@ class CustomerScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black54,
+        backgroundColor: Color(0xFF1E5F74),
       ),
       body: Container(
+        color: Color(0xFF133B5C),
         child: Column(
           children: [
             Profile(),
@@ -29,12 +30,14 @@ class CustomerScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => OrderRepairScreen()));
                   },
+                  style: ElevatedButton.styleFrom(
+                      fixedSize: const Size(200, 60), primary: Color(0xFF1E5F74)),
                   child: const Text(
                     "Order repair",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
-                      color: Colors.black,
+                      color: Colors.white,
                     ),
                   ),
                 ),
@@ -43,12 +46,14 @@ class CustomerScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => MyOrdersScreen()));
                   },
+                  style: ElevatedButton.styleFrom(
+                      fixedSize: const Size(200, 60), primary: Color(0xFF1E5F74)),
                   child: const Text(
                     "My repairs",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
-                      color: Colors.black,
+                      color: Colors.white,
                     ),
                   ),
                 ),
