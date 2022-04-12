@@ -59,6 +59,7 @@ class _RateTechnicianScreenState extends State<RateTechnicianScreen>{
                     child: DropdownButton2(
                             alignment: Alignment.center,
                             icon: const Icon(Icons.keyboard_arrow_down),
+                            iconEnabledColor: Colors.black,
                             items: emails.map((String items){
                               return DropdownMenuItem<String>(
                                 value: items,

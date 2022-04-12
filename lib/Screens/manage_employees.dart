@@ -17,7 +17,14 @@ class Employee{
 }
 
 
-class ManageEmployeeScreen extends StatelessWidget {
+class ManageEmployeeScreen extends StatefulWidget {
+  @override
+  _ManageEmployeeScreenState createState() => _ManageEmployeeScreenState();
+}
+
+class _ManageEmployeeScreenState extends State<ManageEmployeeScreen>{
+
+  int _selectedIndex = 0;
 
   final List employees = [
     Employee(name: "Robert", rating: 0.5),
@@ -75,6 +82,14 @@ class ManageEmployeeScreen extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.all(0),
                               child: ListTile(
+                                selected: index == _selectedIndex,
+                                selectedTileColor: Color(0xffc8a2c8),
+                                selectedColor: Color(0xFFFCDAB7),
+                                onTap: () {
+                                  setState(() {
+                                    _selectedIndex = index;
+                                  });
+                                },
                                 horizontalTitleGap: 30,
                                 leading: Text(employees[index].name,
                                   style: const TextStyle(

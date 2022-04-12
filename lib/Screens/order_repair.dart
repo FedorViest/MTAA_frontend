@@ -37,28 +37,41 @@ class _OrderRepairScreenState extends State<OrderRepairScreen>{
         child: Column(
           children: [
             Profile(),
+            SizedBox(height: size.height * 0.01),
             Container(
               alignment: Alignment.topRight,
               margin: const EdgeInsets.only(right: 20),
-              child: ElevatedButton(
-                onPressed: () {},
-                child: const Text(
-                  "Videocall",
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.black,
+                child: ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: Size(150, 50),
+                      primary: Color(0xFF1E5F74)
                   ),
-                )),
-            ),
+                    icon: Icon(
+                      Icons.videocam,
+                      color: Colors.black,
+                      size: 50,
+                    ),
+                    label: Text(
+                      "Video call",
+                    ), onPressed: () {},
+                ),
+              ),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(height: size.height * 0.1),
-                SizedBox(width: size.width * 0.2),
-                DropdownButton2(
+                Container(
+                  margin: EdgeInsets.only(left: 20, right: 20),
+                  decoration: const BoxDecoration(
+                    color: Colors.blueGrey,
+                  ),
+                child: SizedBox(
+                  width: size.width,
+                child: DropdownButton2(
                   alignment: Alignment.center,
                   icon: const Icon(Icons.keyboard_arrow_down),
+                  iconEnabledColor: Colors.black,
                   items: items.map((String items){
                     return DropdownMenuItem<String>(
                       value: items,
@@ -80,6 +93,8 @@ class _OrderRepairScreenState extends State<OrderRepairScreen>{
                     );
                   },
                 ),
+                ),
+                ),
                 SizedBox(height: size.height * 0.1),
                 TextField(
                   maxLength: 50,
@@ -99,6 +114,8 @@ class _OrderRepairScreenState extends State<OrderRepairScreen>{
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => CustomerScreen()));
                   },
+                  style: ElevatedButton.styleFrom(
+                      fixedSize: const Size(200, 60), primary: Color(0xFF1E5F74)),
                   child: const Text(
                     "Submit request",
                     style: TextStyle(
