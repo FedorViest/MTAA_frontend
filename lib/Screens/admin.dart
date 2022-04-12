@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/Screens/employee_ratings.dart';
+import 'package:frontend/Screens/manage_employees.dart';
 import 'package:frontend/Screens/my_orders.dart';
 import 'package:frontend/Screens/order_repair.dart';
 
@@ -30,7 +32,7 @@ class AdminScreen extends StatelessWidget {
                 SizedBox(height: size.height * 0.2),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => OrderRepairScreen()));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => EmployeeRatingScreen()));
                   },
                   style: ElevatedButton.styleFrom(
                       fixedSize: const Size(200, 60), primary: Color(0xFF1E5F74)),
@@ -46,7 +48,7 @@ class AdminScreen extends StatelessWidget {
                 SizedBox(height: size.height * 0.15),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => MyOrdersScreen()));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => ManageEmployeeScreen()));
                   },
                   style: ElevatedButton.styleFrom(
                       fixedSize: const Size(200, 60), primary: Color(0xFF1E5F74)),

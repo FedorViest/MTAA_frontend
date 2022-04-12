@@ -73,7 +73,7 @@ class MyOrdersScreen extends StatelessWidget {
                   SizedBox(height: size.height * 0.1),
                   Container(
                     decoration: const BoxDecoration(
-                      color: Colors.blueGrey,
+                      color: Color(0xFF1D2D50),
                     ),
                     child:SizedBox(
                     height: size.height * 0.5,
@@ -83,7 +83,7 @@ class MyOrdersScreen extends StatelessWidget {
                       scrollDirection: Axis.vertical,
                       itemBuilder: (BuildContext context, int index){
                         return Card(
-                          color: index % 2 == 0 ? Colors.blueAccent:Colors.lightBlueAccent,
+                          color: index % 2 == 0 ? Color(0xFF247881):Color(0xFFFCDAB7),
                           child: Padding(
                             padding: const EdgeInsets.all(0),
                             child: ListTile(
