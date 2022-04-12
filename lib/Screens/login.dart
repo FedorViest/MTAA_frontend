@@ -3,6 +3,16 @@ import 'package:flutter/services.dart';
 import 'package:frontend/Screens/customer.dart';
 import 'package:frontend/Screens/register.dart';
 
+enum Positions{
+  admin,
+  employee,
+  customer
+}
+
+List<String> positions = <String>[
+  "admin", "employee", "customer"
+];
+
 class LoginScreen extends StatefulWidget{
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -10,9 +20,29 @@ class LoginScreen extends StatefulWidget{
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
+  String? _position;
   
   @override
   Widget build(BuildContext context) {
+
+    handleUser() async{
+      print(_position);
+      if (_position == positions[0]){
+        return null;
+        return Navigator.of(context).push(MaterialPageRoute(builder: (context) => CustomerScreen()));
+      }
+      else if(_position == positions[1]){
+        return null;
+        return Navigator.of(context).push(MaterialPageRoute(builder: (context) => CustomerScreen()));
+      }
+      else if(_position == positions[2]){
+        return Navigator.of(context).push(MaterialPageRoute(builder: (context) => CustomerScreen()));
+      }
+      else{
+        return null;
+      }
+    }
+
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -51,6 +81,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       validator: (value){
                         if(value == null || value.isEmpty){
                           return "This field is required.";
+                        }else{
+                          _position = value;
                         }
                         },
                 ),
@@ -91,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Processing Data')),
                       );
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => CustomerScreen()));
+                      handleUser();
                     }
                   },
                   child: const Text('SIGN IN'),
