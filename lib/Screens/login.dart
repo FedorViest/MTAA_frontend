@@ -9,8 +9,10 @@ class LoginScreen extends StatelessWidget{
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      body: Container(
+      body: SingleChildScrollView(
+      child: Container(
         color: Color(0xFF133B5C),
+        height: size.height,
         child: Column(
           children: <Widget>[
             Container(
@@ -95,7 +97,8 @@ class LoginScreen extends StatelessWidget{
             ),
           ],
         ),
-      )
+      ),
+      ),
     );
   }
 }
