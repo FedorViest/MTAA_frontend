@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:frontend/Screens/customer.dart';
 import 'package:frontend/Screens/register.dart';
+import 'package:frontend/Screens/admin.dart';
 
 enum Positions{
   admin,
@@ -28,8 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
     handleUser() async{
       print(_position);
       if (_position == positions[0]){
-        return null;
-        return Navigator.of(context).push(MaterialPageRoute(builder: (context) => CustomerScreen()));
+        return Navigator.of(context).push(MaterialPageRoute(builder: (context) => AdminScreen()));
       }
       else if(_position == positions[1]){
         return null;
@@ -87,8 +86,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                 ),
               ),
-
-
               Container(
                 alignment: Alignment.center,
                 margin: EdgeInsets.only(left: 20, right: 20, top: 30),

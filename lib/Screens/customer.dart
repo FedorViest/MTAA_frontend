@@ -16,7 +16,9 @@ class CustomerScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color(0xFF1E5F74),
       ),
-      body: Container(
+      body: SingleChildScrollView(
+        child: Container(
+          height: size.height,
         color: Color(0xFF133B5C),
         child: Column(
           children: [
@@ -49,7 +51,7 @@ class CustomerScreen extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                       fixedSize: const Size(200, 60), primary: Color(0xFF1E5F74)),
                   child: const Text(
-                    "My repairs",
+                    "My orders",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -61,6 +63,7 @@ class CustomerScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
       ),
     );
   }

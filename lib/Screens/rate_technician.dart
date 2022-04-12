@@ -18,6 +18,7 @@ class Employee{
 
 class _RateTechnicianScreenState extends State<RateTechnicianScreen>{
   String? _dropDownValue;
+  double _currentValue = 0;
 
   List<String> emails = [
     "employee@gmail.com",
@@ -55,9 +56,7 @@ class _RateTechnicianScreenState extends State<RateTechnicianScreen>{
                     ),
                     child:SizedBox(
                     width: size.width,
-                    child:
-                        Flexible(
-                          child:  DropdownButton2(
+                    child: DropdownButton2(
                             alignment: Alignment.center,
                             icon: const Icon(Icons.keyboard_arrow_down),
                             items: emails.map((String items){
@@ -83,6 +82,34 @@ class _RateTechnicianScreenState extends State<RateTechnicianScreen>{
                           ),
                         ),
                   ),
+                  SizedBox(
+                    height: size.height * 0.1,
+                  ),
+                  Text(
+                    'Rating: $_currentValue',
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    child:
+                  Slider(
+                      value: _currentValue,
+                      min: 0.0,
+                      max: 5.0,
+                      divisions: 20,
+                      activeColor: Color(0XFF1D2D50),
+                      thumbColor: Color(0XFF1D2D50),
+                      inactiveColor: Color(0XFFFCDAB7),
+                      label: _currentValue.toString(),
+                      onChanged: (double value){
+                        setState(() {
+                          _currentValue = value;
+                        });
+                      }
+                  ),
                   ),
                   SizedBox(height: size.height * 0.1),
                   TextField(
@@ -94,7 +121,7 @@ class _RateTechnicianScreenState extends State<RateTechnicianScreen>{
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         hintStyle: TextStyle(color: Colors.grey[800]),
-                        hintText: "Rating",
+                        hintText: "Write Rating",
                         filled: true,
                         fillColor: Colors.white70),
                   ),
