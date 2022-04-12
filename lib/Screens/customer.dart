@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/Screens/my_orders.dart';
 import 'package:frontend/Screens/order_repair.dart';
 
 import 'profile.dart';
@@ -39,7 +40,9 @@ class CustomerScreen extends StatelessWidget {
                 ),
                 SizedBox(height: size.height * 0.15),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => MyOrdersScreen()));
+                  },
                   child: const Text(
                     "My repairs",
                     style: TextStyle(

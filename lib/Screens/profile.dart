@@ -7,6 +7,7 @@ class Profile extends StatelessWidget {
 
     return Container(
         alignment: Alignment.topCenter,
+        color: Colors.indigo[200],
         child: Column(
         children: [
           SizedBox(height: size.height * 0.02),
