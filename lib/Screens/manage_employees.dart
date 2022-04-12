@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:frontend/Screens/add_employee.dart';
 import 'package:frontend/Screens/my_orders.dart';
 import 'package:frontend/Screens/rate_technician.dart';
 
@@ -106,7 +107,7 @@ class ManageEmployeeScreen extends StatelessWidget {
                   SizedBox(height: size.height * 0.1),
                   ElevatedButton(
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => MyOrdersScreen()));
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddEmployeeScreen()));
                       },
                       style: ElevatedButton.styleFrom(
                           fixedSize: const Size(200, 60), primary: Color(0xFF1E5F74)),
