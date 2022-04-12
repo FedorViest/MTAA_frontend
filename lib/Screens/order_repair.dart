@@ -91,6 +91,7 @@ class _OrderRepairScreenState extends State<OrderRepairScreen>{
                       ),
                       hintStyle: TextStyle(color: Colors.grey[800]),
                       hintText: "Describe problem",
+                      filled: true,
                       fillColor: Colors.white70),
                 ),
                 SizedBox(height: size.height * 0.15),
