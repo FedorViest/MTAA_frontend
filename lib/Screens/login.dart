@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:frontend/Backend_calls/Users/login_calls.dart';
 import 'package:frontend/Screens/customer.dart';
 import 'package:frontend/Screens/employee.dart';
+import 'package:frontend/Screens/profile.dart';
 import 'package:frontend/Screens/register.dart';
 import 'package:frontend/Screens/admin.dart';
 import 'package:provider/provider.dart';
 
+import '../Backend_calls/Employees/get_repairs.dart';
 import '../Backend_calls/Users/auth.dart';
 
 enum Positions{
@@ -46,7 +48,9 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => AdminScreen()));
       }
       else if (response["position"] == "employee"){
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => EmployeeScreen()));
+        var response2 = await getRepairs().getInfo();
+        print("RESPONSE ${response2}");
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => EmployeeScreen(orders: response2)));
       }
       else if (response["position"] == "customer"){
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => CustomerScreen()));

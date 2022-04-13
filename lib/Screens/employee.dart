@@ -1,16 +1,14 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import 'profile.dart';
-
-class Order{
-  String date;
-  String technician;
-  String status;
-
-  Order({required this.date, required this.technician, required this.status});
-}
+import '../Backend_calls/Employees/get_repairs.dart';
 
 class EmployeeScreen extends StatefulWidget {
+
+  final List<Order> orders;
+  const EmployeeScreen({Key? key, required this.orders}) : super(key: key);
+
   @override
   _EmployeeScreenState createState() => _EmployeeScreenState();
 }
@@ -18,26 +16,14 @@ class EmployeeScreen extends StatefulWidget {
 class _EmployeeScreenState extends State<EmployeeScreen>{
 
   int _selectedIndex = 0;
-  String? _state;
-
-  final List orders = [
-    Order(date: "2020-02-28", technician: "Robert", status: "Pending"),
-    Order(date: "2019-01-27", technician: "a", status: "Finished"),
-    Order(date: "2018-01-27", technician: "R", status: "Finished"),
-    Order(date: "2022-01-27", technician: "obert", status: "Finished"),
-    Order(date: "2021-01-27", technician: "b", status: "Finished"),
-    Order(date: "2020-01-27", technician: "c", status: "Finished"),
-    Order(date: "2020-01-27", technician: "d", status: "Finished"),
-    Order(date: "2020-01-27", technician: "e", status: "Finished"),
-    Order(date: "2020-01-27", technician: "f", status: "Finished"),
-    Order(date: "2020-01-27", technician: "g", status: "Finished"),
-    Order(date: "2020-01-27", technician: "Robert", status: "Finished"),
-    Order(date: "2020-01-27", technician: "Robert", status: "Finished"),
-    Order(date: "2020-01-27", technician: "Robert", status: "Finished"),
-  ];
+  late List<Order> orders = widget.orders;
 
   @override
   Widget build(BuildContext context) {
+
+    print(orders);
+    //print("Date: ${response["Orders"]["date_created"]}, Status: ${response["Orders"]["status"]}");
+
     Size size = MediaQuery
         .of(context)
         .size;
@@ -102,9 +88,9 @@ class _EmployeeScreenState extends State<EmployeeScreen>{
                   ),
                   SizedBox(height: size.height * 0.1),
                   ElevatedButton(
-                      onPressed: (orders[_selectedIndex].status == "Finished")? null: () {
+                      onPressed: (orders[_selectedIndex].status == "finished")? null: () {
                         setState(() {
-                            orders[_selectedIndex].status = "Pending";
+                            orders[_selectedIndex].status = "finished";
                         });
                       },
                       child: const Text(
