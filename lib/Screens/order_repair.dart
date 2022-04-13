@@ -28,11 +28,11 @@ class _OrderRepairScreenState extends State<OrderRepairScreen>{
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black54,
+        backgroundColor: Color(0xFF1E5F74),
       ),
       body: SingleChildScrollView(
       child: Container(
-        color: Colors.indigo[200],
+        color: Color(0xFF133B5C),
         height: size.height,
         child: Column(
           children: [
@@ -62,9 +62,13 @@ class _OrderRepairScreenState extends State<OrderRepairScreen>{
               children: [
                 SizedBox(height: size.height * 0.1),
                 Container(
+                  width: size.width * 0.9,
                   margin: EdgeInsets.only(left: 20, right: 20),
-                  decoration: const BoxDecoration(
-                    color: Colors.blueGrey,
+                  padding: EdgeInsets.only(left: 20, right: 20),
+                  decoration: BoxDecoration(
+                    color: Color(0xFFFCDAB7),
+
+                    borderRadius: BorderRadius.circular(12),
                   ),
                 child: SizedBox(
                   width: size.width,
@@ -79,7 +83,7 @@ class _OrderRepairScreenState extends State<OrderRepairScreen>{
                     );
                   }).toList(),
                   hint: const Text(
-                    "Choose device",
+                    "Choose a brand",
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 20,
@@ -95,21 +99,64 @@ class _OrderRepairScreenState extends State<OrderRepairScreen>{
                 ),
                 ),
                 ),
-                SizedBox(height: size.height * 0.1),
-                TextField(
-                  maxLength: 50,
-                  keyboardType: TextInputType.multiline,
-                  maxLines: null,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
+                SizedBox(height: size.height * 0.05),
+                Container(
+                  width: size.width * 0.9,
+                  margin: EdgeInsets.only(left: 20, right: 20),
+                  padding: EdgeInsets.only(left: 20, right: 20),
+                  decoration: BoxDecoration(
+                    color: Color(0xFFFCDAB7),
+
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: SizedBox(
+                    width: size.width,
+                    child: DropdownButton2(
+                      alignment: Alignment.center,
+                      icon: const Icon(Icons.keyboard_arrow_down),
+                      iconEnabledColor: Colors.black,
+                      items: items.map((String items){
+                        return DropdownMenuItem<String>(
+                          value: items,
+                          child: Text(items),
+                        );
+                      }).toList(),
+                      hint: const Text(
+                        "Choose your device",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                        ),
                       ),
-                      hintStyle: TextStyle(color: Colors.grey[800]),
-                      hintText: "Describe problem",
-                      filled: true,
-                      fillColor: Colors.white70),
+                      value: _dropDownValue,
+                      onChanged: (value){
+                        setState((){
+                          _dropDownValue = value as String;
+                        }
+                        );
+                      },
+                    ),
+                  ),
                 ),
-                SizedBox(height: size.height * 0.15),
+                SizedBox(height: size.height * 0.05),
+                Container(
+                  width: size.width * 0.9,
+                  child: TextField(
+                    minLines: 6, // any number you need (It works as the rows for the textarea)
+                    maxLength: 50,
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        hintStyle: TextStyle(color: Colors.black),
+                        hintText: "Describe your problem here.",
+                        filled: true,
+                        fillColor: Color(0xFFFCDAB7)),
+                  ),
+                ),
+                SizedBox(height: size.height * 0.05),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => CustomerScreen()));
@@ -121,7 +168,7 @@ class _OrderRepairScreenState extends State<OrderRepairScreen>{
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
-                      color: Colors.black,
+                      color: Colors.white,
                     ),
                   ),
                 ),

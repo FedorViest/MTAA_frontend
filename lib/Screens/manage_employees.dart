@@ -49,11 +49,11 @@ class _ManageEmployeeScreenState extends State<ManageEmployeeScreen>{
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black54,
+        backgroundColor: Color(0xFF1E5F74),
       ),
       body: SingleChildScrollView(
         child: Container(
-          color: Colors.indigo[200],
+          color: Color(0xFF133B5C),
           height: size.height,
           child: Column(
             children: [
@@ -78,7 +78,7 @@ class _ManageEmployeeScreenState extends State<ManageEmployeeScreen>{
                         scrollDirection: Axis.vertical,
                         itemBuilder: (BuildContext context, int index){
                           return Card(
-                            color: index % 2 == 0 ? Color(0xFF247881):Color(0xFFFCDAB7),
+                            color: index % 2 == 0 ? Color(0xFF1E5F74):Color(0xFFFCDAB7),
                             child: Padding(
                               padding: const EdgeInsets.all(0),
                               child: ListTile(

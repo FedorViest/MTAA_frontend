@@ -83,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: TextFormField(
                     controller: emailController,
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                     decoration: InputDecoration(
                         border: OutlineInputBorder(

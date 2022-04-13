@@ -18,7 +18,7 @@ class Order{
 
 class MyOrdersScreen extends StatelessWidget {
 
-  final List colors = [Colors.blue, Colors.lightBlueAccent];
+  final List colors = [Color(0xFF1E5F74), Color(0xFF133B5C)];
 
   final List orders = [
     Order(date: "2020-02-28", technician: "Robert", status: "Finished"),
@@ -43,11 +43,11 @@ class MyOrdersScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black54,
+        backgroundColor: Color(0xFF1E5F74),
       ),
       body: SingleChildScrollView(
         child: Container(
-          color: Colors.indigo[200],
+          color: Color(0xFF133B5C),
           height: size.height,
           child: Column(
             children: [
@@ -61,19 +61,21 @@ class MyOrdersScreen extends StatelessWidget {
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(builder: (context) => RateTechnicianScreen()));
                       },
+                    style: ElevatedButton.styleFrom(
+                        fixedSize: const Size(240, 60), primary: Color(0xFF1E5F74)),
                       child: const Text(
                         "Rate technician",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 25,
-                          color: Colors.black
+                          color: Colors.white
                         ),
                       ),
                   ),
                   SizedBox(height: size.height * 0.1),
                   Container(
                     decoration: const BoxDecoration(
-                      color: Color(0xFF1D2D50),
+                      color: Color(0xFF133B5C)
                     ),
                     child:SizedBox(
                     height: size.height * 0.5,
@@ -83,7 +85,7 @@ class MyOrdersScreen extends StatelessWidget {
                       scrollDirection: Axis.vertical,
                       itemBuilder: (BuildContext context, int index){
                         return Card(
-                          color: index % 2 == 0 ? Color(0xFF247881):Color(0xFFFCDAB7),
+                          color: index % 2 == 0 ? Color(0xFF1E5F74):Color(0xFFFCDAB7),
                           child: Padding(
                             padding: const EdgeInsets.all(0),
                             child: ListTile(

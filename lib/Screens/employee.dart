@@ -46,7 +46,7 @@ class _EmployeeScreenState extends State<EmployeeScreen>{
                   SizedBox(height: size.height * 0.1),
                   Container(
                     decoration: const BoxDecoration(
-                      color: Color(0xFF1D2D50),
+                      color: Color(0xFF133B5C),
                     ),
                     child:SizedBox(
                       height: size.height * 0.5,
@@ -56,7 +56,7 @@ class _EmployeeScreenState extends State<EmployeeScreen>{
                         scrollDirection: Axis.vertical,
                         itemBuilder: (BuildContext context, int index){
                           return Card(
-                            color: index % 2 == 0 ? Color(0xFF247881):Color(0xFFFCDAB7),
+                            color: index % 2 == 0 ? Color(0xFF1E5F74):Color(0xFFFCDAB7),
                             child: Padding(
                               padding: const EdgeInsets.all(0),
                               child: ListTile(
@@ -86,13 +86,15 @@ class _EmployeeScreenState extends State<EmployeeScreen>{
                       ),
                     ),
                   ),
-                  SizedBox(height: size.height * 0.1),
+                  SizedBox(height: size.height * 0.06),
                   ElevatedButton(
                       onPressed: (orders[_selectedIndex].status == "finished")? null: () {
                         setState(() {
                             orders[_selectedIndex].status = "finished";
                         });
                       },
+                     style: ElevatedButton.styleFrom(
+                        fixedSize: const Size(240, 70), primary: Color(0xFF1E5F74)),
                       child: const Text(
                         "Finish selected repair",
                         style: TextStyle(
