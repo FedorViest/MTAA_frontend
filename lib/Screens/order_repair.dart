@@ -28,7 +28,7 @@ class _OrderRepairScreenState extends State<OrderRepairScreen>{
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black54,
+        backgroundColor: Color(0xFF1E5F74),
       ),
       body: SingleChildScrollView(
       child: Container(
