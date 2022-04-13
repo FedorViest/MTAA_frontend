@@ -17,7 +17,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
       appBar: AppBar(
         backgroundColor: Color(0xFF1E5F74),
       ),
-        body: Container(
+      body: SingleChildScrollView(
+        child: Container(
+          height: size.height,
           color: Color(0xFF133B5C),
           child: Form(
             key: _formKey,
@@ -51,12 +53,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         filled: true,
                         hintStyle: TextStyle(color: Colors.grey[800]),
                         hintText: "Name",
-                        fillColor: Colors.white70),
-                        validator: (value){
-                          if(value == null || value.isEmpty){
-                            return "This field is required.";
-                          }
-                        },
+                        fillColor: Colors.white70
+                    ),
+                    validator: (value){
+                      if(value == null || value.isEmpty){
+                        return "This field is required.";
+                      }
+                    },
                   ),
                 ),
 
@@ -75,11 +78,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         hintStyle: TextStyle(color: Colors.grey[800]),
                         hintText: "Email",
                         fillColor: Colors.white70),
-                        validator: (value){
-                          if(value == null || value.isEmpty){
-                            return "This field is required.";
-                          }
-                        },
+                    validator: (value){
+                      if(value == null || value.isEmpty){
+                        return "This field is required.";
+                      }
+                    },
                   ),
                 ),
 
@@ -98,11 +101,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         hintStyle: TextStyle(color: Colors.grey[800]),
                         hintText: "Password",
                         fillColor: Colors.white70),
-                        validator: (value) {
-                          if(value == null || value.isEmpty){
-                            return "This field is required.";
-                          }
-                        },
+                    validator: (value) {
+                      if(value == null || value.isEmpty){
+                        return "This field is required.";
+                      }
+                    },
                   ),
                 ),
 
@@ -120,6 +123,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           const SnackBar(content: Text('Processing Data')),
                         );
                       }
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen()));
                     },
                     child: const Text('REGISTER'),
                     style: ElevatedButton.styleFrom(
@@ -129,7 +133,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ],
             ),
           ),
-        )
+        ),
+      ),
     );
   }
 }
