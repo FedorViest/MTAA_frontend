@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Screens/login.dart';
 
-class RegisterScreen extends StatefulWidget{
+class RegisterScreen extends StatefulWidget {
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
@@ -33,12 +33,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
-                        fontSize: 36
-                    ),
+                        fontSize: 36),
                     textAlign: TextAlign.center,
                   ),
                 ),
-
                 Container(
                   alignment: Alignment.center,
                   margin: EdgeInsets.only(left: 20, right: 20, top: 30),
@@ -53,16 +51,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         filled: true,
                         hintStyle: TextStyle(color: Colors.grey[800]),
                         hintText: "Name",
-                        fillColor: Colors.white70
-                    ),
-                    validator: (value){
-                      if(value == null || value.isEmpty){
+                        fillColor: Colors.white70),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
                         return "This field is required.";
                       }
                     },
                   ),
                 ),
-
                 Container(
                   alignment: Alignment.center,
                   margin: EdgeInsets.only(left: 20, right: 20, top: 30),
@@ -78,14 +74,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         hintStyle: TextStyle(color: Colors.grey[800]),
                         hintText: "Email",
                         fillColor: Colors.white70),
-                    validator: (value){
-                      if(value == null || value.isEmpty){
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
                         return "This field is required.";
                       }
                     },
                   ),
                 ),
-
                 Container(
                   alignment: Alignment.center,
                   margin: EdgeInsets.only(left: 20, right: 20, top: 30),
@@ -102,15 +97,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         hintText: "Password",
                         fillColor: Colors.white70),
                     validator: (value) {
-                      if(value == null || value.isEmpty){
+                      if (value == null || value.isEmpty) {
                         return "This field is required.";
                       }
                     },
                   ),
                 ),
-
                 SizedBox(height: size.height * 0.05),
-
                 Container(
                   alignment: Alignment.center,
                   child: ElevatedButton(
@@ -123,11 +116,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           const SnackBar(content: Text('Processing Data')),
                         );
                       }
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen()));
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => LoginScreen()));
                     },
                     child: const Text('REGISTER'),
                     style: ElevatedButton.styleFrom(
-                        fixedSize: const Size(200, 60), primary: Color(0xFF1E5F74)),
+                        fixedSize: const Size(200, 60),
+                        primary: Color(0xFF1E5F74)),
                   ),
                 ),
               ],
