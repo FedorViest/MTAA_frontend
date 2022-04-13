@@ -12,7 +12,7 @@ class Users with ChangeNotifier{
       final access_token = prefs.getString("access_token") ?? '';
       dio.options.headers["authorization"] = "Bearer " + access_token;
 
-      Response response = await dio.get('http://10.0.2.2:8000/users/getInfo%27);
+      Response response = await dio.get('http://10.0.2.2:8000/users/getInfo');
           print(response.data);
       print("Users ===>>>> ${access_token}");
       return response.data;
