@@ -88,7 +88,7 @@ class _EmployeeScreenState extends State<EmployeeScreen>{
                   ),
                   SizedBox(height: size.height * 0.06),
                   ElevatedButton(
-                      onPressed: (orders[_selectedIndex].status == "finished")? null: () {
+                      onPressed: (orders[_selectedIndex].status == "finished") || (orders[_selectedIndex].status == "REPAIRS")? null: () {
                         setState(() {
                             orders[_selectedIndex].status = "finished";
                         });
