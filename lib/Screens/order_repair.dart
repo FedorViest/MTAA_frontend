@@ -168,7 +168,7 @@ class _OrderRepairScreenState extends State<OrderRepairScreen>{
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
-                      color: Colors.black,
+                      color: Colors.white,
                     ),
                   ),
                 ),
