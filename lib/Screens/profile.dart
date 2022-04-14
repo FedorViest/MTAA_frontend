@@ -5,15 +5,15 @@ class Profile extends StatefulWidget {
   _ProfileState createState() => _ProfileState();
 }
 
-class _ProfileState extends State<Profile> {
+class _ProfileState extends State<Profile>{
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
     return Container(
-      alignment: Alignment.topCenter,
-      color: Color(0xFF1D2D50),
-      child: Column(
+        alignment: Alignment.topCenter,
+        color: Color(0xFF1D2D50),
+        child: Column(
         children: [
           SizedBox(height: size.height * 0.02),
           Row(
@@ -27,21 +27,23 @@ class _ProfileState extends State<Profile> {
               Text(
                 "admin Admin",
                 style: TextStyle(
-                    fontSize: size.width / 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
+                  fontSize: size.width / 20,
+                  fontWeight: FontWeight.bold,
+                    color: Colors.white
+                ),
               ),
               Text(
                 "customer@gmail.com",
                 style: TextStyle(
                     fontSize: size.width / 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white),
+                    color: Colors.white
+                ),
               ),
             ],
           ),
         ],
-      ),
-    );
+        ),
+      );
   }
 }

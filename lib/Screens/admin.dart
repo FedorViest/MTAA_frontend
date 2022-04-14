@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Screens/employee_ratings.dart';
 import 'package:frontend/Screens/manage_employees.dart';
+import 'package:frontend/Screens/manage_orders.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Backend_calls/Admin/get_ratings.dart';
@@ -92,7 +93,25 @@ class _AdminScreenState extends State<AdminScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: size.height * 0.15),
+                    SizedBox(height: size.height * 0.05),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => ManageOrdersScreen()));
+                      },
+                      style: ElevatedButton.styleFrom(
+                          fixedSize: const Size(200, 60),
+                          primary: Color(0xFF1E5F74)),
+                      child: const Text(
+                        "Manage orders",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: size.height * 0.05),
                     ElevatedButton(
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
