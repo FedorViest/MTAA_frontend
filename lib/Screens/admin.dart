@@ -4,6 +4,7 @@ import 'package:frontend/Screens/manage_employees.dart';
 import 'package:frontend/Screens/my_orders.dart';
 import 'package:frontend/Screens/order_repair.dart';
 
+import '../Backend_calls/Admin/get_ratings.dart';
 import 'profile.dart';
 
 class AdminScreen extends StatelessWidget {
@@ -31,8 +32,11 @@ class AdminScreen extends StatelessWidget {
               children: [
                 SizedBox(height: size.height * 0.2),
                 ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => EmployeeRatingScreen()));
+                  onPressed: () async {
+                    var response2 = await getRatings().getInfo();
+                    print("RESPONSE ${response2}");
+                    response2 ??= [Rating("NO", "RATINGS", 0, " ")];
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => EmployeeRatingScreen(ratings: response2)));
                   },
                   style: ElevatedButton.styleFrom(
                       fixedSize: const Size(200, 60), primary: Color(0xFF1E5F74)),

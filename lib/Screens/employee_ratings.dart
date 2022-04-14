@@ -1,37 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:frontend/Screens/rate_technician.dart';
-
+import '../Backend_calls/Admin/get_ratings.dart';
 
 import 'customer.dart';
 import 'profile.dart';
 
-class Employee{
-  String name;
-  double rating;
+class EmployeeRatingScreen extends StatefulWidget {
+  final List<Rating> ratings;
+  const EmployeeRatingScreen({Key? key, required this.ratings}) : super(key: key);
 
-  Employee({required this.name, required this.rating});
+  @override
+  _EmployeeRatingScreenState createState() => _EmployeeRatingScreenState();
 }
 
-class EmployeeRatingScreen extends StatelessWidget {
+class _EmployeeRatingScreenState extends State<EmployeeRatingScreen> {
 
-  final List employees = [
-    Employee(name: "Robert", rating: 0.5),
-    Employee(name: "a", rating: 1),
-    Employee(name: "R", rating: 2),
-    Employee(name: "obert", rating: 2.5),
-    Employee(name: "b", rating: 3),
-    Employee(name: "c", rating: 3),
-    Employee(name: "d", rating: 4),
-    Employee(name: "e", rating: 4.5),
-    Employee(name: "f", rating: 0),
-    Employee(name: "g", rating: 1),
-    Employee(name: "Robert", rating: 1),
-    Employee(name: "Robert", rating: 2),
-    Employee(name: "Robert", rating: 3),
-  ];
+  late List<Rating> ratings = widget.ratings;
 
   Widget build(BuildContext context) {
+
+    print(ratings);
+
     Size size = MediaQuery
         .of(context)
         .size;
@@ -60,7 +50,7 @@ class EmployeeRatingScreen extends StatelessWidget {
                       height: size.height * 0.7,
                       child: ListView.builder(
                         padding: EdgeInsets.all(10),
-                        itemCount: employees.length,
+                        itemCount: ratings.length,
                         scrollDirection: Axis.vertical,
                         itemBuilder: (BuildContext context, int index){
                           return Card(
@@ -69,12 +59,12 @@ class EmployeeRatingScreen extends StatelessWidget {
                               padding: const EdgeInsets.all(0),
                               child: ListTile(
                                 horizontalTitleGap: 30,
-                                leading: Text(employees[index].name,
+                                leading: Text(ratings[index].employee_email,
                                   style: const TextStyle(
                                     fontSize: 20,
                                   ),
                                 ),
-                                trailing: Text(employees[index].rating.toString(),
+                                trailing: Text(ratings[index].rating.toString(),
                                   style: const TextStyle(
                                     fontSize: 20,
                                   ),
