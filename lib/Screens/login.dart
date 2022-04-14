@@ -7,6 +7,7 @@ import 'package:frontend/Screens/profile.dart';
 import 'package:frontend/Screens/register.dart';
 import 'package:frontend/Screens/admin.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Backend_calls/Employees/get_repairs.dart';
 import '../Backend_calls/Users/auth.dart';
@@ -37,11 +38,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
     handleUser() async {
 
-
-
       var dio = Dio();
       print(_position);
       Provider.of<Auth>(context, listen: false).login(emailController.text, passwordController.text);
+
+      print(passwordController.text);
 
       var response = await Users().getInfo();
 
