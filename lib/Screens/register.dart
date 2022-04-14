@@ -1,4 +1,8 @@
+import 'dart:convert';
+import 'package:form_field_validator/form_field_validator.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/Backend_calls/Customers/register.dart';
 import 'package:frontend/Screens/login.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -8,6 +12,9 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +48,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   alignment: Alignment.center,
                   margin: EdgeInsets.only(left: 20, right: 20, top: 30),
                   child: TextFormField(
+                    controller: nameController,
                     style: TextStyle(
                       color: Colors.white,
                     ),
@@ -63,6 +71,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   alignment: Alignment.center,
                   margin: EdgeInsets.only(left: 20, right: 20, top: 30),
                   child: TextFormField(
+                    controller: emailController,
                     style: TextStyle(
                       color: Colors.white,
                     ),
@@ -74,17 +83,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         hintStyle: TextStyle(color: Colors.grey[800]),
                         hintText: "Email",
                         fillColor: Colors.white70),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "This field is required.";
-                      }
-                    },
+                    validator: MultiValidator([
+                      EmailValidator(
+                        errorText: "Enter valid email",
+                      ),
+                      RequiredValidator(errorText: "Required Required"),
+                    ])
                   ),
                 ),
                 Container(
                   alignment: Alignment.center,
                   margin: EdgeInsets.only(left: 20, right: 20, top: 30),
                   child: TextFormField(
+                    controller: passwordController,
                     style: TextStyle(
                       color: Colors.white,
                     ),
@@ -96,7 +107,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         hintStyle: TextStyle(color: Colors.grey[800]),
                         hintText: "Password",
                         fillColor: Colors.white70),
-                    validator: (value) {
+                    validator:  (value) {
                       if (value == null || value.isEmpty) {
                         return "This field is required.";
                       }
@@ -107,17 +118,48 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Container(
                   alignment: Alignment.center,
                   child: ElevatedButton(
-                    onPressed: () {
-                      // Validate returns true if the form is valid, or false otherwise.
+                    onPressed: () async {
+
                       if (_formKey.currentState!.validate()) {
-                        // If the form is valid, display a snackbar. In the real world,
-                        // you'd often call a server or save the information in a database.
+                      var response = await Register().register(nameController.text, emailController.text, passwordController.text);
+                      if (response.runtimeType == DioError) {
+                        String errorMessage = Map<String, dynamic>.from(
+                            response.response.data)["detail"].toString();
+                        if (errorMessage == "User with selected email already exists") {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                'Email already in use',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold
+                                ),),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                        }
+                        else{
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                'Invalid data',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold
+                                ),),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                        }
+                      }
+                      else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Processing Data')),
                         );
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => LoginScreen()));
+                        }
                       }
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => LoginScreen()));
                     },
                     child: const Text('REGISTER'),
                     style: ElevatedButton.styleFrom(
