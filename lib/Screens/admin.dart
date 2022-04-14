@@ -3,6 +3,7 @@ import 'package:frontend/Screens/employee_ratings.dart';
 import 'package:frontend/Screens/manage_employees.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../Backend_calls/Admin/get_ratings.dart';
 import 'profile.dart';
 
 class AdminScreen extends StatefulWidget {
@@ -71,9 +72,12 @@ class _AdminScreenState extends State<AdminScreen> {
                   children: [
                     SizedBox(height: size.height * 0.2),
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        var response2 = await getRatings().getInfo();
+                        print("RESPONSE ${response2}");
+                        response2 ??= [Rating("NO", "REPAIRS", 0, "")];
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => EmployeeRatingScreen()));
+                            builder: (context) => EmployeeRatingScreen(ratings: response2)));
                       },
                       style: ElevatedButton.styleFrom(
                           fixedSize: const Size(200, 60),
