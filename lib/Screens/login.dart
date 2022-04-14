@@ -12,17 +12,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../Backend_calls/Employees/get_repairs.dart';
 import '../Backend_calls/Users/auth.dart';
 
-enum Positions{
-  admin,
-  employee,
-  customer
-}
+enum Positions { admin, employee, customer }
 
-List<String> positions = <String>[
-  "admin", "employee", "customer"
-];
+List<String> positions = <String>["admin", "employee", "customer"];
 
-class LoginScreen extends StatefulWidget{
+class LoginScreen extends StatefulWidget {
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -35,12 +29,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     handleUser() async {
-
       var dio = Dio();
       print(_position);
-      Provider.of<Auth>(context, listen: false).login(emailController.text, passwordController.text);
+      Provider.of<Auth>(context, listen: false)
+          .login(emailController.text, passwordController.text);
 
       print(passwordController.text);
 
@@ -48,17 +41,18 @@ class _LoginScreenState extends State<LoginScreen> {
 
       print('->>>> ${response["position"]}');
 
-      if (response["position"] == "admin"){
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => AdminScreen()));
-      }
-      else if (response["position"] == "employee"){
+      if (response["position"] == "admin") {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => AdminScreen()));
+      } else if (response["position"] == "employee") {
         var response2 = await getRepairs().getInfo();
         print("RESPONSE ${response2}");
         response2 ??= [Order("", "NO", "REPAIRS", "", "", "", 0, "")];
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => EmployeeScreen(orders: response2)));
-      }
-      else if (response["position"] == "customer"){
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => CustomerScreen()));
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => EmployeeScreen(orders: response2)));
+      } else if (response["position"] == "customer") {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => CustomerScreen()));
       }
     }
 
@@ -73,15 +67,11 @@ class _LoginScreenState extends State<LoginScreen> {
             key: _formKey,
             child: Column(
               children: <Widget>[
-                Container(
-                    height: size.height * 0.3,
-                    color: Color(0xFF1E5F74)
-                ),
+                Container(height: size.height * 0.3, color: Color(0xFF1E5F74)),
                 Container(
                   alignment: Alignment.topCenter,
                   margin: EdgeInsets.only(top: 20),
                 ),
-
                 Container(
                   alignment: Alignment.center,
                   margin: EdgeInsets.only(left: 20, right: 20, top: 30),
@@ -98,10 +88,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         hintStyle: TextStyle(color: Colors.grey[800]),
                         hintText: "Email",
                         fillColor: Colors.white70),
-                    validator: (value){
-                      if(value == null || value.isEmpty){
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
                         return "This field is required.";
-                      }else{
+                      } else {
                         _position = value;
                       }
                     },
@@ -121,16 +111,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         hintText: "Password",
                         fillColor: Colors.white70),
                     obscureText: true,
-                    validator: (value){
-                      if(value == null || value.isEmpty){
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
                         return "This field is required.";
                       }
                     },
                   ),
                 ),
-
                 SizedBox(height: size.height * 0.05),
-
                 Container(
                   alignment: Alignment.center,
                   child: ElevatedButton(
@@ -147,17 +135,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     child: const Text('SIGN IN'),
                     style: ElevatedButton.styleFrom(
-                        fixedSize: const Size(200, 60), primary: Color(0xFF1E5F74)),
+                        fixedSize: const Size(200, 60),
+                        primary: Color(0xFF1E5F74)),
                   ),
                 ),
-
                 SizedBox(height: size.height * 0.01),
-
                 Container(
                     alignment: Alignment.center,
                     child: TextButton(
                         onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegisterScreen()));
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => RegisterScreen()));
                         },
                         child: RichText(
                           text: const TextSpan(
@@ -167,12 +155,13 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             children: <TextSpan>[
                               TextSpan(text: 'Don\'t have an account? '),
-                              TextSpan(text: 'Register here!', style: TextStyle(fontWeight: FontWeight.bold)),
+                              TextSpan(
+                                  text: 'Register here!',
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
                             ],
                           ),
-                        )
-                    )
-                ),
+                        ))),
               ],
             ),
           ),

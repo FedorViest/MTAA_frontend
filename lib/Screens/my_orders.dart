@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:frontend/Screens/rate_technician.dart';
 
-
 import 'customer.dart';
 import 'profile.dart';
 
-
-class Order{
+class Order {
   String date;
   String technician;
   String status;
@@ -15,9 +13,7 @@ class Order{
   Order({required this.date, required this.technician, required this.status});
 }
 
-
 class MyOrdersScreen extends StatelessWidget {
-
   final List colors = [Color(0xFF1E5F74), Color(0xFF133B5C)];
 
   final List orders = [
@@ -37,9 +33,7 @@ class MyOrdersScreen extends StatelessWidget {
   ];
 
   Widget build(BuildContext context) {
-    Size size = MediaQuery
-        .of(context)
-        .size;
+    Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: AppBar(
@@ -58,60 +52,63 @@ class MyOrdersScreen extends StatelessWidget {
                 children: [
                   SizedBox(height: size.height * 0.1),
                   ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => RateTechnicianScreen()));
-                      },
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => RateTechnicianScreen()));
+                    },
                     style: ElevatedButton.styleFrom(
-                        fixedSize: const Size(240, 60), primary: Color(0xFF1E5F74)),
-                      child: const Text(
-                        "Rate technician",
-                        style: TextStyle(
+                        fixedSize: const Size(240, 60),
+                        primary: Color(0xFF1E5F74)),
+                    child: const Text(
+                      "Rate technician",
+                      style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 25,
-                          color: Colors.white
-                        ),
-                      ),
+                          color: Colors.white),
+                    ),
                   ),
                   SizedBox(height: size.height * 0.1),
                   Container(
-                    decoration: const BoxDecoration(
-                      color: Color(0xFF133B5C)
-                    ),
-                    child:SizedBox(
-                    height: size.height * 0.5,
+                    decoration: const BoxDecoration(color: Color(0xFF133B5C)),
+                    child: SizedBox(
+                      height: size.height * 0.5,
                       child: ListView.builder(
-                      padding: EdgeInsets.all(10),
-                      itemCount: orders.length,
-                      scrollDirection: Axis.vertical,
-                      itemBuilder: (BuildContext context, int index){
-                        return Card(
-                          color: index % 2 == 0 ? Color(0xFF1E5F74):Color(0xFFFCDAB7),
-                          child: Padding(
-                            padding: const EdgeInsets.all(0),
-                            child: ListTile(
-                              title: Text(
-                                orders[index].technician,
-                                style: const TextStyle(
-                                  fontSize: 20,
+                        padding: EdgeInsets.all(10),
+                        itemCount: orders.length,
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Card(
+                            color: index % 2 == 0
+                                ? Color(0xFF1E5F74)
+                                : Color(0xFFFCDAB7),
+                            child: Padding(
+                              padding: const EdgeInsets.all(0),
+                              child: ListTile(
+                                title: Text(
+                                  orders[index].technician,
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                  ),
                                 ),
-                              ),
-                              horizontalTitleGap: 30,
-                              leading: Text(orders[index].date,
-                                style: const TextStyle(
-                                  fontSize: 20,
+                                horizontalTitleGap: 30,
+                                leading: Text(
+                                  orders[index].date,
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                  ),
                                 ),
-                              ),
-                              trailing: Text(orders[index].status,
-                                style: const TextStyle(
-                                  fontSize: 20,
+                                trailing: Text(
+                                  orders[index].status,
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        );
-                      },
+                          );
+                        },
+                      ),
                     ),
-                   ),
                   ),
                 ],
               ),

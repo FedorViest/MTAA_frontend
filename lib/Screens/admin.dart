@@ -77,7 +77,8 @@ class _AdminScreenState extends State<AdminScreen> {
                         print("RESPONSE ${response2}");
                         response2 ??= [Rating("NO", "REPAIRS", 0, "")];
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => EmployeeRatingScreen(ratings: response2)));
+                            builder: (context) =>
+                                EmployeeRatingScreen(ratings: response2)));
                       },
                       style: ElevatedButton.styleFrom(
                           fixedSize: const Size(200, 60),

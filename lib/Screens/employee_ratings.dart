@@ -8,23 +8,21 @@ import 'profile.dart';
 
 class EmployeeRatingScreen extends StatefulWidget {
   final List<Rating> ratings;
-  const EmployeeRatingScreen({Key? key, required this.ratings}) : super(key: key);
+
+  const EmployeeRatingScreen({Key? key, required this.ratings})
+      : super(key: key);
 
   @override
   _EmployeeRatingScreenState createState() => _EmployeeRatingScreenState();
 }
 
 class _EmployeeRatingScreenState extends State<EmployeeRatingScreen> {
-
   late List<Rating> ratings = widget.ratings;
 
   Widget build(BuildContext context) {
-
     print(ratings);
 
-    Size size = MediaQuery
-        .of(context)
-        .size;
+    Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: AppBar(
@@ -46,25 +44,29 @@ class _EmployeeRatingScreenState extends State<EmployeeRatingScreen> {
                     decoration: const BoxDecoration(
                       color: Color(0xFF133B5C),
                     ),
-                    child:SizedBox(
+                    child: SizedBox(
                       height: size.height * 0.7,
                       child: ListView.builder(
                         padding: EdgeInsets.all(10),
                         itemCount: ratings.length,
                         scrollDirection: Axis.vertical,
-                        itemBuilder: (BuildContext context, int index){
+                        itemBuilder: (BuildContext context, int index) {
                           return Card(
-                            color: index % 2 == 0 ? Color(0xFF1E5F74):Color(0xFFFCDAB7),
+                            color: index % 2 == 0
+                                ? Color(0xFF1E5F74)
+                                : Color(0xFFFCDAB7),
                             child: Padding(
                               padding: const EdgeInsets.all(0),
                               child: ListTile(
                                 horizontalTitleGap: 30,
-                                leading: Text(ratings[index].employee_email,
+                                leading: Text(
+                                  ratings[index].employee_email,
                                   style: const TextStyle(
                                     fontSize: 20,
                                   ),
                                 ),
-                                trailing: Text(ratings[index].rating.toString(),
+                                trailing: Text(
+                                  ratings[index].rating.toString(),
                                   style: const TextStyle(
                                     fontSize: 20,
                                   ),

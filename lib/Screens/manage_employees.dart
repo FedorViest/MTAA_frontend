@@ -4,26 +4,22 @@ import 'package:frontend/Screens/add_employee.dart';
 import 'package:frontend/Screens/my_orders.dart';
 import 'package:frontend/Screens/rate_technician.dart';
 
-
 import 'customer.dart';
 import 'profile.dart';
 
-
-class Employee{
+class Employee {
   String name;
   double rating;
 
   Employee({required this.name, required this.rating});
 }
 
-
 class ManageEmployeeScreen extends StatefulWidget {
   @override
   _ManageEmployeeScreenState createState() => _ManageEmployeeScreenState();
 }
 
-class _ManageEmployeeScreenState extends State<ManageEmployeeScreen>{
-
+class _ManageEmployeeScreenState extends State<ManageEmployeeScreen> {
   int _selectedIndex = 0;
 
   final List employees = [
@@ -43,9 +39,7 @@ class _ManageEmployeeScreenState extends State<ManageEmployeeScreen>{
   ];
 
   Widget build(BuildContext context) {
-    Size size = MediaQuery
-        .of(context)
-        .size;
+    Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: AppBar(
@@ -69,16 +63,18 @@ class _ManageEmployeeScreenState extends State<ManageEmployeeScreen>{
                     decoration: const BoxDecoration(
                       color: Color(0XFF1D2D50),
                     ),
-                    child:SizedBox(
+                    child: SizedBox(
                       height: size.height * 0.3,
                       width: size.width,
                       child: ListView.builder(
                         padding: EdgeInsets.all(10),
                         itemCount: employees.length,
                         scrollDirection: Axis.vertical,
-                        itemBuilder: (BuildContext context, int index){
+                        itemBuilder: (BuildContext context, int index) {
                           return Card(
-                            color: index % 2 == 0 ? Color(0xFF1E5F74):Color(0xFFFCDAB7),
+                            color: index % 2 == 0
+                                ? Color(0xFF1E5F74)
+                                : Color(0xFFFCDAB7),
                             child: Padding(
                               padding: const EdgeInsets.all(0),
                               child: ListTile(
@@ -91,7 +87,8 @@ class _ManageEmployeeScreenState extends State<ManageEmployeeScreen>{
                                   });
                                 },
                                 horizontalTitleGap: 30,
-                                leading: Text(employees[index].name,
+                                leading: Text(
+                                  employees[index].name,
                                   style: const TextStyle(
                                     fontSize: 20,
                                   ),
@@ -106,10 +103,12 @@ class _ManageEmployeeScreenState extends State<ManageEmployeeScreen>{
                   SizedBox(height: size.height * 0.1),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => MyOrdersScreen()));
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => MyOrdersScreen()));
                     },
                     style: ElevatedButton.styleFrom(
-                        fixedSize: const Size(200, 60), primary: Color(0xFF1E5F74)),
+                        fixedSize: const Size(200, 60),
+                        primary: Color(0xFF1E5F74)),
                     child: const Text(
                       "Delete employee",
                       style: TextStyle(
@@ -121,19 +120,21 @@ class _ManageEmployeeScreenState extends State<ManageEmployeeScreen>{
                   ),
                   SizedBox(height: size.height * 0.1),
                   ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddEmployeeScreen()));
-                      },
-                      style: ElevatedButton.styleFrom(
-                          fixedSize: const Size(200, 60), primary: Color(0xFF1E5F74)),
-                      child: const Text(
-                        "Add employee",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Colors.white,
-                          ),
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => AddEmployeeScreen()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                        fixedSize: const Size(200, 60),
+                        primary: Color(0xFF1E5F74)),
+                    child: const Text(
+                      "Add employee",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Colors.white,
                       ),
+                    ),
                   ),
                 ],
               ),

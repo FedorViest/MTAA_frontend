@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
-
 import 'customer.dart';
 import 'profile.dart';
 
@@ -10,13 +9,13 @@ class RateTechnicianScreen extends StatefulWidget {
   _RateTechnicianScreenState createState() => _RateTechnicianScreenState();
 }
 
-class Employee{
+class Employee {
   String email;
 
   Employee(this.email);
 }
 
-class _RateTechnicianScreenState extends State<RateTechnicianScreen>{
+class _RateTechnicianScreenState extends State<RateTechnicianScreen> {
   String? _dropDownValue;
   double _currentValue = 0;
 
@@ -29,9 +28,7 @@ class _RateTechnicianScreenState extends State<RateTechnicianScreen>{
   ];
 
   Widget build(BuildContext context) {
-    Size size = MediaQuery
-        .of(context)
-        .size;
+    Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: AppBar(
@@ -54,34 +51,33 @@ class _RateTechnicianScreenState extends State<RateTechnicianScreen>{
                     decoration: const BoxDecoration(
                       color: Colors.blueGrey,
                     ),
-                    child:SizedBox(
-                    width: size.width,
-                    child: DropdownButton2(
-                            alignment: Alignment.center,
-                            icon: const Icon(Icons.keyboard_arrow_down),
-                            iconEnabledColor: Colors.black,
-                            items: emails.map((String items){
-                              return DropdownMenuItem<String>(
-                                value: items,
-                                child: Text(items),
-                              );
-                            }).toList(),
-                            hint: const Text(
-                              "Select technician",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                              ),
-                            ),
-                            value: _dropDownValue,
-                            onChanged: (value){
-                              setState((){
-                                _dropDownValue = value as String;
-                              }
-                              );
-                            },
+                    child: SizedBox(
+                      width: size.width,
+                      child: DropdownButton2(
+                        alignment: Alignment.center,
+                        icon: const Icon(Icons.keyboard_arrow_down),
+                        iconEnabledColor: Colors.black,
+                        items: emails.map((String items) {
+                          return DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                          );
+                        }).toList(),
+                        hint: const Text(
+                          "Select technician",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
                           ),
                         ),
+                        value: _dropDownValue,
+                        onChanged: (value) {
+                          setState(() {
+                            _dropDownValue = value as String;
+                          });
+                        },
+                      ),
+                    ),
                   ),
                   SizedBox(
                     height: size.height * 0.1,
@@ -95,22 +91,20 @@ class _RateTechnicianScreenState extends State<RateTechnicianScreen>{
                   ),
                   Container(
                     margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    child:
-                  Slider(
-                      value: _currentValue,
-                      min: 0.0,
-                      max: 5.0,
-                      divisions: 20,
-                      activeColor: Color(0XFF1D2D50),
-                      thumbColor: Color(0XFF1D2D50),
-                      inactiveColor: Color(0XFFFCDAB7),
-                      label: _currentValue.toString(),
-                      onChanged: (double value){
-                        setState(() {
-                          _currentValue = value;
-                        });
-                      }
-                  ),
+                    child: Slider(
+                        value: _currentValue,
+                        min: 0.0,
+                        max: 5.0,
+                        divisions: 20,
+                        activeColor: Color(0XFF1D2D50),
+                        thumbColor: Color(0XFF1D2D50),
+                        inactiveColor: Color(0XFFFCDAB7),
+                        label: _currentValue.toString(),
+                        onChanged: (double value) {
+                          setState(() {
+                            _currentValue = value;
+                          });
+                        }),
                   ),
                   SizedBox(height: size.height * 0.1),
                   TextField(
@@ -129,10 +123,12 @@ class _RateTechnicianScreenState extends State<RateTechnicianScreen>{
                   SizedBox(height: size.height * 0.05),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => CustomerScreen()));
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => CustomerScreen()));
                     },
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.blueGrey),
+                      backgroundColor:
+                          MaterialStateProperty.all(Colors.blueGrey),
                     ),
                     child: const Text(
                       "Rate Technician",
