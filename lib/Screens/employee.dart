@@ -27,21 +27,29 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('AlertDialog Title'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: const <Widget>[
-                Text('This is a demo alert dialog.'),
-                Text('Would you like to approve of this message?'),
-              ],
-            ),
-          ),
+          backgroundColor: Color(0xFFFCDAB7),
+          title: const Text('Do you wish to logout?'),
           actions: <Widget>[
-            TextButton(
-              child: const Text('Approve'),
-              onPressed: () {
-                Navigator.pop(context, true);
-              },
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.close_outlined),
+                  iconSize: 50,
+                  color: Colors.red,
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                IconButton(
+                  icon: Icon(Icons.check),
+                  iconSize: 50,
+                  color: Colors.green,
+                  onPressed: () {
+                    Navigator.pop(context, true);
+                  },
+                ),
+              ],
             ),
           ],
         );
@@ -128,10 +136,9 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                                             "computer year: ${orders[_selectedIndex].year_made}\n\n"
                                             "issue: ${orders[_selectedIndex].issue}\n\n",
                                             style: const TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15
-                                            )),
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 15)),
                                         backgroundColor: Color(0xFF133B5C),
                                       ),
                                     )
