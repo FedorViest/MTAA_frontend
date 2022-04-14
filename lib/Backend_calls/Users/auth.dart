@@ -18,8 +18,10 @@ class Auth with ChangeNotifier{
       Response response = await dio.post('http://10.0.2.2:8000/users/login', data: formData);
       print(response.data);
       final prefs = await SharedPreferences.getInstance();
-      prefs.setString('access_token', response.data["access_token"]);
+      await prefs.setString('access_token', response.data["access_token"]);
       Map<String, dynamic> data = Jwt.parseJwt(response.data["access_token"]);
+
+      print(response.data);
 
       return response.data;
     }

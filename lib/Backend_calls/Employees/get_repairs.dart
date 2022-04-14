@@ -5,10 +5,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Order{
+  String id;
   String date;
   String status;
 
-  Order(this.date, this.status);
+  Order(this.id, this.date, this.status);
 }
 
 
@@ -25,7 +26,7 @@ class getRepairs with ChangeNotifier{
       late List<Order> orders = [];
 
       for (var item in response.data){
-        var order = Order(item["Orders"]["date_created"], item["Orders"]["status"]);
+        var order = Order(item["Orders"]["id"], item["Orders"]["date_created"], item["Orders"]["status"]);
         orders.add(order);
         print(item["Orders"]["date_created"]);
       }

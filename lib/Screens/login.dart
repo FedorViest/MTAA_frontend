@@ -7,6 +7,7 @@ import 'package:frontend/Screens/profile.dart';
 import 'package:frontend/Screens/register.dart';
 import 'package:frontend/Screens/admin.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Backend_calls/Employees/get_repairs.dart';
 import '../Backend_calls/Users/auth.dart';
@@ -36,9 +37,12 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
 
     handleUser() async {
+
       var dio = Dio();
       print(_position);
       Provider.of<Auth>(context, listen: false).login(emailController.text, passwordController.text);
+
+      print(passwordController.text);
 
       var response = await Users().getInfo();
 
@@ -50,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
       else if (response["position"] == "employee"){
         var response2 = await getRepairs().getInfo();
         print("RESPONSE ${response2}");
-        response2 ??= [Order("NO", "REPAIRS")];
+        response2 ??= [Order("", "NO", "REPAIRS")];
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => EmployeeScreen(orders: response2)));
       }
       else if (response["position"] == "customer"){
