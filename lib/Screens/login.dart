@@ -36,6 +36,9 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
 
     handleUser() async {
+
+
+
       var dio = Dio();
       print(_position);
       Provider.of<Auth>(context, listen: false).login(emailController.text, passwordController.text);
@@ -50,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
       else if (response["position"] == "employee"){
         var response2 = await getRepairs().getInfo();
         print("RESPONSE ${response2}");
-        response2 ??= [Order("NO", "REPAIRS")];
+        response2 ??= [Order("", "NO", "REPAIRS")];
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => EmployeeScreen(orders: response2)));
       }
       else if (response["position"] == "customer"){
