@@ -122,13 +122,16 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                                                 style: const TextStyle(
                                                     color: Colors.white))),
                                         content: Text(
-                                            "customer email: ${orders[_selectedIndex].customer_email}\n"
-                                            "computer brand: ${orders[_selectedIndex].brand}\n"
-                                            "computer model: ${orders[_selectedIndex].model}\n"
-                                            "computer year: ${orders[_selectedIndex].year_made}\n"
-                                            "issue: ${orders[_selectedIndex].issue}\n",
+                                            "customer email: ${orders[_selectedIndex].customer_email}\n\n"
+                                            "computer brand: ${orders[_selectedIndex].brand}\n\n"
+                                            "computer model: ${orders[_selectedIndex].model}\n\n"
+                                            "computer year: ${orders[_selectedIndex].year_made}\n\n"
+                                            "issue: ${orders[_selectedIndex].issue}\n\n",
                                             style: const TextStyle(
-                                                color: Colors.white)),
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15
+                                            )),
                                         backgroundColor: Color(0xFF133B5C),
                                       ),
                                     )
