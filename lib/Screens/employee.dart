@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/Backend_calls/Employees/update_repair.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,7 +18,7 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
   int _selectedIndex = 0;
   int _selectedId = 0;
   late List<Order> orders = widget.orders;
-  
+
   late bool back;
 
   Future<bool> _showMyDialog() async {
@@ -60,9 +59,9 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
     return WillPopScope(
       onWillPop: () async {
         back = await _showMyDialog();
-        if (back){
-            SharedPreferences prefs = await SharedPreferences.getInstance();
-            await prefs.clear();
+        if (back) {
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          await prefs.clear();
         }
         return back;
       },
