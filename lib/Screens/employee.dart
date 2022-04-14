@@ -110,7 +110,32 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                                       print(_selectedId);
                                     });
                                   },
-                                  onLongPress: () => {},
+                                  onLongPress: () => {
+                                      setState(() {
+                                      _selectedIndex = index;
+                                    }),
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        title: Center(
+                                            child: Text("Order information",
+                                            style: const TextStyle(
+                                              color: Colors.white
+                                            ))),
+                                              content: Text(
+                                                "customer email: ${orders[_selectedIndex].customer_email}\n"
+                                                    "computer brand: ${orders[_selectedIndex].brand}\n"
+                                                    "computer model: ${orders[_selectedIndex].model}\n"
+                                                    "computer year: ${orders[_selectedIndex].year_made}\n"
+                                                    "issue: ${orders[_selectedIndex].issue}\n",
+                                                style: const TextStyle(
+                                                  color: Colors.white
+                                                )
+                                        ),
+                                        backgroundColor: Color(0xFF133B5C),
+                                    ),
+                                    )
+                                  },
                                   horizontalTitleGap: 30,
                                   leading: Text(
                                     orders[index].date,

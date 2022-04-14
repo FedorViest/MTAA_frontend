@@ -8,8 +8,13 @@ class Order{
   String id;
   String date;
   String status;
+  String issue;
+  String brand;
+  String model;
+  int year_made;
+  String customer_email;
 
-  Order(this.id, this.date, this.status);
+  Order(this.id, this.date, this.status, this.issue, this.brand, this.model, this.year_made, this.customer_email);
 }
 
 
@@ -26,9 +31,10 @@ class getRepairs with ChangeNotifier{
       late List<Order> orders = [];
 
       for (var item in response.data){
-        var order = Order(item["Orders"]["id"], item["Orders"]["date_created"], item["Orders"]["status"]);
+        var order = Order(item["Orders"]["id"], item["Orders"]["date_created"], item["Orders"]["status"], item["Orders"]["issue"], item["Computers"]["brand"], item["Computers"]["model"], item["Computers"]["year_made"], item["customer_email"]);
         orders.add(order);
         print(item["Orders"]["date_created"]);
+        print(item["Computers"]["brand"]);
       }
       for (var item in orders){
         print(item);
