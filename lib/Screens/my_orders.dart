@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:frontend/Backend_calls/Customers/get_order.dart';
 import 'package:frontend/Screens/rate_technician.dart';
 
 import '../Backend_calls/Customers/get_orders.dart';
@@ -51,12 +54,12 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                 children: [
                   SizedBox(height: size.height * 0.1),
                   ElevatedButton(
-                    onPressed:
-                    orders[_selectedIndex].status == "accepted" ? null:
-                          () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => RateTechnicianScreen()));
-                    },
+                    onPressed: orders[_selectedIndex].status == "accepted"
+                        ? null
+                        : () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => RateTechnicianScreen()));
+                          },
                     style: ElevatedButton.styleFrom(
                         fixedSize: const Size(240, 60),
                         primary: Color(0xFF1E5F74)),
@@ -95,26 +98,40 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                                     print(_selectedId);
                                   });
                                 },
-                                onLongPress: () async => {
+                                onLongPress: () async {
+                                  print(_selectedId);
+                                  var response = await getOrder()
+                                      .getOrderFunc(_selectedId);
+                                  Map<String, dynamic> response_json =
+                                      json.decode(response);
+                                  print(response_json);
+                                  print(response_json["Orders"]["status"]);
+                                  print(response_json["employee_name"]);
                                   setState(() {
                                     _selectedIndex = index;
-                                  }),
-                                  //response = await
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) => AlertDialog(
-                                      title: Center(
-                                          child: Text("Order information",
-                                              style: const TextStyle(
-                                                  color: Colors.white))),
-                                      content: Text("YOLO",
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15)),
-                                      backgroundColor: Color(0xFF133B5C),
-                                    ),
-                                  )
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        title: const Center(
+                                          child: Text(
+                                            "Order information",
+                                            style: const TextStyle(
+                                                color: Colors.white),
+                                          ),
+                                        ),
+                                        content: Text(
+                                            "Employee: ${response_json["employee_name"]}\n\n"
+                                            "Issue: ${response_json["Orders"]["issue"]}\n\n"
+                                            "Computer brand: ${response_json["Computers"]["brand"]}\n\n"
+                                            "Computer model: ${response_json["Computers"]["model"]}",
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 15)),
+                                        backgroundColor: Color(0xFF133B5C),
+                                      ),
+                                    );
+                                  });
                                 },
                                 horizontalTitleGap: 30,
                                 leading: Text(

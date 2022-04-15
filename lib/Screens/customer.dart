@@ -101,7 +101,7 @@ class _CustomerScreenState extends State<CustomerScreen> {
                       onPressed: () async {
                         var response = await getOrders().getOrdersFunc();
                         print("RESPONSE" + response.toString());
-                        response ??= [Order(0, "No", "ORDERS")];
+                        response ??= [Order(0, "ORDERS", "NO")];
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => MyOrdersScreen(orders: response)));
                       },
