@@ -6,9 +6,9 @@ import 'profile.dart';
 import '../Backend_calls/Employees/get_repairs.dart';
 
 class EmployeeScreen extends StatefulWidget {
-  final List<Order> orders;
+  final List<Repair> repairs;
 
-  const EmployeeScreen({Key? key, required this.orders}) : super(key: key);
+  const EmployeeScreen({Key? key, required this.repairs}) : super(key: key);
 
   @override
   _EmployeeScreenState createState() => _EmployeeScreenState();
@@ -17,7 +17,7 @@ class EmployeeScreen extends StatefulWidget {
 class _EmployeeScreenState extends State<EmployeeScreen> {
   int _selectedIndex = 0;
   int _selectedId = 0;
-  late List<Order> orders = widget.orders;
+  late List<Repair> repairs = widget.repairs;
 
   late bool back;
 
@@ -59,7 +59,7 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(orders);
+    print(repairs);
     //print("Date: ${response["Orders"]["date_created"]}, Status: ${response["Orders"]["status"]}");
 
     Size size = MediaQuery.of(context).size;
@@ -97,7 +97,7 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                         height: size.height * 0.5,
                         child: ListView.builder(
                           padding: EdgeInsets.all(10),
-                          itemCount: orders.length,
+                          itemCount: repairs.length,
                           scrollDirection: Axis.vertical,
                           itemBuilder: (BuildContext context, int index) {
                             return Card(
@@ -114,7 +114,7 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                                     setState(() {
                                       _selectedIndex = index;
                                       _selectedId =
-                                          int.parse(orders[_selectedIndex].id);
+                                          int.parse(repairs[_selectedIndex].id);
                                       print(_selectedId);
                                     });
                                   },
@@ -130,11 +130,11 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                                                 style: const TextStyle(
                                                     color: Colors.white))),
                                         content: Text(
-                                            "customer email: ${orders[_selectedIndex].customer_email}\n\n"
-                                            "computer brand: ${orders[_selectedIndex].brand}\n\n"
-                                            "computer model: ${orders[_selectedIndex].model}\n\n"
-                                            "computer year: ${orders[_selectedIndex].year_made}\n\n"
-                                            "issue: ${orders[_selectedIndex].issue}\n\n",
+                                            "customer email: ${repairs[_selectedIndex].customer_email}\n\n"
+                                            "computer brand: ${repairs[_selectedIndex].brand}\n\n"
+                                            "computer model: ${repairs[_selectedIndex].model}\n\n"
+                                            "computer year: ${repairs[_selectedIndex].year_made}\n\n"
+                                            "issue: ${repairs[_selectedIndex].issue}\n\n",
                                             style: const TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.bold,
@@ -145,13 +145,13 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                                   },
                                   horizontalTitleGap: 30,
                                   leading: Text(
-                                    orders[index].date,
+                                    repairs[index].date,
                                     style: const TextStyle(
                                       fontSize: 20,
                                     ),
                                   ),
                                   trailing: Text(
-                                    orders[index].status,
+                                    repairs[index].status,
                                     style: const TextStyle(
                                       fontSize: 20,
                                     ),
@@ -166,12 +166,12 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                     SizedBox(height: size.height * 0.06),
                     ElevatedButton(
                       onPressed:
-                          (orders[_selectedIndex].status == "finished") ||
-                                  (orders[_selectedIndex].status == "REPAIRS")
+                          (repairs[_selectedIndex].status == "finished") ||
+                                  (repairs[_selectedIndex].status == "REPAIRS")
                               ? null
                               : () {
                                   setState(() {
-                                    orders[_selectedIndex].status = "finished";
+                                    repairs[_selectedIndex].status = "finished";
                                   });
                                   updateRepair().getInfo(_selectedId);
                                 },

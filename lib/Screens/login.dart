@@ -47,9 +47,9 @@ class _LoginScreenState extends State<LoginScreen> {
       } else if (response["position"] == "employee") {
         var response2 = await getRepairs().getInfo();
         print("RESPONSE ${response2}");
-        response2 ??= [Order("", "NO", "REPAIRS", "", "", "", 0, "")];
+        response2 ??= [Repair("", "NO", "REPAIRS", "", "", "", 0, "")];
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => EmployeeScreen(orders: response2)));
+            builder: (context) => EmployeeScreen(repairs: response2)));
       } else if (response["position"] == "customer") {
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => CustomerScreen()));

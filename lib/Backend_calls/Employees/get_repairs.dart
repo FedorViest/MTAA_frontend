@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Utils/constants.dart';
 
-class Order {
+class Repair {
   String id;
   String date;
   String status;
@@ -16,7 +16,7 @@ class Order {
   int year_made;
   String customer_email;
 
-  Order(this.id, this.date, this.status, this.issue, this.brand, this.model,
+  Repair(this.id, this.date, this.status, this.issue, this.brand, this.model,
       this.year_made, this.customer_email);
 }
 
@@ -32,10 +32,10 @@ class getRepairs with ChangeNotifier {
       Response response =
           await dio.get(url + '/employee/getRepairs');
 
-      late List<Order> orders = [];
+      late List<Repair> orders = [];
 
       for (var item in response.data) {
-        var order = Order(
+        var order = Repair(
             item["Orders"]["id"],
             item["Orders"]["date_created"],
             item["Orders"]["status"],

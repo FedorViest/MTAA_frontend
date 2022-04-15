@@ -102,10 +102,7 @@ class _ManageEmployeeScreenState extends State<ManageEmployeeScreen> {
                   ),
                   SizedBox(height: size.height * 0.1),
                   ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => MyOrdersScreen()));
-                    },
+                    onPressed: () {},
                     style: ElevatedButton.styleFrom(
                         fixedSize: const Size(200, 60),
                         primary: Color(0xFF1E5F74)),
