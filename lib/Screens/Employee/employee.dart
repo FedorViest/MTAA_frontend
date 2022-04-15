@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:frontend/Backend_calls/Employees/update_repair.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'profile.dart';
-import '../Backend_calls/Employees/get_repairs.dart';
+import '../Users/profile.dart';
+import '../../Backend_calls/Employees/get_repairs.dart';
 
 class EmployeeScreen extends StatefulWidget {
   final List<Repair> repairs;

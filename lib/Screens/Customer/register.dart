@@ -3,7 +3,7 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/Backend_calls/Customers/register.dart';
-import 'package:frontend/Screens/login.dart';
+import 'package:frontend/Screens/Users/login.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override

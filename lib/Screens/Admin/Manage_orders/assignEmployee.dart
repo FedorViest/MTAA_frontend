@@ -3,9 +3,9 @@ import 'package:frontend/Backend_calls/Admin/orders_calls.dart';
 import 'package:frontend/Backend_calls/Employees/update_repair.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'admin.dart';
-import 'profile.dart';
-import '../Backend_calls/Employees/get_repairs.dart';
+import '../admin.dart';
+import '../../Users/profile.dart';
+import '../../../Backend_calls/Employees/get_repairs.dart';
 
 class assignEmployeeScreen extends StatefulWidget {
   final List<Users_info> users;

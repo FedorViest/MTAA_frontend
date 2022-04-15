@@ -1,16 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/Backend_calls/Users/login_calls.dart';
-import 'package:frontend/Screens/customer.dart';
-import 'package:frontend/Screens/employee.dart';
-import 'package:frontend/Screens/profile.dart';
-import 'package:frontend/Screens/register.dart';
-import 'package:frontend/Screens/admin.dart';
+import 'package:frontend/Screens/Customer/customer.dart';
+import 'package:frontend/Screens/Employee/employee.dart';
+import 'package:frontend/Screens/Users/profile.dart';
+import 'package:frontend/Screens/Customer/register.dart';
+import 'package:frontend/Screens/Admin/admin.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../Backend_calls/Employees/get_repairs.dart';
-import '../Backend_calls/Users/auth.dart';
+import '../../Backend_calls/Employees/get_repairs.dart';
+import '../../Backend_calls/Users/auth.dart';
 
 enum Positions { admin, employee, customer }
 

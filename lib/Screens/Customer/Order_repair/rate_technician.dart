@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:frontend/Backend_calls/Customers/rate_employee.dart';
 
-import 'customer.dart';
-import 'profile.dart';
+import '../customer.dart';
+import '../../Users/profile.dart';
 
 class Employee {
   String email;

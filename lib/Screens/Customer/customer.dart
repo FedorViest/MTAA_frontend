@@ -1,22 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/Backend_calls/Admin/computer_calls.dart';
-import 'package:frontend/Backend_calls/Admin/orders_calls.dart';
-import 'package:frontend/Screens/employee_ratings.dart';
-import 'package:frontend/Screens/manage_employees.dart';
-import 'package:frontend/Screens/manage_orders.dart';
+import 'package:frontend/Backend_calls/Customers/get_orders.dart';
+import 'package:frontend/Screens/Customer/My_orders/my_orders.dart';
+import 'package:frontend/Screens/Customer/Order_repair/order_repair.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../Backend_calls/Admin/get_ratings.dart';
-import 'login.dart';
-import 'manage_computers.dart';
-import 'profile.dart';
+import '../Users/profile.dart';
 
-class AdminScreen extends StatefulWidget {
+class CustomerScreen extends StatefulWidget {
   @override
-  _AdminScreenState createState() => _AdminScreenState();
+  _CustomerScreenState createState() => _CustomerScreenState();
 }
 
-class _AdminScreenState extends State<AdminScreen> {
+class _CustomerScreenState extends State<CustomerScreen> {
   late bool back;
 
   Future<bool> _showMyDialog() async {
@@ -45,8 +40,6 @@ class _AdminScreenState extends State<AdminScreen> {
                   color: Colors.green,
                   onPressed: () {
                     Navigator.pop(context, true);
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => LoginScreen()));
                   },
                 ),
               ],
@@ -87,59 +80,15 @@ class _AdminScreenState extends State<AdminScreen> {
                   children: [
                     SizedBox(height: size.height * 0.2),
                     ElevatedButton(
-                      onPressed: () async {
-                        var response2 = await getRatings().getInfo();
-                        print("RESPONSE ${response2}");
-                        response2 ??= [Rating("NO", "REPAIRS", 0, "")];
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) =>
-                                EmployeeRatingScreen(ratings: response2)));
-                      },
-                      style: ElevatedButton.styleFrom(
-                          fixedSize: const Size(200, 60),
-                          primary: Color(0xFF1E5F74)),
-                      child: const Text(
-                        "Employee Ratings",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: size.height * 0.05),
-                    ElevatedButton(
-                      onPressed: () async {
-                        var response2 = await getOrders().getOrdersFunc();
-                        print("RESPONSE ${response2}");
-                        response2 ??= [Order(0, "ORDERS", "NO")];
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => ManageOrdersScreen(
-                                orders: response2)));
-                      },
-                      style: ElevatedButton.styleFrom(
-                          fixedSize: const Size(200, 60),
-                          primary: Color(0xFF1E5F74)),
-                      child: const Text(
-                        "Manage orders",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: size.height * 0.05),
-                    ElevatedButton(
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => ManageEmployeeScreen()));
+                            builder: (context) => OrderRepairScreen()));
                       },
                       style: ElevatedButton.styleFrom(
                           fixedSize: const Size(200, 60),
                           primary: Color(0xFF1E5F74)),
                       child: const Text(
-                        "Manage employees",
+                        "Order repair",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
@@ -147,20 +96,20 @@ class _AdminScreenState extends State<AdminScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: size.height * 0.05),
+                    SizedBox(height: size.height * 0.15),
                     ElevatedButton(
                       onPressed: () async {
-                          var response2 = await getComputers().getInfo();
-                          print("RESPONSE ${response2}");
-                          response2 ??= [Computer(0, "NO", "COMPUTERS", "")];
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => ManageComputersScreen(computers: response2)));
-                        },
+                        var response = await getOrders().getOrdersFunc();
+                        print("RESPONSE" + response.toString());
+                        response ??= [Order(0, "ORDERS", "NO")];
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => MyOrdersScreen(orders: response)));
+                      },
                       style: ElevatedButton.styleFrom(
                           fixedSize: const Size(200, 60),
                           primary: Color(0xFF1E5F74)),
                       child: const Text(
-                        "Manage computers",
+                        "My orders",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,

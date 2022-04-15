@@ -3,11 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:frontend/Backend_calls/Customers/get_order.dart';
-import 'package:frontend/Screens/rate_technician.dart';
+import 'package:frontend/Screens/Customer/Order_repair/rate_technician.dart';
 
-import '../Backend_calls/Customers/get_orders.dart';
-import 'customer.dart';
-import 'profile.dart';
+import '../../../Backend_calls/Customers/get_orders.dart';
+import '../customer.dart';
+import '../../Users/profile.dart';
 
 class Orders {
   String date;

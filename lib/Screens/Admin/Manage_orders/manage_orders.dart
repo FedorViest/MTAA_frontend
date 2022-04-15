@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Backend_calls/Employees/update_repair.dart';
-import 'package:frontend/Screens/assignEmployee.dart';
+import 'package:frontend/Screens/Admin/Manage_orders/assignEmployee.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../Backend_calls/Admin/orders_calls.dart';
-import 'profile.dart';
-import '../Backend_calls/Employees/get_repairs.dart';
+import '../../../Backend_calls/Admin/orders_calls.dart';
+import '../../Users/profile.dart';
+import '../../../Backend_calls/Employees/get_repairs.dart';
 
 class ManageOrdersScreen extends StatefulWidget {
   final List<Order> orders;

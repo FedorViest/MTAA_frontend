@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
-import 'customer.dart';
-import 'profile.dart';
+import '../customer.dart';
+import '../../Users/profile.dart';
 
 class OrderRepairScreen extends StatefulWidget {
   @override

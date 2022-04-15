@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:frontend/Screens/add_employee.dart';
-import 'package:frontend/Screens/my_orders.dart';
-import 'package:frontend/Screens/rate_technician.dart';
+import 'package:frontend/Screens/Admin/Manage_employees/add_employee.dart';
+import 'package:frontend/Screens/Customer/My_orders/my_orders.dart';
+import 'package:frontend/Screens/Customer/Order_repair/rate_technician.dart';
 
-import 'customer.dart';
-import 'profile.dart';
+import '../../Customer/customer.dart';
+import '../../Users/profile.dart';
 
 class Employee {
   String name;

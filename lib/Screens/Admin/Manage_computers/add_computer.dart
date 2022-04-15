@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../Backend_calls/Admin/computer_calls.dart';
-import 'admin.dart';
+import '../../../Backend_calls/Admin/computer_calls.dart';
+import '../admin.dart';
 
 class AddComputerScreen extends StatefulWidget {
   @override
