@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/Backend_calls/Admin/add_employee_calls.dart';
+
+import '../admin.dart';
 
 class AddEmployeeScreen extends StatefulWidget {
   @override
@@ -7,6 +10,11 @@ class AddEmployeeScreen extends StatefulWidget {
 
 class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
   final _formKey = GlobalKey<FormState>();
+
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwdController = TextEditingController();
+  final skillsController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +48,7 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                 alignment: Alignment.center,
                 margin: EdgeInsets.only(left: 20, right: 20, top: 30),
                 child: TextFormField(
+                  controller: nameController,
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -62,6 +71,7 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                 alignment: Alignment.center,
                 margin: EdgeInsets.only(left: 20, right: 20, top: 30),
                 child: TextFormField(
+                  controller: emailController,
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -84,6 +94,7 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                 alignment: Alignment.center,
                 margin: EdgeInsets.only(left: 20, right: 20, top: 30),
                 child: TextFormField(
+                  controller: passwdController,
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -106,6 +117,7 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                 alignment: Alignment.center,
                 margin: EdgeInsets.only(left: 20, right: 20, top: 30),
                 child: TextFormField(
+                  controller: skillsController,
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -131,11 +143,15 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                   onPressed: () {
                     // Validate returns true if the form is valid, or false otherwise.
                     if (_formKey.currentState!.validate()) {
+                      addEmployee().add_employee(nameController.text, passwdController.text, emailController.text, skillsController.text);
+
                       // If the form is valid, display a snackbar. In the real world,
                       // you'd often call a server or save the information in a database.
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Processing Data')),
                       );
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (context) => AdminScreen()));
                     }
                   },
                   child: const Text('REGISTER'),
