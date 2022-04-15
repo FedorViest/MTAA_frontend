@@ -31,6 +31,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
 
   int _selectedIndex = 0;
   int _selectedId = 0;
+  late String _employeeEmail;
 
   late List<Order> orders = widget.orders;
 
@@ -54,11 +55,17 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                 children: [
                   SizedBox(height: size.height * 0.1),
                   ElevatedButton(
+
                     onPressed: orders[_selectedIndex].status == "accepted"
                         ? null
-                        : () {
+                        : () async {
+                      var response = await getOrder()
+                          .getOrderFunc(_selectedId);
+                      Map<String, dynamic> response_json =
+                      json.decode(response);
+                      _employeeEmail = response_json["employee_email"].toString();
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => RateTechnicianScreen()));
+                                builder: (context) => RateTechnicianScreen(email: _employeeEmail,)));
                           },
                     style: ElevatedButton.styleFrom(
                         fixedSize: const Size(240, 60),
@@ -114,6 +121,8 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                                       response_json["employee_name"] = "Unassigned";
                                       response_json["employee_email"] = "Unassigned";
                                     }
+                                    _employeeEmail = response_json["employee_email"].toString();
+                                    print(_employeeEmail);
                                     showDialog(
                                       context: context,
                                       builder: (context) => AlertDialog(
