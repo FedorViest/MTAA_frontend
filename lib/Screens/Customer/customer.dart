@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/Backend_calls/Customers/get_computers.dart';
 import 'package:frontend/Backend_calls/Customers/get_orders.dart';
 import 'package:frontend/Screens/Customer/My_orders/my_orders.dart';
 import 'package:frontend/Screens/Customer/Order_repair/order_repair.dart';
@@ -80,9 +81,11 @@ class _CustomerScreenState extends State<CustomerScreen> {
                   children: [
                     SizedBox(height: size.height * 0.2),
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        var response = await getComputersCustomer().getInfo();
+                        print(response);
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => OrderRepairScreen()));
+                            builder: (context) => OrderRepairScreen(computers: response)));
                       },
                       style: ElevatedButton.styleFrom(
                           fixedSize: const Size(200, 60),
