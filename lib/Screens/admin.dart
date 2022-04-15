@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/Backend_calls/Admin/computer_calls.dart';
 import 'package:frontend/Backend_calls/Admin/orders_calls.dart';
 import 'package:frontend/Screens/employee_ratings.dart';
 import 'package:frontend/Screens/manage_employees.dart';
@@ -7,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Backend_calls/Admin/get_ratings.dart';
 import 'login.dart';
+import 'manage_computers.dart';
 import 'profile.dart';
 
 class AdminScreen extends StatefulWidget {
@@ -138,6 +140,27 @@ class _AdminScreenState extends State<AdminScreen> {
                           primary: Color(0xFF1E5F74)),
                       child: const Text(
                         "Manage employees",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: size.height * 0.05),
+                    ElevatedButton(
+                      onPressed: () async {
+                          var response2 = await getComputers().getInfo();
+                          print("RESPONSE ${response2}");
+                          response2 ??= [Computer(0, "NO", "COMPUTERS", "")];
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => ManageComputersScreen(computers: response2)));
+                        },
+                      style: ElevatedButton.styleFrom(
+                          fixedSize: const Size(200, 60),
+                          primary: Color(0xFF1E5F74)),
+                      child: const Text(
+                        "Manage computers",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
