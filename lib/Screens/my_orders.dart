@@ -99,6 +99,8 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                                   });
                                 },
                                 onLongPress: () async {
+                                  _selectedIndex = index;
+                                  _selectedId = orders[_selectedIndex].id;
                                   print(_selectedId);
                                   var response = await getOrder()
                                       .getOrderFunc(_selectedId);
@@ -108,7 +110,10 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                                   print(response_json["Orders"]["status"]);
                                   print(response_json["employee_name"]);
                                   setState(() {
-                                    _selectedIndex = index;
+                                    if (response_json["employee_name"] == null){
+                                      response_json["employee_name"] = "Unassigned";
+                                      response_json["employee_email"] = "Unassigned";
+                                    }
                                     showDialog(
                                       context: context,
                                       builder: (context) => AlertDialog(
@@ -121,6 +126,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                                         ),
                                         content: Text(
                                             "Employee: ${response_json["employee_name"]}\n\n"
+                                                "Email: ${response_json["employee_email"]}\n\n"
                                             "Issue: ${response_json["Orders"]["issue"]}\n\n"
                                             "Computer brand: ${response_json["Computers"]["brand"]}\n\n"
                                             "Computer model: ${response_json["Computers"]["model"]}",
