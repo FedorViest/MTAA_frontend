@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
     handleUser() async {
       var dio = Dio();
       print(_position);
-      Provider.of<Auth>(context, listen: false)
+      await Provider.of<Auth>(context, listen: false)
           .login(emailController.text, passwordController.text);
 
       print(passwordController.text);
