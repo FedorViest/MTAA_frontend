@@ -119,6 +119,7 @@ class _MyRatingsScreenState extends State<MyRatingsScreen> {
                   ElevatedButton(
                     onPressed: () {
                       deleteRating().delete_rating(_selectedId);
+                      ratings.removeWhere((element) => ratings.indexOf(element) == _selectedIndex);
                       setState(() {});
                     },
                     style: ElevatedButton.styleFrom(
