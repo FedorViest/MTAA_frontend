@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/Backend_calls/Admin/orders_calls.dart';
 import 'package:frontend/Screens/employee_ratings.dart';
 import 'package:frontend/Screens/manage_employees.dart';
 import 'package:frontend/Screens/manage_orders.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Backend_calls/Admin/get_ratings.dart';
+import 'login.dart';
 import 'profile.dart';
 
 class AdminScreen extends StatefulWidget {
@@ -41,6 +43,8 @@ class _AdminScreenState extends State<AdminScreen> {
                   color: Colors.green,
                   onPressed: () {
                     Navigator.pop(context, true);
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => LoginScreen()));
                   },
                 ),
               ],
@@ -103,9 +107,13 @@ class _AdminScreenState extends State<AdminScreen> {
                     ),
                     SizedBox(height: size.height * 0.05),
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        var response2 = await getOrders().getOrdersFunc();
+                        print("RESPONSE ${response2}");
+                        response2 ??= [Order(0, "ORDERS", "NO")];
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => ManageOrdersScreen()));
+                            builder: (context) => ManageOrdersScreen(
+                                orders: response2)));
                       },
                       style: ElevatedButton.styleFrom(
                           fixedSize: const Size(200, 60),

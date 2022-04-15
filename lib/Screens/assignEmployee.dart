@@ -1,33 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/Backend_calls/Admin/orders_calls.dart';
 import 'package:frontend/Backend_calls/Employees/update_repair.dart';
-import 'package:frontend/Screens/assignEmployee.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../Backend_calls/Admin/orders_calls.dart';
+import 'admin.dart';
 import 'profile.dart';
 import '../Backend_calls/Employees/get_repairs.dart';
 
-class ManageOrdersScreen extends StatefulWidget {
-  final List<Order> orders;
+class assignEmployeeScreen extends StatefulWidget {
+  final List<Users_info> users;
+  final order_id;
 
-  const ManageOrdersScreen(
-      {Key? key, required this.orders})
+  const assignEmployeeScreen(
+      {Key? key, required this.users, required this.order_id})
       : super(key: key);
 
   @override
-  _ManageOrdersScreenState createState() => _ManageOrdersScreenState();
+  _assignEmployeeScreenState createState() => _assignEmployeeScreenState();
 }
 
-class _ManageOrdersScreenState extends State<ManageOrdersScreen> {
+class _assignEmployeeScreenState extends State<assignEmployeeScreen> {
   int _selectedIndex = 0;
-  int _selectedId = 0;
-  late List<Order> orders = widget.orders;
+  String _selectedEmail = "";
+  late List<Users_info> users = widget.users;
+  late var order_id = widget.order_id;
 
   late bool back;
 
   @override
   Widget build(BuildContext context) {
-    print(orders);
     //print("Date: ${response["Orders"]["date_created"]}, Status: ${response["Orders"]["status"]}");
 
     Size size = MediaQuery.of(context).size;
@@ -56,7 +57,7 @@ class _ManageOrdersScreenState extends State<ManageOrdersScreen> {
                       height: size.height * 0.5,
                       child: ListView.builder(
                         padding: EdgeInsets.all(10),
-                        itemCount: orders.length,
+                        itemCount: users.length,
                         scrollDirection: Axis.vertical,
                         itemBuilder: (BuildContext context, int index) {
                           return Card(
@@ -72,19 +73,20 @@ class _ManageOrdersScreenState extends State<ManageOrdersScreen> {
                                 onTap: () {
                                   setState(() {
                                     _selectedIndex = index;
-                                    _selectedId = orders[_selectedIndex].id;
-                                    print(_selectedId);
+                                    _selectedEmail =
+                                        users[_selectedIndex].email;
+                                    print(_selectedEmail);
                                   });
                                 },
                                 horizontalTitleGap: 30,
                                 leading: Text(
-                                  orders[index].date,
+                                  users[index].name,
                                   style: const TextStyle(
                                     fontSize: 20,
                                   ),
                                 ),
                                 trailing: Text(
-                                  orders[index].status,
+                                  users[index].email,
                                   style: const TextStyle(
                                     fontSize: 20,
                                   ),
@@ -98,24 +100,15 @@ class _ManageOrdersScreenState extends State<ManageOrdersScreen> {
                   ),
                   SizedBox(height: size.height * 0.06),
                   ElevatedButton(
-                    onPressed:
-                      (orders[_selectedIndex].status == "ORDERS") ? null
-                          : () async {
-                                print("penis");
-                               var response = await Users_profile().getInfo();
-                               print(response);
-                                response ??= [Users_info("NO", "EMPLOYEES")];
-                                Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => assignEmployeeScreen(
-                                        users: response,
-                                        order_id: _selectedId,
-                                      )));
-                            },
+                    onPressed: () {
+                      assignEmployee().assign_employee(_selectedEmail, order_id);
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => AdminScreen()));
+                    },
                     style: ElevatedButton.styleFrom(
                         fixedSize: const Size(240, 70),
                         primary: Color(0xFF1E5F74)),
                     child: const Text(
-                      "View Employees",
+                      "Assign selected employee",
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
