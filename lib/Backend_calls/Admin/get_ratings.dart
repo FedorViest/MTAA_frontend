@@ -4,6 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../Utils/constants.dart';
+
 class Rating {
   String customer_email;
   String employee_email;
@@ -23,7 +25,7 @@ class getRatings with ChangeNotifier {
       dio.options.headers["authorization"] = "Bearer " + access_token;
 
       Response response =
-          await dio.get('http://10.0.2.2:8000/admin/getRatings');
+          await dio.get(url + '/admin/getRatings');
 
       print(response);
 

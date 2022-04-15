@@ -4,6 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../Utils/constants.dart';
+
 class updateRepair with ChangeNotifier {
   var dio = Dio();
 
@@ -14,7 +16,7 @@ class updateRepair with ChangeNotifier {
       dio.options.headers["authorization"] = "Bearer " + access_token;
 
       Response response = await dio.put(
-          'http://10.0.2.2:8000/employee/updateOrderState/$id',
+          url + '/employee/updateOrderState/$id',
           data: {"status": "finished"});
       print('http://10.0.2.2:8000/employee/updateOrderState/$id');
 

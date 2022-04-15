@@ -4,6 +4,8 @@ import 'package:jwt_decode/jwt_decode.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../Utils/constants.dart';
+
 class Auth with ChangeNotifier {
   var dio = Dio();
 
@@ -13,7 +15,7 @@ class Auth with ChangeNotifier {
       FormData formData =
           FormData.fromMap({'username': email, 'password': password});
       Response response =
-          await dio.post('http://10.0.2.2:8000/users/login', data: formData);
+          await dio.post(url + '/users/login', data: formData);
       print(response.data);
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString('access_token', response.data["access_token"]);
