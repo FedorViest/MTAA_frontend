@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:frontend/Backend_calls/Admin/manage_employees.dart';
 import 'package:frontend/Screens/Admin/Manage_employees/add_employee.dart';
 import 'package:frontend/Screens/Customer/My_orders/my_orders.dart';
 import 'package:frontend/Screens/Customer/Order_repair/rate_technician.dart';
 
+import '../../../Backend_calls/Admin/orders_calls.dart';
 import '../../Customer/customer.dart';
 import '../../Users/profile.dart';
+import 'change_employee.dart';
 
 class Employee {
   String name;
@@ -15,28 +18,21 @@ class Employee {
 }
 
 class ManageEmployeeScreen extends StatefulWidget {
+  final List<User_info> employees;
+
+  const ManageEmployeeScreen(
+      {Key? key, required this.employees})
+      : super(key: key);
+
   @override
   _ManageEmployeeScreenState createState() => _ManageEmployeeScreenState();
 }
 
 class _ManageEmployeeScreenState extends State<ManageEmployeeScreen> {
   int _selectedIndex = 0;
-
-  final List employees = [
-    Employee(name: "Robert", rating: 0.5),
-    Employee(name: "a", rating: 1),
-    Employee(name: "R", rating: 2),
-    Employee(name: "obert", rating: 2.5),
-    Employee(name: "b", rating: 3),
-    Employee(name: "c", rating: 3),
-    Employee(name: "d", rating: 4),
-    Employee(name: "e", rating: 4.5),
-    Employee(name: "f", rating: 0),
-    Employee(name: "g", rating: 1),
-    Employee(name: "Robert", rating: 1),
-    Employee(name: "Robert", rating: 2),
-    Employee(name: "Robert", rating: 3),
-  ];
+  String _selectedEmail = "";
+  String _selectedName = "";
+  late List<User_info> employees = widget.employees;
 
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -83,6 +79,9 @@ class _ManageEmployeeScreenState extends State<ManageEmployeeScreen> {
                               onTap: () {
                                 setState(() {
                                   _selectedIndex = index;
+                                  _selectedEmail = employees[_selectedIndex].email;
+                                  _selectedName = employees[_selectedIndex].name;
+                                  print(_selectedEmail);
                                 });
                               },
                               horizontalTitleGap: 30,
@@ -101,7 +100,9 @@ class _ManageEmployeeScreenState extends State<ManageEmployeeScreen> {
                 ),
                 SizedBox(height: size.height * 0.05),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    deleteEmployee().delete_employee(_selectedEmail);
+                  },
                   style: ElevatedButton.styleFrom(
                       fixedSize: const Size(200, 60),
                       primary: Color(0xFF1E5F74)),
@@ -117,8 +118,9 @@ class _ManageEmployeeScreenState extends State<ManageEmployeeScreen> {
                 SizedBox(height: size.height * 0.05),
                 ElevatedButton(
                   onPressed: () {
+                    print(_selectedName);
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => AddEmployeeScreen()));
+                        builder: (context) => ChangeEmployeeScreen(employeeName: _selectedName, employeeEmail: _selectedEmail)));
                   },
                   style: ElevatedButton.styleFrom(
                       fixedSize: const Size(200, 60),

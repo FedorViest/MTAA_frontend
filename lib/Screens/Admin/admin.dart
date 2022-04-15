@@ -131,9 +131,12 @@ class _AdminScreenState extends State<AdminScreen> {
                     ),
                     SizedBox(height: size.height * 0.05),
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        var response2 = await getAllEmployees().getInfo();
+                        print("RESPONSE ${response2}");
+                        response2 ??= [User_info("", "")];
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => ManageEmployeeScreen()));
+                            builder: (context) => ManageEmployeeScreen(employees: response2)));
                       },
                       style: ElevatedButton.styleFrom(
                           fixedSize: const Size(200, 60),

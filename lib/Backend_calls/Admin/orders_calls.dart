@@ -12,11 +12,11 @@ class Order {
   Order(this.id, this.status, this.date);
 }
 
-class Users_info {
+class User_info {
   String name;
   String email;
 
-  Users_info(this.name, this.email);
+  User_info(this.name, this.email);
 }
 
 class assignEmployeeOut {
@@ -59,7 +59,7 @@ class getOrders with ChangeNotifier {
   }
 }
 
-class Users_profile with ChangeNotifier {
+class getAllEmployees with ChangeNotifier {
   var dio = Dio();
 
   Future<dynamic> getInfo() async {
@@ -73,11 +73,11 @@ class Users_profile with ChangeNotifier {
       Response response =
           await dio.get('http://10.0.2.2:8000/admin/getAllEmployees');
 
-      late List<Users_info> users = [];
+      late List<User_info> users = [];
 
       print(response.data);
       for (var item in response.data) {
-        var user = Users_info(item["name"], item["email"]);
+        var user = User_info(item["name"], item["email"]);
         users.add(user);
       }
 

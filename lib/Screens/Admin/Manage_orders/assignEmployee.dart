@@ -8,7 +8,7 @@ import '../../Users/profile.dart';
 import '../../../Backend_calls/Employees/get_repairs.dart';
 
 class assignEmployeeScreen extends StatefulWidget {
-  final List<Users_info> users;
+  final List<User_info> users;
   final order_id;
 
   const assignEmployeeScreen(
@@ -22,7 +22,7 @@ class assignEmployeeScreen extends StatefulWidget {
 class _assignEmployeeScreenState extends State<assignEmployeeScreen> {
   int _selectedIndex = 0;
   String _selectedEmail = "";
-  late List<Users_info> users = widget.users;
+  late List<User_info> users = widget.users;
   late var order_id = widget.order_id;
 
   late bool back;
