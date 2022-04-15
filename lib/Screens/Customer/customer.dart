@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Backend_calls/Customers/get_computers.dart';
 import 'package:frontend/Backend_calls/Customers/get_orders.dart';
+import 'package:frontend/Backend_calls/Customers/my_ratings.dart';
 import 'package:frontend/Screens/Customer/My_orders/my_orders.dart';
+import 'package:frontend/Screens/Customer/My_ratings/my_ratings.dart';
 import 'package:frontend/Screens/Customer/Order_repair/order_repair.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -99,7 +101,28 @@ class _CustomerScreenState extends State<CustomerScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: size.height * 0.15),
+                    SizedBox(height: size.height * 0.05),
+                    ElevatedButton(
+                      onPressed: () async {
+                        var response = await getRatings().getInfo();
+                        print("RESPONSE" + response.toString());
+                        response ??= [Rating(0, "RATINGS", 0, "NO")];
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => MyRatingsScreen(ratings: response)));
+                      },
+                      style: ElevatedButton.styleFrom(
+                          fixedSize: const Size(200, 60),
+                          primary: Color(0xFF1E5F74)),
+                      child: const Text(
+                        "My ratings",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: size.height * 0.05),
                     ElevatedButton(
                       onPressed: () async {
                         var response = await getOrders().getOrdersFunc();
