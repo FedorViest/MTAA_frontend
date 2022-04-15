@@ -9,9 +9,10 @@ class OneOrder{
   String issue;
   String brand;
   String model;
+  String employee_name;
   String employee_email;
 
-  OneOrder(this.id, this.issue, this.brand, this.model, this.employee_email);
+  OneOrder(this.id, this.issue, this.brand, this.model, this.employee_name, this.employee_email);
 }
 
 class getOrder with ChangeNotifier{

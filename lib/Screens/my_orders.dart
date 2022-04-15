@@ -31,6 +31,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
 
   int _selectedIndex = 0;
   int _selectedId = 0;
+  late String _employeeEmail;
 
   late List<Order> orders = widget.orders;
 
@@ -54,11 +55,17 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                 children: [
                   SizedBox(height: size.height * 0.1),
                   ElevatedButton(
+
                     onPressed: orders[_selectedIndex].status == "accepted"
                         ? null
-                        : () {
+                        : () async {
+                      var response = await getOrder()
+                          .getOrderFunc(_selectedId);
+                      Map<String, dynamic> response_json =
+                      json.decode(response);
+                      _employeeEmail = response_json["employee_email"].toString();
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => RateTechnicianScreen()));
+                                builder: (context) => RateTechnicianScreen(email: _employeeEmail,)));
                           },
                     style: ElevatedButton.styleFrom(
                         fixedSize: const Size(240, 60),
@@ -99,6 +106,8 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                                   });
                                 },
                                 onLongPress: () async {
+                                  _selectedIndex = index;
+                                  _selectedId = orders[_selectedIndex].id;
                                   print(_selectedId);
                                   var response = await getOrder()
                                       .getOrderFunc(_selectedId);
@@ -108,7 +117,12 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                                   print(response_json["Orders"]["status"]);
                                   print(response_json["employee_name"]);
                                   setState(() {
-                                    _selectedIndex = index;
+                                    if (response_json["employee_name"] == null){
+                                      response_json["employee_name"] = "Unassigned";
+                                      response_json["employee_email"] = "Unassigned";
+                                    }
+                                    _employeeEmail = response_json["employee_email"].toString();
+                                    print(_employeeEmail);
                                     showDialog(
                                       context: context,
                                       builder: (context) => AlertDialog(
@@ -121,6 +135,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                                         ),
                                         content: Text(
                                             "Employee: ${response_json["employee_name"]}\n\n"
+                                                "Email: ${response_json["employee_email"]}\n\n"
                                             "Issue: ${response_json["Orders"]["issue"]}\n\n"
                                             "Computer brand: ${response_json["Computers"]["brand"]}\n\n"
                                             "Computer model: ${response_json["Computers"]["model"]}",

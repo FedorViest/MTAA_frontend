@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:frontend/Backend_calls/Customers/rate_employee.dart';
 
 import 'customer.dart';
 import 'profile.dart';
-
-class RateTechnicianScreen extends StatefulWidget {
-  @override
-  _RateTechnicianScreenState createState() => _RateTechnicianScreenState();
-}
 
 class Employee {
   String email;
@@ -15,17 +11,20 @@ class Employee {
   Employee(this.email);
 }
 
+class RateTechnicianScreen extends StatefulWidget {
+  final String email;
+  @override
+  _RateTechnicianScreenState createState() => _RateTechnicianScreenState();
+
+  const RateTechnicianScreen({Key? key, required this.email}) : super(key: key);
+}
+
 class _RateTechnicianScreenState extends State<RateTechnicianScreen> {
   String? _dropDownValue;
-  double _currentValue = 0;
+  double _currentValue = 2.5;
+  final _commentController = TextEditingController();
 
-  List<String> emails = [
-    "employee@gmail.com",
-    "employee1@gmail.com",
-    "employee2@gmail.com",
-    "employee3@gmail.com",
-    "employee4@gmail.com",
-  ];
+  late String email = widget.email;
 
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -48,34 +47,15 @@ class _RateTechnicianScreenState extends State<RateTechnicianScreen> {
                   SizedBox(height: size.height * 0.05),
                   Container(
                     margin: EdgeInsets.only(left: 20, right: 20),
-                    decoration: const BoxDecoration(
-                      color: Colors.blueGrey,
-                    ),
+                    alignment: Alignment.center,
                     child: SizedBox(
                       width: size.width,
-                      child: DropdownButton2(
-                        alignment: Alignment.center,
-                        icon: const Icon(Icons.keyboard_arrow_down),
-                        iconEnabledColor: Colors.black,
-                        items: emails.map((String items) {
-                          return DropdownMenuItem<String>(
-                            value: items,
-                            child: Text(items),
-                          );
-                        }).toList(),
-                        hint: const Text(
-                          "Select technician",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
-                          ),
+                      child: Text(
+                        "Technician: $email",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
                         ),
-                        value: _dropDownValue,
-                        onChanged: (value) {
-                          setState(() {
-                            _dropDownValue = value as String;
-                          });
-                        },
                       ),
                     ),
                   ),
@@ -109,6 +89,7 @@ class _RateTechnicianScreenState extends State<RateTechnicianScreen> {
                   SizedBox(height: size.height * 0.1),
                   TextField(
                     maxLength: 50,
+                    controller: _commentController,
                     keyboardType: TextInputType.multiline,
                     maxLines: null,
                     decoration: InputDecoration(
@@ -122,7 +103,8 @@ class _RateTechnicianScreenState extends State<RateTechnicianScreen> {
                   ),
                   SizedBox(height: size.height * 0.05),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      var response = await AddRating().add_rating(email, _currentValue, _commentController.text);
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => CustomerScreen()));
                     },
