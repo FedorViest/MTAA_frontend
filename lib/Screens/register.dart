@@ -107,6 +107,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         hintStyle: TextStyle(color: Colors.grey[800]),
                         hintText: "Password",
                         fillColor: Colors.white70),
+                    obscureText: true,
                     validator:  (value) {
                       if (value == null || value.isEmpty) {
                         return "This field is required.";
