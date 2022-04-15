@@ -2,35 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:frontend/Screens/rate_technician.dart';
 
+import '../Backend_calls/Customers/get_orders.dart';
 import 'customer.dart';
 import 'profile.dart';
 
-class Order {
+class Orders {
   String date;
   String technician;
   String status;
 
-  Order({required this.date, required this.technician, required this.status});
+  Orders({required this.date, required this.technician, required this.status});
 }
 
-class MyOrdersScreen extends StatelessWidget {
+class MyOrdersScreen extends StatefulWidget {
+  final List<Order> orders;
+
+  const MyOrdersScreen({Key? key, required this.orders}) : super(key: key);
+
+  @override
+  _MyOrdersScreenState createState() => _MyOrdersScreenState();
+}
+
+class _MyOrdersScreenState extends State<MyOrdersScreen> {
   final List colors = [Color(0xFF1E5F74), Color(0xFF133B5C)];
 
-  final List orders = [
-    Order(date: "2020-02-28", technician: "Robert", status: "Finished"),
-    Order(date: "2019-01-27", technician: "a", status: "Finished"),
-    Order(date: "2018-01-27", technician: "R", status: "Finished"),
-    Order(date: "2022-01-27", technician: "obert", status: "Finished"),
-    Order(date: "2021-01-27", technician: "b", status: "Finished"),
-    Order(date: "2020-01-27", technician: "c", status: "Finished"),
-    Order(date: "2020-01-27", technician: "d", status: "Finished"),
-    Order(date: "2020-01-27", technician: "e", status: "Finished"),
-    Order(date: "2020-01-27", technician: "f", status: "Finished"),
-    Order(date: "2020-01-27", technician: "g", status: "Finished"),
-    Order(date: "2020-01-27", technician: "Robert", status: "Finished"),
-    Order(date: "2020-01-27", technician: "Robert", status: "Finished"),
-    Order(date: "2020-01-27", technician: "Robert", status: "Finished"),
-  ];
+  int _selectedIndex = 0;
+  int _selectedId = 0;
+
+  late List<Order> orders = widget.orders;
 
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -52,7 +51,9 @@ class MyOrdersScreen extends StatelessWidget {
                 children: [
                   SizedBox(height: size.height * 0.1),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed:
+                    orders[_selectedIndex].status == "accepted" ? null:
+                          () {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => RateTechnicianScreen()));
                     },
@@ -84,12 +85,37 @@ class MyOrdersScreen extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.all(0),
                               child: ListTile(
-                                title: Text(
-                                  orders[index].technician,
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                  ),
-                                ),
+                                selected: index == _selectedIndex,
+                                selectedTileColor: Color(0xffc8a2c8),
+                                selectedColor: Color(0xFFFCDAB7),
+                                onTap: () {
+                                  setState(() {
+                                    _selectedIndex = index;
+                                    _selectedId = orders[_selectedIndex].id;
+                                    print(_selectedId);
+                                  });
+                                },
+                                onLongPress: () async => {
+                                  setState(() {
+                                    _selectedIndex = index;
+                                  }),
+                                  //response = await
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                      title: Center(
+                                          child: Text("Order information",
+                                              style: const TextStyle(
+                                                  color: Colors.white))),
+                                      content: Text("YOLO",
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15)),
+                                      backgroundColor: Color(0xFF133B5C),
+                                    ),
+                                  )
+                                },
                                 horizontalTitleGap: 30,
                                 leading: Text(
                                   orders[index].date,

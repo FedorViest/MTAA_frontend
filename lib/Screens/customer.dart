@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/Backend_calls/Customers/get_orders.dart';
 import 'package:frontend/Screens/my_orders.dart';
 import 'package:frontend/Screens/order_repair.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -97,9 +98,12 @@ class _CustomerScreenState extends State<CustomerScreen> {
                     ),
                     SizedBox(height: size.height * 0.15),
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        var response = await getOrders().getOrdersFunc();
+                        print("RESPONSE" + response.toString());
+                        response ??= [Order(0, "No", "ORDERS")];
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => MyOrdersScreen()));
+                            builder: (context) => MyOrdersScreen(orders: response)));
                       },
                       style: ElevatedButton.styleFrom(
                           fixedSize: const Size(200, 60),
