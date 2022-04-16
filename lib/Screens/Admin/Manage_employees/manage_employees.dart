@@ -99,9 +99,41 @@ class _ManageEmployeeScreenState extends State<ManageEmployeeScreen> {
                                   print(_selectedEmail);
                                 });
                               },
+                              onLongPress: () async {
+                                _selectedIndex = index;
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                    title: const Center(
+                                      child: Text(
+                                        "Rating info",
+                                        style: const TextStyle(
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                    content: Text(
+                                        "Name: ${employees[index].name}\n\n"
+                                        "Email: ${employees[index].email}\n\n"
+                                        "Registration date:: ${employees[index].reg_date}\n\n"
+                                        "Position: ${employees[index].position}\n\n"
+                                        "Skills: ${employees[index].skills}\n\n",
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15)),
+                                    backgroundColor: Color(0xFF133B5C),
+                                  ),
+                                );
+                              },
                               horizontalTitleGap: 30,
-                              leading: Text(
+                              title: Text(
                                 employees[index].name,
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                ),
+                              ),
+                              subtitle:Text(
+                                employees[index].email,
                                 style: const TextStyle(
                                   fontSize: 20,
                                 ),
