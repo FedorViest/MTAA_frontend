@@ -19,6 +19,7 @@ class EmployeeRatingScreen extends StatefulWidget {
 
 class _EmployeeRatingScreenState extends State<EmployeeRatingScreen> {
   late List<Rating> ratings = widget.ratings;
+  int _selectedIndex = 0;
 
   var response = "";
 
@@ -74,7 +75,48 @@ class _EmployeeRatingScreenState extends State<EmployeeRatingScreen> {
                               padding: const EdgeInsets.all(0),
                               child: ListTile(
                                 horizontalTitleGap: 30,
-                                leading: Text(
+                                selected: index == _selectedIndex,
+                                selectedTileColor: Color(0xffc8a2c8),
+                                selectedColor: Color(0xFFFCDAB7),
+                                onTap: () {
+                                  setState(() {
+                                    _selectedIndex = index;
+                                  });
+                                },
+                                onLongPress: () async {
+                                  _selectedIndex = index;
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        title: const Center(
+                                          child: Text(
+                                            "Order information",
+                                            style: const TextStyle(
+                                                color: Colors.white),
+                                          ),
+                                        ),
+                                        content: Text(
+                                            "Employee: ${ratings[index].employee_name}\n\n"
+                                                "Email: ${ratings[index].employee_email}\n\n"
+                                                "Customer: ${ratings[index].customer_name}\n\n"
+                                                "Email: ${ratings[index].customer_email}\n\n"
+                                                "Rating: ${ratings[index].rating}\n\n"
+                                                "Comment: ${ratings[index].comment}",
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 15)),
+                                        backgroundColor: Color(0xFF133B5C),
+                                      ),
+                                    );
+                                  },
+                                title: Text(
+                                  ratings[index].employee_name,
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                subtitle: Text(
                                   ratings[index].employee_email,
                                   style: const TextStyle(
                                     fontSize: 20,
