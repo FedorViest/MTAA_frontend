@@ -106,7 +106,7 @@ class _ManageEmployeeScreenState extends State<ManageEmployeeScreen> {
                                   builder: (context) => AlertDialog(
                                     title: const Center(
                                       child: Text(
-                                        "Rating info",
+                                        "Employee info",
                                         style: const TextStyle(
                                             color: Colors.white),
                                       ),
