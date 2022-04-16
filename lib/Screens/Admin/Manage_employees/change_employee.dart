@@ -101,7 +101,6 @@ class _ChangeEmployeeScreenState extends State<ChangeEmployeeScreen> {
                       EmailValidator(
                         errorText: "Enter valid email (example@example.com).",
                       ),
-                      RequiredValidator(errorText: "This field is required."),
                     ])),
               ),
               Container(
@@ -132,6 +131,7 @@ class _ChangeEmployeeScreenState extends State<ChangeEmployeeScreen> {
                 alignment: Alignment.center,
                 child: ElevatedButton(
                   onPressed: () async {
+                    print(emailController.text);
                     if (_formKey.currentState!.validate()) {
                       var response = await changeEmployee().change_employee(
                           employeeEmail, nameController.text, emailController.text,

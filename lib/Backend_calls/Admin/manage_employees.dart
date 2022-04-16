@@ -57,19 +57,31 @@ class deleteEmployee{
 class changeEmployee{
   var dio = Dio();
 
-  change_employee(String oldEmail, String name, String newEmail, String skills) async {
+  change_employee(String oldEmail, String name,String newEmail, String skills) async {
     try {
       final prefs = await SharedPreferences.getInstance();
       final access_token = prefs.getString("access_token") ?? '';
       dio.options.headers["authorization"] = "Bearer " + access_token;
 
-      Response response = await dio
-          .put(url + '/admin/changeEmployee/$oldEmail', data: {
-            "name": name,
-            "email": newEmail,
-            "skills": skills
-      });
+      Response response;
 
+      print(newEmail);
+      print(newEmail.isEmpty);
+      if(newEmail == ""){
+        response = await dio
+            .put(url + '/admin/changeEmployee/$oldEmail', data: {
+          "name": name,
+          "skills": skills
+        });
+      }
+      else {
+        response = await dio
+            .put(url + '/admin/changeEmployee/$oldEmail', data: {
+          "name": name,
+          "email": newEmail,
+          "skills": skills
+        });
+      }
       print(response);
 
       return response;
