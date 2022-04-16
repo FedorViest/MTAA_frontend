@@ -20,8 +20,11 @@ class Order {
 class User_info {
   String name;
   String email;
+  String reg_date;
+  String position;
+  String skills;
 
-  User_info(this.name, this.email);
+  User_info(this.name, this.email, this.reg_date, this.position, this.skills);
 }
 
 class assignEmployeeOut {
@@ -80,7 +83,7 @@ class getAllEmployees with ChangeNotifier {
 
       print(response.data);
       for (var item in response.data) {
-        var user = User_info(item["name"], item["email"]);
+        var user = User_info(item["name"], item["email"], item["registration_date"], item["position"], item["skills"]);
         users.add(user);
       }
 
