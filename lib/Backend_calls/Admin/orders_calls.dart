@@ -83,7 +83,9 @@ class getAllEmployees with ChangeNotifier {
 
       print(response.data);
       for (var item in response.data) {
-        var user = User_info(item["name"], item["email"], item["reg_date"], item["position"], item["skills"]);
+          var user = User_info(
+              item["name"], item["email"], item["registration_date"], item["position"],
+              item["skills"]);
         print(user);
         users.add(user);
       }
