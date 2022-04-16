@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 const COLOR_CREAM = Color(0xFFFCDAB7);
 
-const url = "http://10.0.2.2:8000";
+const url = "https://fiit-mtaa-backend.herokuapp.com";
 
 
 Future<bool> showMyDialog(context) async {
