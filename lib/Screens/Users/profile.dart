@@ -4,9 +4,14 @@ import 'package:frontend/Utils/constants.dart';
 class Profile extends StatefulWidget {
   @override
   _ProfileState createState() => _ProfileState();
+  final String email;
+
+  const Profile({Key? key, required this.email}) : super(key: key);
 }
 
 class _ProfileState extends State<Profile>{
+
+  late String email = widget.email;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -29,7 +34,7 @@ class _ProfileState extends State<Profile>{
                 backgroundImage: AssetImage("assets/images/unknown.png"),
               ),
               Text(
-                "admin Admin",
+                "$email",
                 style: TextStyle(
                   fontSize: size.width / 20,
                   fontWeight: FontWeight.bold,

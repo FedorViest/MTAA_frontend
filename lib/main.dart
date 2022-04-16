@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Backend_calls/Users/auth.dart';
+import 'package:frontend/splash.dart';
 import 'package:provider/provider.dart';
 
 import 'Screens/Users/login.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primaryColor: Colors.blue,
         ),
-        home: LoginScreen(),
+        home: SplashScreen(),
       ),
     );
   }

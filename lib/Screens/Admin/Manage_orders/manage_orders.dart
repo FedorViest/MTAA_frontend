@@ -4,6 +4,7 @@ import 'package:frontend/Screens/Admin/Manage_orders/assignEmployee.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../Backend_calls/Admin/orders_calls.dart';
+import '../../../Utils/constants.dart';
 import '../../Users/profile.dart';
 import '../../../Backend_calls/Employees/get_repairs.dart';
 
@@ -25,6 +26,19 @@ class _ManageOrdersScreenState extends State<ManageOrdersScreen> {
 
   late bool back;
 
+  var response = "";
+
+  @override
+  void initState(){
+    super.initState();
+    asyncMethod();
+  }
+
+  asyncMethod() async{
+    response = await getProfileInfo();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     print(orders);
@@ -42,7 +56,8 @@ class _ManageOrdersScreenState extends State<ManageOrdersScreen> {
           color: Color(0xFF133B5C),
           child: Column(
             children: [
-              Profile(),
+              response.toString()=="" ? const CircularProgressIndicator():
+              Profile(email: response.toString()),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,

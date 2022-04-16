@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Backend_calls/Employees/update_repair.dart';
+import 'package:frontend/Utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Users/profile.dart';
@@ -20,6 +21,19 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
   late List<Repair> repairs = widget.repairs;
 
   late bool back;
+
+  var response = "";
+
+  @override
+  void initState(){
+    super.initState();
+    asyncMethod();
+  }
+
+  asyncMethod() async{
+    response = await getProfileInfo();
+    setState(() {});
+  }
 
   Future<bool> _showMyDialog() async {
     return await showDialog(
@@ -83,7 +97,8 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
             color: Color(0xFF133B5C),
             child: Column(
               children: [
-                Profile(),
+                response.toString()=="" ? const CircularProgressIndicator():
+                Profile(email: response.toString()),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

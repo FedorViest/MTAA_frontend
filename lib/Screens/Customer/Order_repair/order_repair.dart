@@ -3,6 +3,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:frontend/Backend_calls/Customers/add_order.dart';
 import 'package:frontend/Backend_calls/Customers/get_computers.dart';
 
+import '../../../Utils/constants.dart';
 import '../customer.dart';
 import '../../Users/profile.dart';
 
@@ -25,6 +26,19 @@ class _OrderRepairScreenState extends State<OrderRepairScreen> {
 
   late List<Computers> computers = widget.computers;
 
+  var response = "";
+
+  @override
+  void initState(){
+    super.initState();
+    asyncMethod();
+  }
+
+  asyncMethod() async{
+    response = await getProfileInfo();
+    setState(() {});
+  }
+
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
@@ -39,7 +53,8 @@ class _OrderRepairScreenState extends State<OrderRepairScreen> {
           width: size.width,
           child: Column(
             children: [
-              Profile(),
+              response.toString()=="" ? const CircularProgressIndicator():
+              Profile(email: response.toString()),
               SizedBox(height: size.height * 0.02),
               SizedBox(height: size.height * 0.01),
               Container(

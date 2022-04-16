@@ -3,6 +3,7 @@ import 'package:frontend/Backend_calls/Admin/orders_calls.dart';
 import 'package:frontend/Backend_calls/Employees/update_repair.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../Utils/constants.dart';
 import '../admin.dart';
 import '../../Users/profile.dart';
 import '../../../Backend_calls/Employees/get_repairs.dart';
@@ -27,6 +28,19 @@ class _assignEmployeeScreenState extends State<assignEmployeeScreen> {
 
   late bool back;
 
+  var response = "";
+
+  @override
+  void initState(){
+    super.initState();
+    asyncMethod();
+  }
+
+  asyncMethod() async{
+    response = await getProfileInfo();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     //print("Date: ${response["Orders"]["date_created"]}, Status: ${response["Orders"]["status"]}");
@@ -43,7 +57,8 @@ class _assignEmployeeScreenState extends State<assignEmployeeScreen> {
           color: Color(0xFF133B5C),
           child: Column(
             children: [
-              Profile(),
+              response.toString()=="" ? const CircularProgressIndicator():
+              Profile(email: response.toString()),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,

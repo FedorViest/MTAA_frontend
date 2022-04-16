@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:frontend/Backend_calls/Customers/rate_employee.dart';
 
+import '../../../Utils/constants.dart';
 import '../customer.dart';
 import '../../Users/profile.dart';
 
@@ -26,6 +27,19 @@ class _RateTechnicianScreenState extends State<RateTechnicianScreen> {
 
   late String email = widget.email;
 
+  var response = "";
+
+  @override
+  void initState(){
+    super.initState();
+    asyncMethod();
+  }
+
+  asyncMethod() async{
+    response = await getProfileInfo();
+    setState(() {});
+  }
+
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
@@ -39,7 +53,8 @@ class _RateTechnicianScreenState extends State<RateTechnicianScreen> {
           height: size.height,
           child: Column(
             children: [
-              Profile(),
+              response.toString()=="" ? const CircularProgressIndicator():
+              Profile(email: response.toString()),
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
