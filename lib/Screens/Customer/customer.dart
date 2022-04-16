@@ -8,6 +8,7 @@ import 'package:frontend/Screens/Customer/Order_repair/order_repair.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Utils/constants.dart';
+import '../Users/login.dart';
 import '../Users/profile.dart';
 
 class CustomerScreen extends StatefulWidget {
@@ -57,6 +58,8 @@ class _CustomerScreenState extends State<CustomerScreen> {
                   color: Colors.green,
                   onPressed: () {
                     Navigator.pop(context, true);
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => LoginScreen()));
                   },
                 ),
               ],

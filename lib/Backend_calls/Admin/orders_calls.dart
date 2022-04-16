@@ -74,7 +74,7 @@ class getAllEmployees with ChangeNotifier {
 
       print("penis");
       Response response =
-          await dio.get('http://10.0.2.2:8000/admin/getAllEmployees');
+          await dio.get(url + '/admin/getAllEmployees');
 
       late List<User_info> users = [];
 

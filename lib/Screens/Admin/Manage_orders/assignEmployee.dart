@@ -69,7 +69,7 @@ class _assignEmployeeScreenState extends State<assignEmployeeScreen> {
                       color: Color(0xFF133B5C),
                     ),
                     child: SizedBox(
-                      height: size.height * 0.5,
+                      height: size.height * 0.3,
                       child: ListView.builder(
                         padding: EdgeInsets.all(10),
                         itemCount: users.length,
