@@ -6,6 +6,7 @@ import 'package:frontend/Screens/Customer/My_orders/my_orders.dart';
 import 'package:frontend/Screens/Customer/Order_repair/rate_technician.dart';
 
 import '../../../Backend_calls/Admin/orders_calls.dart';
+import '../../../Utils/constants.dart';
 import '../../Customer/customer.dart';
 import '../../Users/profile.dart';
 import 'change_employee.dart';
@@ -34,6 +35,19 @@ class _ManageEmployeeScreenState extends State<ManageEmployeeScreen> {
   String _selectedName = "";
   late List<User_info> employees = widget.employees;
 
+  var response = "";
+
+  @override
+  void initState(){
+    super.initState();
+    asyncMethod();
+  }
+
+  asyncMethod() async{
+    response = await getProfileInfo();
+    setState(() {});
+  }
+
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
@@ -46,7 +60,8 @@ class _ManageEmployeeScreenState extends State<ManageEmployeeScreen> {
         height: size.height,
         child: Column(
           children: [
-            Profile(),
+            response.toString()=="" ? const CircularProgressIndicator():
+            Profile(email: response.toString()),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,

@@ -7,6 +7,7 @@ import 'package:frontend/Screens/Customer/My_ratings/my_ratings.dart';
 import 'package:frontend/Screens/Customer/Order_repair/order_repair.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../Utils/constants.dart';
 import '../Users/profile.dart';
 
 class CustomerScreen extends StatefulWidget {
@@ -16,6 +17,19 @@ class CustomerScreen extends StatefulWidget {
 
 class _CustomerScreenState extends State<CustomerScreen> {
   late bool back;
+
+  var response = "";
+
+  @override
+  void initState(){
+    super.initState();
+    asyncMethod();
+  }
+
+  asyncMethod() async{
+    response = await getProfileInfo();
+    setState(() {});
+  }
 
   Future<bool> _showMyDialog() async {
     return await showDialog(
@@ -76,7 +90,8 @@ class _CustomerScreenState extends State<CustomerScreen> {
             color: Color(0xFF133B5C),
             child: Column(
               children: [
-                Profile(),
+                response.toString()=="" ? const CircularProgressIndicator():
+                Profile(email: response.toString()),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

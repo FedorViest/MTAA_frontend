@@ -7,6 +7,7 @@ import 'package:frontend/Screens/Admin/Manage_orders/manage_orders.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Backend_calls/Admin/get_ratings.dart';
+import '../../Utils/constants.dart';
 import '../Users/login.dart';
 import 'Manage_computers/manage_computers.dart';
 import '../Users/profile.dart';
@@ -18,6 +19,19 @@ class AdminScreen extends StatefulWidget {
 
 class _AdminScreenState extends State<AdminScreen> {
   late bool back;
+
+  var response = "";
+
+  @override
+  void initState(){
+    super.initState();
+    asyncMethod();
+  }
+
+  asyncMethod() async{
+    response = await getProfileInfo();
+    setState(() {});
+  }
 
   Future<bool> _showMyDialog() async {
     return await showDialog(
@@ -80,7 +94,8 @@ class _AdminScreenState extends State<AdminScreen> {
             color: Color(0xFF133B5C),
             child: Column(
               children: [
-                Profile(),
+                response.toString()=="" ? const CircularProgressIndicator():
+                Profile(email: response.toString()),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

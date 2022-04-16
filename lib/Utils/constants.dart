@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../Backend_calls/Users/login_calls.dart';
+
 const COLOR_CREAM = Color(0xFFFCDAB7);
 
 const url = "http://10.0.2.2:8000";
+
+
+getProfileInfo() async{
+  var response = await Users().getInfo();
+
+  return response["email"];
+}
 
 
 Future<bool> showMyDialog(context) async {

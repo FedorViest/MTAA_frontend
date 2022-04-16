@@ -3,6 +3,7 @@ import 'package:frontend/Backend_calls/Customers/my_ratings.dart';
 import 'package:frontend/Backend_calls/Employees/update_repair.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../Utils/constants.dart';
 import '../../Users/profile.dart';
 import '../../../Backend_calls/Employees/get_repairs.dart';
 
@@ -19,6 +20,19 @@ class _MyRatingsScreenState extends State<MyRatingsScreen> {
   int _selectedIndex = 0;
   int _selectedId = 0;
   late List<Rating> ratings = widget.ratings;
+
+  var response = "";
+
+  @override
+  void initState(){
+    super.initState();
+    asyncMethod();
+  }
+
+  asyncMethod() async{
+    response = await getProfileInfo();
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +52,8 @@ class _MyRatingsScreenState extends State<MyRatingsScreen> {
           color: Color(0xFF133B5C),
           child: Column(
             children: [
-              Profile(),
+              response.toString()=="" ? const CircularProgressIndicator():
+              Profile(email: response.toString()),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,

@@ -6,6 +6,7 @@ import 'package:frontend/Backend_calls/Customers/get_order.dart';
 import 'package:frontend/Screens/Customer/Order_repair/rate_technician.dart';
 
 import '../../../Backend_calls/Customers/get_orders.dart';
+import '../../../Utils/constants.dart';
 import '../customer.dart';
 import '../../Users/profile.dart';
 
@@ -35,6 +36,19 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
 
   late List<Order> orders = widget.orders;
 
+  var response = "";
+
+  @override
+  void initState(){
+    super.initState();
+    asyncMethod();
+  }
+
+  asyncMethod() async{
+    response = await getProfileInfo();
+    setState(() {});
+  }
+
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
@@ -48,7 +62,8 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
           height: size.height,
           child: Column(
             children: [
-              Profile(),
+              response.toString()=="" ? const CircularProgressIndicator():
+              Profile(email: response.toString()),
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,

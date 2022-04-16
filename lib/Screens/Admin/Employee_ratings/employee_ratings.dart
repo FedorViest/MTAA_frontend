@@ -3,6 +3,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:frontend/Screens/Customer/Order_repair/rate_technician.dart';
 import '../../../Backend_calls/Admin/get_ratings.dart';
 
+import '../../../Utils/constants.dart';
 import '../../Customer/customer.dart';
 import '../../Users/profile.dart';
 
@@ -19,6 +20,19 @@ class EmployeeRatingScreen extends StatefulWidget {
 class _EmployeeRatingScreenState extends State<EmployeeRatingScreen> {
   late List<Rating> ratings = widget.ratings;
 
+  var response = "";
+
+  @override
+  void initState(){
+    super.initState();
+    asyncMethod();
+  }
+
+  asyncMethod() async{
+    response = await getProfileInfo();
+    setState(() {});
+  }
+
   Widget build(BuildContext context) {
     print(ratings);
 
@@ -34,7 +48,8 @@ class _EmployeeRatingScreenState extends State<EmployeeRatingScreen> {
           height: size.height,
           child: Column(
             children: [
-              Profile(),
+              response.toString()=="" ? const CircularProgressIndicator():
+              Profile(email: response.toString()),
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
