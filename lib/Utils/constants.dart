@@ -4,7 +4,7 @@ import '../Backend_calls/Users/login_calls.dart';
 
 const COLOR_CREAM = Color(0xFFFCDAB7);
 
-const url = "http://10.0.2.2:8000";
+const url = "https://fiit-mtaa-backend.herokuapp.com";
 
 const ip = "10.10.10.10";
 

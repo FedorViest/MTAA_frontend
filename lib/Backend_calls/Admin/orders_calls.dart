@@ -8,8 +8,13 @@ class Order {
   int id;
   String status;
   String date;
+  String brand;
+  String model;
+  String year;
+  String customer_email;
+  String issue;
 
-  Order(this.id, this.status, this.date);
+  Order(this.id, this.status, this.date, this.brand, this.model, this.year, this.customer_email, this.issue);
 }
 
 class User_info {
@@ -37,15 +42,13 @@ class getOrders with ChangeNotifier {
 
       Response response = await dio.get(url + '/admin/getNullOrders');
 
-      print(response);
-      print("penis");
-
       late List<Order> orders = [];
 
       for (var item in response.data) {
         print(item["id"]);
         var order = Order(item["Orders"]["id"], item["Orders"]["status"],
-            item["Orders"]["date_created"]);
+            item["Orders"]["date_created"], item["Computers"]["brand"], item["Computers"]["model"],
+            item["Computers"]["year_made"], item["user_email"], item["Orders"]["issue"]);
         orders.add(order);
       }
       for (var item in orders) {

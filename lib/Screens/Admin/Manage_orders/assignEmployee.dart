@@ -94,18 +94,18 @@ class _assignEmployeeScreenState extends State<assignEmployeeScreen> {
                                   });
                                 },
                                 horizontalTitleGap: 30,
-                                leading: Text(
+                                title: Text(
                                   users[index].name,
                                   style: const TextStyle(
                                     fontSize: 20,
                                   ),
                                 ),
-                                trailing: Text(
-                                  users[index].email,
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                  ),
+                                subtitle:Text(
+                                users[index].email,
+                                style: const TextStyle(
+                                  fontSize: 20,
                                 ),
+                              ),
                               ),
                             ),
                           );

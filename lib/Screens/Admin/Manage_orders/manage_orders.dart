@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../Backend_calls/Admin/orders_calls.dart';
 import '../../../Utils/constants.dart';
+import '../../../Backend_calls/Customers/get_order.dart';
 import '../../Users/profile.dart';
 import '../../../Backend_calls/Employees/get_repairs.dart';
 
@@ -23,6 +24,7 @@ class _ManageOrdersScreenState extends State<ManageOrdersScreen> {
   int _selectedIndex = 0;
   int _selectedId = 0;
   late List<Order> orders = widget.orders;
+  late String _employeeEmail;
 
   late bool back;
 
@@ -59,6 +61,7 @@ class _ManageOrdersScreenState extends State<ManageOrdersScreen> {
               response.toString()=="" ? const CircularProgressIndicator():
               Profile(email: response.toString()),
               Column(
+
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -90,6 +93,33 @@ class _ManageOrdersScreenState extends State<ManageOrdersScreen> {
                                     _selectedId = orders[_selectedIndex].id;
                                     print(_selectedId);
                                   });
+                                },
+                                onLongPress: () async {
+                                  _selectedIndex = index;
+                                  _selectedId = orders[_selectedIndex].id;
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        title: const Center(
+                                          child: Text(
+                                            "Order information",
+                                            style: const TextStyle(
+                                                color: Colors.white),
+                                          ),
+                                        ),
+                                        content: Text(
+                                            "Customer: ${orders[index].customer_email}\n\n"
+                                                "Brand: ${orders[index].brand}\n\n"
+                                                "Model: ${orders[index].model}\n\n"
+                                                "Year of release: ${orders[index].year}\n\n"
+                                                "Issue: ${orders[index].issue}",
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 15)),
+                                        backgroundColor: Color(0xFF133B5C),
+                                      ),
+                                    );
                                 },
                                 horizontalTitleGap: 30,
                                 leading: Text(
