@@ -148,7 +148,7 @@ class _ManageOrdersScreenState extends State<ManageOrdersScreen> {
                         : () async {
                       var response = await getAllEmployees().getInfo();
                       print(response);
-                      response ??= [User_info("NO", "EMPLOYEES")];
+                      response ??= [User_info("NO", "EMPLOYEES", "", "", "")];
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => assignEmployeeScreen(
                             users: response,

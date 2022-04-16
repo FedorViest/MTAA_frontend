@@ -116,7 +116,10 @@ class _ManageEmployeeScreenState extends State<ManageEmployeeScreen> {
                                       ),
                                       content: Text(
                                           "Name: ${employees[index].name}\n\n"
-                                          "Email: ${employees[index].email}\n\n",
+                                          "Email: ${employees[index].email}\n\n"
+                                          "Registration date:: ${employees[index].reg_date}\n\n"
+                                          "Position: ${employees[index].position}\n\n"
+                                          "Skills: ${employees[index].skills}\n\n",
                                           style: const TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,

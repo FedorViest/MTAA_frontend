@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:frontend/Backend_calls/Users/login_calls.dart';
 import 'package:frontend/Screens/Customer/customer.dart';
 import 'package:frontend/Screens/Employee/employee.dart';
@@ -23,7 +24,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  String? _position;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -31,7 +31,6 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     handleUser() async {
       var dio = Dio();
-      print(_position);
       await Provider.of<Auth>(context, listen: false)
           .login(emailController.text, passwordController.text);
 
@@ -88,13 +87,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         hintStyle: TextStyle(color: Colors.grey[800]),
                         hintText: "Email",
                         fillColor: Colors.white70),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "This field is required.";
-                      } else {
-                        _position = value;
-                      }
-                    },
+                    validator: MultiValidator([
+                      EmailValidator(errorText: "Please enter valid email"),
+                      RequiredValidator(errorText: "Please enter email"),
+                    ],
+                    ),
                   ),
                 ),
                 Container(
@@ -123,10 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   alignment: Alignment.center,
                   child: ElevatedButton(
                     onPressed: () {
-                      // Validate returns true if the form is valid, or false otherwise.
                       if (_formKey.currentState!.validate()) {
-                        // If the form is valid, display a snackbar. In the real world,
-                        // you'd often call a server or save the information in a database.
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Processing Data')),
                         );
@@ -141,27 +135,28 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 SizedBox(height: size.height * 0.01),
                 Container(
-                    alignment: Alignment.center,
-                    child: TextButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => RegisterScreen()));
-                        },
-                        child: RichText(
-                          text: const TextSpan(
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey,
-                            ),
-                            children: <TextSpan>[
-                              TextSpan(text: 'Don\'t have an account? '),
-                              TextSpan(
-                                  text: 'Register here!',
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
-                            ],
-                          ),
-                        ))),
+                  alignment: Alignment.center,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => RegisterScreen()));
+                    },
+                    child: RichText(
+                      text: const TextSpan(
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey,
+                        ),
+                        children: <TextSpan>[
+                          TextSpan(text: 'Don\'t have an account? '),
+                          TextSpan(
+                              text: 'Register here!',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

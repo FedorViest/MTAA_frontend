@@ -150,7 +150,7 @@ class _AdminScreenState extends State<AdminScreen> {
                         var response2 = await getAllEmployees().getInfo();
                         print("RESPONSE ${response2}");
                         print("SOM TU");
-                        response2 ??= [User_info("", "")];
+                        response2 ??= [User_info("", "", "", "", "")];
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => ManageEmployeeScreen(employees: response2)));
                       },
