@@ -6,6 +6,14 @@ const COLOR_CREAM = Color(0xFFFCDAB7);
 
 const url = "http://10.0.2.2:8000";
 
+const ip = "10.10.10.10";
+
+late String set_ip = ip;
+
+RegExp regExp = RegExp(
+  r'(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])'
+);
+
 
 getProfileInfo() async{
   var response = await Users().getInfo();
