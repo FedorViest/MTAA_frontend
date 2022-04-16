@@ -85,9 +85,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         fillColor: Colors.white70),
                     validator: MultiValidator([
                       EmailValidator(
-                        errorText: "Enter valid email",
+                        errorText: "Enter valid email (example@example.com).",
                       ),
-                      RequiredValidator(errorText: "Required Required"),
+                      RequiredValidator(errorText: "This field is required."),
                     ])
                   ),
                 ),
