@@ -90,7 +90,7 @@ class _EmployeeRatingScreenState extends State<EmployeeRatingScreen> {
                                       builder: (context) => AlertDialog(
                                         title: const Center(
                                           child: Text(
-                                            "Order information",
+                                            "Rating info",
                                             style: const TextStyle(
                                                 color: Colors.white),
                                           ),
