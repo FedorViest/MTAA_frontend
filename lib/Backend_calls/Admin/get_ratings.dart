@@ -8,11 +8,13 @@ import '../../Utils/constants.dart';
 
 class Rating {
   String customer_email;
+  String customer_name;
   String employee_email;
+  String employee_name;
   double rating;
   String comment;
 
-  Rating(this.customer_email, this.employee_email, this.rating, this.comment);
+  Rating(this.customer_email, this.customer_name, this.employee_email, this.employee_name, this.rating, this.comment);
 }
 
 class getRatings with ChangeNotifier {
@@ -32,8 +34,8 @@ class getRatings with ChangeNotifier {
       late List<Rating> ratings = [];
 
       for (var item in response.data) {
-        var order = Rating(item["customer_email"], item["employee_email"],
-            item["Ratings"]["rating"], item["Ratings"]["comment"]);
+        var order = Rating(item["customer_email"], item["customer_name"], item["employee_email"],
+            item["employee_name"], item["Ratings"]["rating"], item["Ratings"]["comment"]);
         ratings.add(order);
         print(item["employee_email"]);
       }

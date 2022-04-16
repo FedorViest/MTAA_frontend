@@ -105,7 +105,7 @@ class _AdminScreenState extends State<AdminScreen> {
                       onPressed: () async {
                         var response2 = await getRatings().getInfo();
                         print("RESPONSE ${response2}");
-                        response2 ??= [Rating("NO", "REPAIRS", 0, "")];
+                        response2 ??= [Rating("NO", "","","RATINGS", 0, "")];
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) =>
                                 EmployeeRatingScreen(ratings: response2)));
@@ -127,7 +127,7 @@ class _AdminScreenState extends State<AdminScreen> {
                       onPressed: () async {
                         var response2 = await getOrders().getOrdersFunc();
                         print("RESPONSE ${response2}");
-                        response2 ??= [Order(0, "ORDERS", "NO")];
+                        response2 ??= [Order(0, "ORDERS", "NO", "", "", "", "", "")];
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => ManageOrdersScreen(
                                 orders: response2)));
