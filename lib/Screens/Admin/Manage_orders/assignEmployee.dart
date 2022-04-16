@@ -101,11 +101,11 @@ class _assignEmployeeScreenState extends State<assignEmployeeScreen> {
                                   ),
                                 ),
                                 subtitle:Text(
-                                users[index].email,
-                                style: const TextStyle(
-                                  fontSize: 20,
+                                  users[index].email,
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                  ),
                                 ),
-                              ),
                               ),
                             ),
                           );
@@ -125,7 +125,7 @@ class _assignEmployeeScreenState extends State<assignEmployeeScreen> {
                     child: const Text(
                       "Assign selected employee",
                       style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],

@@ -71,7 +71,7 @@ class _ManageOrdersScreenState extends State<ManageOrdersScreen> {
                       color: Color(0xFF133B5C),
                     ),
                     child: SizedBox(
-                      height: size.height * 0.5,
+                      height: size.height * 0.3,
                       child: ListView.builder(
                         padding: EdgeInsets.all(10),
                         itemCount: orders.length,
@@ -97,29 +97,29 @@ class _ManageOrdersScreenState extends State<ManageOrdersScreen> {
                                 onLongPress: () async {
                                   _selectedIndex = index;
                                   _selectedId = orders[_selectedIndex].id;
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) => AlertDialog(
-                                        title: const Center(
-                                          child: Text(
-                                            "Order information",
-                                            style: const TextStyle(
-                                                color: Colors.white),
-                                          ),
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                      title: const Center(
+                                        child: Text(
+                                          "Order information",
+                                          style: const TextStyle(
+                                              color: Colors.white),
                                         ),
-                                        content: Text(
-                                            "Customer: ${orders[index].customer_email}\n\n"
-                                                "Brand: ${orders[index].brand}\n\n"
-                                                "Model: ${orders[index].model}\n\n"
-                                                "Year of release: ${orders[index].year}\n\n"
-                                                "Issue: ${orders[index].issue}",
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 15)),
-                                        backgroundColor: Color(0xFF133B5C),
                                       ),
-                                    );
+                                      content: Text(
+                                          "Customer: ${orders[index].customer_email}\n\n"
+                                              "Brand: ${orders[index].brand}\n\n"
+                                              "Model: ${orders[index].model}\n\n"
+                                              "Year of release: ${orders[index].year}\n\n"
+                                              "Issue: ${orders[index].issue}",
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15)),
+                                      backgroundColor: Color(0xFF133B5C),
+                                    ),
+                                  );
                                 },
                                 horizontalTitleGap: 30,
                                 leading: Text(
@@ -144,24 +144,24 @@ class _ManageOrdersScreenState extends State<ManageOrdersScreen> {
                   SizedBox(height: size.height * 0.06),
                   ElevatedButton(
                     onPressed:
-                      (orders[_selectedIndex].status == "ORDERS") ? null
-                          : () async {
-                               var response = await getAllEmployees().getInfo();
-                               print(response);
-                                response ??= [User_info("NO", "EMPLOYEES", "", "", "")];
-                                Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => assignEmployeeScreen(
-                                        users: response,
-                                        order_id: _selectedId,
-                                      )));
-                            },
+                    (orders[_selectedIndex].status == "ORDERS") ? null
+                        : () async {
+                      var response = await getAllEmployees().getInfo();
+                      print(response);
+                      response ??= [User_info("NO", "EMPLOYEES")];
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => assignEmployeeScreen(
+                            users: response,
+                            order_id: _selectedId,
+                          )));
+                    },
                     style: ElevatedButton.styleFrom(
                         fixedSize: const Size(240, 70),
                         primary: Color(0xFF1E5F74)),
                     child: const Text(
                       "View Employees",
                       style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],

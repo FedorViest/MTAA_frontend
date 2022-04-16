@@ -149,7 +149,8 @@ class _AdminScreenState extends State<AdminScreen> {
                       onPressed: () async {
                         var response2 = await getAllEmployees().getInfo();
                         print("RESPONSE ${response2}");
-                        response2 ??= [User_info("", "", "", "", "")];
+                        print("SOM TU");
+                        response2 ??= [User_info("", "")];
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => ManageEmployeeScreen(employees: response2)));
                       },
@@ -168,12 +169,12 @@ class _AdminScreenState extends State<AdminScreen> {
                     SizedBox(height: size.height * 0.05),
                     ElevatedButton(
                       onPressed: () async {
-                          var response2 = await getComputers().getInfo();
-                          print("RESPONSE ${response2}");
-                          response2 ??= [Computer(0, "NO", "COMPUTERS", "")];
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => ManageComputersScreen(computers: response2)));
-                        },
+                        var response2 = await getComputers().getInfo();
+                        print("RESPONSE ${response2}");
+                        response2 ??= [Computer(0, "NO", "COMPUTERS", "")];
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => ManageComputersScreen(computers: response2)));
+                      },
                       style: ElevatedButton.styleFrom(
                           fixedSize: const Size(200, 60),
                           primary: Color(0xFF1E5F74)),

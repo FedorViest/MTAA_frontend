@@ -20,11 +20,8 @@ class Order {
 class User_info {
   String name;
   String email;
-  String reg_date;
-  String position;
-  String skills;
 
-  User_info(this.name, this.email, this.reg_date, this.position, this.skills);
+  User_info(this.name, this.email);
 }
 
 class assignEmployeeOut {
@@ -77,13 +74,14 @@ class getAllEmployees with ChangeNotifier {
 
       print("penis");
       Response response =
-          await dio.get(url + '/admin/getAllEmployees');
+      await dio.get(url + '/admin/getAllEmployees');
 
       late List<User_info> users = [];
 
       print(response.data);
       for (var item in response.data) {
-        var user = User_info(item["name"], item["email"], item["registration_date"], item["position"], item["skills"]);
+        var user = User_info(item["name"], item["email"]);
+        print(user);
         users.add(user);
       }
 
@@ -105,7 +103,7 @@ class assignEmployee with ChangeNotifier {
       dio.options.headers["authorization"] = "Bearer " + access_token;
 
       Response response =
-          await dio.put(url + '/admin/assignEmployee/$email/$order_id');
+      await dio.put(url + '/admin/assignEmployee/$email/$order_id');
 
       return response;
     } catch (e) {
