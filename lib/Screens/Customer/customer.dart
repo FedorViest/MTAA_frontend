@@ -111,7 +111,7 @@ class _CustomerScreenState extends State<CustomerScreen> {
                           fixedSize: const Size(200, 60),
                           primary: Color(0xFF1E5F74)),
                       child: const Text(
-                        "Order repair",
+                        "Create order",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
