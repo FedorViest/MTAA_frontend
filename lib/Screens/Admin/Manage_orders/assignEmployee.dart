@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Backend_calls/Admin/orders_calls.dart';
 import 'package:frontend/Backend_calls/Employees/update_repair.dart';
+import 'package:frontend/Utils/funcs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../Utils/constants.dart';
@@ -115,9 +116,12 @@ class _assignEmployeeScreenState extends State<assignEmployeeScreen> {
                   ),
                   SizedBox(height: size.height * 0.06),
                   ElevatedButton(
-                    onPressed: () {
-                      assignEmployee().assign_employee(_selectedEmail, order_id);
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => AdminScreen()));
+                    onPressed: () async {
+                      var response = await assignEmployee().assign_employee(_selectedEmail, order_id);
+                      if(response.statusCode == 200)
+                        {
+                          showCorrectDialog(context, 'Employee has been sucessfuly assigned.', 'admin');
+                        }
                     },
                     style: ElevatedButton.styleFrom(
                         fixedSize: const Size(240, 70),

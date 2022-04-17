@@ -3,6 +3,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:frontend/Backend_calls/Admin/manage_employees.dart';
 import 'package:frontend/Screens/Admin/Manage_employees/add_employee.dart';
 import 'package:frontend/Screens/Customer/My_orders/my_orders.dart';
+import 'package:frontend/Utils/funcs.dart';
 
 import '../../../Backend_calls/Admin/orders_calls.dart';
 import '../../../Utils/constants.dart';
@@ -149,8 +150,12 @@ class _ManageEmployeeScreenState extends State<ManageEmployeeScreen> {
                   ),
                   SizedBox(height: size.height * 0.05),
                   ElevatedButton(
-                    onPressed: () {
-                      deleteEmployee().delete_employee(_selectedEmail);
+                    onPressed: () async {
+                      var response = await deleteEmployee().delete_employee(_selectedEmail);
+                      if(response.statusCode == 200)
+                        {
+                          showCorrectDialog(context, 'Employee has been sucessfuly deleted.', 'admin');
+                        }
                     },
                     style: ElevatedButton.styleFrom(
                         fixedSize: const Size(200, 60),

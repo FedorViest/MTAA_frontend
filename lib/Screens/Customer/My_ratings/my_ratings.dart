@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/Backend_calls/Customers/my_ratings.dart';
 import 'package:frontend/Backend_calls/Employees/update_repair.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../../Utils/funcs.dart';
 
 import '../../../Utils/constants.dart';
 import '../../Users/profile.dart';
@@ -34,35 +35,6 @@ class _MyRatingsScreenState extends State<MyRatingsScreen> {
     response = await getProfileInfo();
     setState(() {});
   }
-
-    Future<bool> _showMyDialog() async {
-      return await showDialog(
-        context: context,
-        barrierDismissible: false, // user must tap button!
-        builder: (BuildContext context) {
-          return AlertDialog(
-            backgroundColor: Color(0xFFFCDAB7),
-            title: const Text('Your rating was sucessfuly deleted.'),
-            alignment: Alignment.center,
-            actions: <Widget>[
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.of(context).push(
-                      MaterialPageRoute(
-                          builder: (context) => CustomerScreen()));
-                },
-                child: Text(
-                  "OK",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ],
-          );
-        },
-      );
-    }
-
 
     @override
     Widget build(BuildContext context) {
@@ -168,7 +140,7 @@ class _MyRatingsScreenState extends State<MyRatingsScreen> {
                         var response = await deleteRating().delete_rating(
                             _selectedId);
                         if (response.statusCode == 200) {
-                          _showMyDialog();
+                          showCorrectDialog(context, 'Rating has been sucessfuly deleted.', 'customer');
                         }
                       },
                       style: ElevatedButton.styleFrom(

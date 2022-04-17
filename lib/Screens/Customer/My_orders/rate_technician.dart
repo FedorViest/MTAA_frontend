@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:frontend/Backend_calls/Customers/rate_employee.dart';
+import 'package:frontend/Utils/funcs.dart';
 
 import '../../../Utils/constants.dart';
 import '../customer.dart';
@@ -38,33 +39,6 @@ class _RateTechnicianScreenState extends State<RateTechnicianScreen> {
   asyncMethod() async{
     response = await getProfileInfo();
     setState(() {});
-  }
-
-  Future<bool> _showMyDialog() async {
-    return await showDialog(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: Color(0xFFFCDAB7),
-          title: const Text('Thank you for your rating'),
-          alignment: Alignment.center,
-          actions: <Widget>[
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => CustomerScreen()));
-              },
-              child: Text(
-                "OK",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-            ),
-          ],
-        );
-      },
-    );
   }
 
   Widget build(BuildContext context) {
@@ -164,7 +138,7 @@ class _RateTechnicianScreenState extends State<RateTechnicianScreen> {
                     onPressed: () async {
                       var response = await AddRating().add_rating(email, _currentValue, _commentController.text);
                       if (response.statusCode == 200){
-                        _showMyDialog();
+                        showCorrectDialog(context, 'Your rating has been sucessfuly submitted.', 'customer');
                       }
                     },
                     style: ElevatedButton.styleFrom(

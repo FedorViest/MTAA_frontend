@@ -95,13 +95,12 @@ class _ChangeEmployeeScreenState extends State<ChangeEmployeeScreen> {
                         ),
                         filled: true,
                         hintStyle: TextStyle(color: Colors.grey[800]),
-                        hintText: "Email",
+                        hintText: "Email (optional)",
                         fillColor: Colors.white70),
-                    validator: MultiValidator([
-                      EmailValidator(
+                    validator: EmailValidator(
                         errorText: "Enter valid email (example@example.com).",
                       ),
-                    ])),
+               ),
               ),
               Container(
                 alignment: Alignment.center,
@@ -131,7 +130,7 @@ class _ChangeEmployeeScreenState extends State<ChangeEmployeeScreen> {
                 alignment: Alignment.center,
                 child: ElevatedButton(
                   onPressed: () async {
-                    print(emailController.text);
+                    print(_formKey.currentState!.validate());
                     if (_formKey.currentState!.validate()) {
                       var response = await changeEmployee().change_employee(
                           employeeEmail, nameController.text, emailController.text,
@@ -140,6 +139,8 @@ class _ChangeEmployeeScreenState extends State<ChangeEmployeeScreen> {
                         String errorMessage = Map<String, dynamic>.from(
                                 response.response.data)["detail"]
                             .toString();
+                        print("penis");
+                        print(errorMessage);
                         if (errorMessage ==
                             "User with selected email already exists") {
                           ScaffoldMessenger.of(context).showSnackBar(
