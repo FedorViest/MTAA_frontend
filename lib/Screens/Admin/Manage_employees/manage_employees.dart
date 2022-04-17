@@ -3,7 +3,6 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:frontend/Backend_calls/Admin/manage_employees.dart';
 import 'package:frontend/Screens/Admin/Manage_employees/add_employee.dart';
 import 'package:frontend/Screens/Customer/My_orders/my_orders.dart';
-import 'package:frontend/Screens/Customer/Order_repair/rate_technician.dart';
 
 import '../../../Backend_calls/Admin/orders_calls.dart';
 import '../../../Utils/constants.dart';

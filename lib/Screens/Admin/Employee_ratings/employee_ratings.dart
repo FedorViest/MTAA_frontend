@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:frontend/Screens/Customer/Order_repair/rate_technician.dart';
 import '../../../Backend_calls/Admin/get_ratings.dart';
 
 import '../../../Utils/constants.dart';
