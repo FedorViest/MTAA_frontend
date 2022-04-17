@@ -71,6 +71,31 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
     );
   }
 
+  Future<bool> _showAcceptWindow() async {
+    return await showDialog(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Color(0xFFFCDAB7),
+          title: const Text('Order status updated'),
+          alignment: Alignment.center,
+          actions: <Widget>[
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text(
+                "OK",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     print(repairs);
@@ -184,11 +209,16 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                           (repairs[_selectedIndex].status == "finished") ||
                                   (repairs[_selectedIndex].status == "REPAIRS")
                               ? null
-                              : () {
+                              : () async {
                                   setState(() {
                                     repairs[_selectedIndex].status = "finished";
                                   });
-                                  updateRepair().getInfo(_selectedId);
+                                  var response_put = await updateRepair().getInfo(_selectedId);
+
+                                  if (response_put.statusCode == 200){
+                                    _showAcceptWindow();
+                                  }
+
                                 },
                       style: ElevatedButton.styleFrom(
                           fixedSize: const Size(240, 70),
