@@ -31,8 +31,8 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     handleUser() async {
       var dio = Dio();
-      await Provider.of<Auth>(context, listen: false)
-          .login(emailController.text, passwordController.text);
+      /*await Provider.of<Auth>(context, listen: false)
+          .login(emailController.text, passwordController.text);*/
 
       print(passwordController.text);
 
@@ -119,12 +119,29 @@ class _LoginScreenState extends State<LoginScreen> {
                 Container(
                   alignment: Alignment.center,
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Processing Data')),
-                        );
-                        handleUser();
+                        var response = await Provider.of<Auth>(context, listen: false)
+                            .login(emailController.text, passwordController.text);
+                        if (response == null){
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                'Incorrect email or password',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                        }
+                        else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Processing Data')),
+                          );
+                          handleUser();
+                        }
                       }
                     },
                     child: const Text('SIGN IN'),
