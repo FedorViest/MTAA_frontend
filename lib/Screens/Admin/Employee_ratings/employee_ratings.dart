@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import '../../../Backend_calls/Admin/get_ratings.dart';
 
+import '../../../Backend_calls/Users/profile_pictures.dart';
 import '../../../Utils/constants.dart';
 import '../../Customer/customer.dart';
 import '../../Users/profile.dart';
@@ -21,6 +22,8 @@ class _EmployeeRatingScreenState extends State<EmployeeRatingScreen> {
   int _selectedIndex = 0;
 
   var response = "";
+  var img;
+  var response_img;
 
   @override
   void initState(){
@@ -30,6 +33,8 @@ class _EmployeeRatingScreenState extends State<EmployeeRatingScreen> {
 
   asyncMethod() async{
     response = await getProfileInfo();
+    img = await getProfilePicture();
+    response_img = await getPictureResponse();
     setState(() {});
   }
 
@@ -49,7 +54,7 @@ class _EmployeeRatingScreenState extends State<EmployeeRatingScreen> {
           child: Column(
             children: [
               response.toString()=="" ? const CircularProgressIndicator():
-              Profile(email: response.toString()),
+              Profile(email: response.toString(), img: img, response_img: response_img),
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,

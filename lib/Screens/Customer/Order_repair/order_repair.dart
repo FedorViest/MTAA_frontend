@@ -4,6 +4,7 @@ import 'package:frontend/Backend_calls/Customers/add_order.dart';
 import 'package:frontend/Backend_calls/Customers/get_computers.dart';
 import 'package:frontend/Utils/funcs.dart';
 
+import '../../../Backend_calls/Users/profile_pictures.dart';
 import '../../../Utils/constants.dart';
 import '../customer.dart';
 import '../../Users/profile.dart';
@@ -28,6 +29,8 @@ class _OrderRepairScreenState extends State<OrderRepairScreen> {
   late List<Computers> computers = widget.computers;
 
   var response = "";
+  var img;
+  var response_img;
 
   @override
   void initState(){
@@ -37,6 +40,8 @@ class _OrderRepairScreenState extends State<OrderRepairScreen> {
 
   asyncMethod() async{
     response = await getProfileInfo();
+    img = await getProfilePicture();
+    response_img = await getPictureResponse();
     setState(() {});
   }
 
@@ -55,7 +60,7 @@ class _OrderRepairScreenState extends State<OrderRepairScreen> {
           child: Column(
             children: [
               response.toString()=="" ? const CircularProgressIndicator():
-              Profile(email: response.toString()),
+              Profile(email: response.toString(), img: img, response_img: response_img),
               SizedBox(height: size.height * 0.02),
               SizedBox(height: size.height * 0.01),
               Container(

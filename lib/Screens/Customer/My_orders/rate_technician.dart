@@ -3,6 +3,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:frontend/Backend_calls/Customers/rate_employee.dart';
 import 'package:frontend/Utils/funcs.dart';
 
+import '../../../Backend_calls/Users/profile_pictures.dart';
 import '../../../Utils/constants.dart';
 import '../customer.dart';
 import '../../Users/profile.dart';
@@ -29,6 +30,8 @@ class _RateTechnicianScreenState extends State<RateTechnicianScreen> {
   late String email = widget.email;
 
   var response = "";
+  var img;
+  var response_img;
 
   @override
   void initState(){
@@ -38,6 +41,8 @@ class _RateTechnicianScreenState extends State<RateTechnicianScreen> {
 
   asyncMethod() async{
     response = await getProfileInfo();
+    img = await getProfilePicture();
+    response_img = await getPictureResponse();
     setState(() {});
   }
 
@@ -55,7 +60,7 @@ class _RateTechnicianScreenState extends State<RateTechnicianScreen> {
           child: Column(
             children: [
               response.toString()=="" ? const CircularProgressIndicator():
-              Profile(email: response.toString()),
+              Profile(email: response.toString(), img: img, response_img: response_img),
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,

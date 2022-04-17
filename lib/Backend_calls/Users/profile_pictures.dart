@@ -17,10 +17,28 @@ class GetPicture with ChangeNotifier{
       final prefs = await SharedPreferences.getInstance();
       final access_token = prefs.getString("access_token") ?? '';
       dio.options.headers["authorization"] = "Bearer " + access_token;
-      
-      Response response = await dio.get(url + '/users/getPicture');
+
+      Map<String, String> auth = {
+        'authorization' : "Bearer " + access_token,
+      };
+
+      ImageProvider img = Image.network(url + "/users/getPicture", headers: auth,).image;
       print("PICTURE");
-      print(response);
+      print(img);
+
+      return img;
+    }
+    catch (e){
+      print(e);
+    }
+  }
+
+  getPictureResponse() async{
+    try{
+      final prefs = await SharedPreferences.getInstance();
+      final access_token = prefs.getString("access_token") ?? '';
+      dio.options.headers["authorization"] = "Bearer " + access_token;
+      Response response = await dio.get(url + '/users/getPicture');
 
       return response;
     }

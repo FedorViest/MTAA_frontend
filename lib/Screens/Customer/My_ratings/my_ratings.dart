@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/Backend_calls/Customers/my_ratings.dart';
 import 'package:frontend/Backend_calls/Employees/update_repair.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../../Backend_calls/Users/profile_pictures.dart';
 import '../../../Utils/funcs.dart';
 
 import '../../../Utils/constants.dart';
@@ -24,6 +25,8 @@ class _MyRatingsScreenState extends State<MyRatingsScreen> {
   late List<Rating> ratings = widget.ratings;
 
   var response = "";
+  var img;
+  var response_img;
 
   @override
   void initState() {
@@ -33,6 +36,8 @@ class _MyRatingsScreenState extends State<MyRatingsScreen> {
 
   asyncMethod() async {
     response = await getProfileInfo();
+    img = await getProfilePicture();
+    response_img = await getPictureResponse();
     setState(() {});
   }
 
@@ -55,7 +60,7 @@ class _MyRatingsScreenState extends State<MyRatingsScreen> {
             child: Column(
               children: [
                 response.toString() == "" ? const CircularProgressIndicator() :
-                Profile(email: response.toString()),
+                Profile(email: response.toString(), img: img, response_img: response_img),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

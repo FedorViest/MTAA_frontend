@@ -7,6 +7,7 @@ import 'package:frontend/Screens/Customer/My_ratings/my_ratings.dart';
 import 'package:frontend/Screens/Customer/Order_repair/order_repair.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../Backend_calls/Users/profile_pictures.dart';
 import '../../Utils/constants.dart';
 import '../Users/login.dart';
 import '../Users/profile.dart';
@@ -20,6 +21,8 @@ class _CustomerScreenState extends State<CustomerScreen> {
   late bool back;
 
   var response = "";
+  var img;
+  var response_img;
 
   @override
   void initState(){
@@ -29,6 +32,10 @@ class _CustomerScreenState extends State<CustomerScreen> {
 
   asyncMethod() async{
     response = await getProfileInfo();
+    img = await getProfilePicture();
+    response_img = await getPictureResponse();
+    print(img);
+    print(response_img);
     setState(() {});
   }
 
@@ -74,6 +81,8 @@ class _CustomerScreenState extends State<CustomerScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
+    setState(() {});
+
     return WillPopScope(
       onWillPop: () async {
         back = await _showMyDialog();
@@ -94,7 +103,7 @@ class _CustomerScreenState extends State<CustomerScreen> {
             child: Column(
               children: [
                 response.toString()=="" ? const CircularProgressIndicator():
-                Profile(email: response.toString()),
+                Profile(email: response.toString(), img: img, response_img: response_img),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

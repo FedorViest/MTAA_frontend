@@ -6,6 +6,7 @@ import 'package:frontend/Backend_calls/Customers/get_order.dart';
 import 'package:frontend/Screens/Customer/My_orders/rate_technician.dart';
 
 import '../../../Backend_calls/Customers/get_orders.dart';
+import '../../../Backend_calls/Users/profile_pictures.dart';
 import '../../../Utils/constants.dart';
 import '../customer.dart';
 import '../../Users/profile.dart';
@@ -37,6 +38,8 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
   late List<Order> orders = widget.orders;
 
   var response = "";
+  var img;
+  var response_img;
 
   @override
   void initState(){
@@ -46,6 +49,8 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
 
   asyncMethod() async{
     response = await getProfileInfo();
+    img = await getProfilePicture();
+    response_img = await getPictureResponse();
     setState(() {});
   }
 
@@ -63,7 +68,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
           child: Column(
             children: [
               response.toString()=="" ? const CircularProgressIndicator():
-              Profile(email: response.toString()),
+              Profile(email: response.toString(), img: img, response_img: response_img),
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,

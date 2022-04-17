@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Backend_calls/Employees/update_repair.dart';
+import 'package:frontend/Backend_calls/Users/profile_pictures.dart';
 import 'package:frontend/Utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../Users/login.dart';
 import '../Users/profile.dart';
 import '../../Backend_calls/Employees/get_repairs.dart';
 
@@ -23,6 +25,8 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
   late bool back;
 
   var response = "";
+  var img;
+  var response_img;
 
   @override
   void initState(){
@@ -32,6 +36,10 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
 
   asyncMethod() async{
     response = await getProfileInfo();
+    img = await getProfilePicture();
+    response_img = await getPictureResponse();
+    print("RESPONSE");
+    print(response_img);
     setState(() {});
   }
 
@@ -61,6 +69,8 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                   color: Colors.green,
                   onPressed: () {
                     Navigator.pop(context, true);
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => LoginScreen()));
                   },
                 ),
               ],
@@ -103,6 +113,8 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
 
     Size size = MediaQuery.of(context).size;
 
+    setState(() {});
+
     return WillPopScope(
       onWillPop: () async {
         back = await _showMyDialog();
@@ -123,7 +135,7 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
             child: Column(
               children: [
                 response.toString()=="" ? const CircularProgressIndicator():
-                Profile(email: response.toString()),
+                Profile(email: response.toString(), img: img, response_img: response_img),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

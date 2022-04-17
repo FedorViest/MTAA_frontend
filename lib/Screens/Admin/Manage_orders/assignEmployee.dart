@@ -4,6 +4,7 @@ import 'package:frontend/Backend_calls/Employees/update_repair.dart';
 import 'package:frontend/Utils/funcs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../Backend_calls/Users/profile_pictures.dart';
 import '../../../Utils/constants.dart';
 import '../admin.dart';
 import '../../Users/profile.dart';
@@ -30,6 +31,8 @@ class _assignEmployeeScreenState extends State<assignEmployeeScreen> {
   late bool back;
 
   var response = "";
+  var img;
+  var response_img;
 
   @override
   void initState(){
@@ -39,6 +42,8 @@ class _assignEmployeeScreenState extends State<assignEmployeeScreen> {
 
   asyncMethod() async{
     response = await getProfileInfo();
+    img = await getProfilePicture();
+    response_img = await getPictureResponse();
     setState(() {});
   }
 
@@ -59,7 +64,7 @@ class _assignEmployeeScreenState extends State<assignEmployeeScreen> {
           child: Column(
             children: [
               response.toString()=="" ? const CircularProgressIndicator():
-              Profile(email: response.toString()),
+              Profile(email: response.toString(), img: img, response_img: response_img),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,

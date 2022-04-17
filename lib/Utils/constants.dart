@@ -28,6 +28,13 @@ getProfilePicture() async{
   return response;
 }
 
+getPictureResponse() async{
+  var response = await GetPicture().getPictureResponse();
+  print("RESPONSE RESPONSE");
+  print(response);
+  return response;
+}
+
 
 Future<bool> showMyDialog(context) async {
   return await showDialog(

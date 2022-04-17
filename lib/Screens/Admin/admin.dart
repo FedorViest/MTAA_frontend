@@ -7,6 +7,7 @@ import 'package:frontend/Screens/Admin/Manage_orders/manage_orders.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Backend_calls/Admin/get_ratings.dart';
+import '../../Backend_calls/Users/profile_pictures.dart';
 import '../../Utils/constants.dart';
 import '../Users/login.dart';
 import 'Manage_computers/manage_computers.dart';
@@ -21,6 +22,8 @@ class _AdminScreenState extends State<AdminScreen> {
   late bool back;
 
   var response = "";
+  var img;
+  var response_img;
 
   @override
   void initState(){
@@ -30,6 +33,8 @@ class _AdminScreenState extends State<AdminScreen> {
 
   asyncMethod() async{
     response = await getProfileInfo();
+    img = await getProfilePicture();
+    response_img = await getPictureResponse();
     setState(() {});
   }
 
@@ -95,7 +100,7 @@ class _AdminScreenState extends State<AdminScreen> {
             child: Column(
               children: [
                 response.toString()=="" ? const CircularProgressIndicator():
-                Profile(email: response.toString()),
+                Profile(email: response.toString(), img: img, response_img: response_img),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

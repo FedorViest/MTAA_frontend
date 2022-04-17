@@ -6,6 +6,7 @@ import 'package:frontend/Screens/Admin/Manage_orders/assignEmployee.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../Backend_calls/Admin/orders_calls.dart';
+import '../../../Backend_calls/Users/profile_pictures.dart';
 import '../../../Utils/constants.dart';
 import '../../Users/profile.dart';
 import '../../../Backend_calls/Employees/get_repairs.dart';
@@ -26,6 +27,8 @@ class _ManageComputersScreenState extends State<ManageComputersScreen> {
   late bool back;
 
   var response = "";
+  var img;
+  var response_img;
 
   @override
   void initState(){
@@ -35,6 +38,8 @@ class _ManageComputersScreenState extends State<ManageComputersScreen> {
 
   asyncMethod() async{
     response = await getProfileInfo();
+    img = await getProfilePicture();
+    response_img = await getPictureResponse();
     setState(() {});
   }
 
@@ -55,7 +60,7 @@ class _ManageComputersScreenState extends State<ManageComputersScreen> {
           child: Column(
             children: [
               response.toString()=="" ? const CircularProgressIndicator():
-              Profile(email: response.toString()),
+              Profile(email: response.toString(), img: img, response_img: response_img),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,

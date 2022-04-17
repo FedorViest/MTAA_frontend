@@ -10,12 +10,16 @@ class Profile extends StatefulWidget {
   @override
   _ProfileState createState() => _ProfileState();
   final String email;
+  final img;
+  final response_img;
 
-  const Profile({Key? key, required this.email}) : super(key: key);
+  const Profile({Key? key, required this.email, required this.img, required this.response_img}) : super(key: key);
 }
 
 class _ProfileState extends State<Profile> {
   late String email = widget.email;
+  late var img = widget.img;
+  late var response_img = widget.response_img;
   final _formKey = GlobalKey<FormState>();
 
   getImage(type) async {
@@ -63,11 +67,7 @@ class _ProfileState extends State<Profile> {
               children: <Widget>[
                 GestureDetector(
                   onTap: () async {
-                    // mark the function as async
-                    print('tap');
-                    // Show PopUp
-
-                    // await the dialog
+                    print(response_img);
                     await showDialog(
                       context: context,
                       builder: (BuildContext context) {
@@ -77,10 +77,9 @@ class _ProfileState extends State<Profile> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                const CircleAvatar(
+                                CircleAvatar(
                                   radius: 100,
-                                  backgroundImage: ExactAssetImage(
-                                      'assets/images/unknown.png'),
+                                  backgroundImage: img,
                                 ),
                                 ElevatedButton(
                                   onPressed: () async {
@@ -118,10 +117,9 @@ class _ProfileState extends State<Profile> {
                       },
                     );
                   },
-                  child: const CircleAvatar(
+                  child: CircleAvatar(
                     radius: 20,
-                    backgroundImage:
-                        ExactAssetImage('assets/images/unknown.png'),
+                    backgroundImage: response_img == null ? const ExactAssetImage('assets/images/unknown.png'): img,
                   ),
                 ),
                 Text(
