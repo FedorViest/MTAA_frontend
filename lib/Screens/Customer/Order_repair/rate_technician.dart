@@ -40,6 +40,33 @@ class _RateTechnicianScreenState extends State<RateTechnicianScreen> {
     setState(() {});
   }
 
+  Future<bool> _showMyDialog() async {
+    return await showDialog(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Color(0xFFFCDAB7),
+          title: const Text('Thank you for your rating'),
+          alignment: Alignment.center,
+          actions: <Widget>[
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => CustomerScreen()));
+              },
+              child: Text(
+                "OK",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
@@ -120,8 +147,9 @@ class _RateTechnicianScreenState extends State<RateTechnicianScreen> {
                   ElevatedButton(
                     onPressed: () async {
                       var response = await AddRating().add_rating(email, _currentValue, _commentController.text);
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => CustomerScreen()));
+                      if (response.statusCode == 200){
+                        _showMyDialog();
+                      }
                     },
                     style: ButtonStyle(
                       backgroundColor:
