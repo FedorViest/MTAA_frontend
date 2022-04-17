@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/Backend_calls/Users/profile_pictures.dart';
 
 import '../Backend_calls/Users/login_calls.dart';
 
@@ -19,6 +20,12 @@ getProfileInfo() async{
   var response = await Users().getInfo();
 
   return response["email"];
+}
+
+getProfilePicture() async{
+  var response = await GetPicture().get_picture();
+
+  return response;
 }
 
 

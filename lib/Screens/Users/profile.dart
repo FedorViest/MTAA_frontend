@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:frontend/Backend_calls/Users/profile_pictures.dart';
 import 'package:frontend/Utils/constants.dart';
+import 'package:image_picker/image_picker.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -13,6 +17,22 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   late String email = widget.email;
   final _formKey = GlobalKey<FormState>();
+
+  getImage() async {
+    File _image;
+    final picker = ImagePicker();
+
+    var _pickedFile = await picker.pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 50, // <- Reduce Image quality
+        maxHeight: 500, // <- reduce the image size
+        maxWidth: 500);
+
+    if (_pickedFile != null) {
+      _image = File(_pickedFile.path);
+      await UploadPicture().uploadImage(_image);
+    }
+  }
 
   late var _ipController = TextEditingController();
 
@@ -57,7 +77,9 @@ class _ProfileState extends State<Profile> {
                                         'assets/images/unknown.png'),
                                   ),
                                   ElevatedButton(
-                                    onPressed: () {},
+                                    onPressed: () async {
+                                      await getImage();
+                                    },
                                     style: ElevatedButton.styleFrom(
                                         fixedSize: const Size(240, 70),
                                         primary: Color(0xFF1E5F74)),
