@@ -74,6 +74,9 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                     onPressed: orders[_selectedIndex].status == "accepted"
                         ? null
                         : () async {
+                      if(_selectedIndex == 0){
+                        _selectedId = orders[_selectedIndex].id;
+                      }
                       var response = await getOrder()
                           .getOrderFunc(_selectedId);
                       Map<String, dynamic> response_json =

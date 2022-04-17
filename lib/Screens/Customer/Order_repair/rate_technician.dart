@@ -72,11 +72,11 @@ class _RateTechnicianScreenState extends State<RateTechnicianScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black54,
+        backgroundColor: Color(0xFF1E5F74),
       ),
       body: SingleChildScrollView(
         child: Container(
-          color: Colors.indigo[200],
+          color: Color(0xFF133B5C),
           height: size.height,
           child: Column(
             children: [
@@ -94,6 +94,7 @@ class _RateTechnicianScreenState extends State<RateTechnicianScreen> {
                       width: size.width,
                       child: Text(
                         "Technician: $email",
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
@@ -104,16 +105,27 @@ class _RateTechnicianScreenState extends State<RateTechnicianScreen> {
                   SizedBox(
                     height: size.height * 0.1,
                   ),
-                  Text(
+                  Container(
+                    width: size.width,
+                    decoration: BoxDecoration(
+                      color: Colors.white70,
+                        border: Border.all(
+                          color: Colors.white70,
+                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(20))
+                    ),
+                    margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  child:Column(
+                    children: [
+                   Text(
                     'Rating: $_currentValue',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    child: Slider(
+                    Slider(
                         value: _currentValue,
                         min: 0.0,
                         max: 5.0,
@@ -125,8 +137,12 @@ class _RateTechnicianScreenState extends State<RateTechnicianScreen> {
                         onChanged: (double value) {
                           setState(() {
                             _currentValue = value;
-                          });
-                        }),
+                          }
+                          );
+                        }
+                        ),
+                    ],
+                  ),
                   ),
                   SizedBox(height: size.height * 0.1),
                   TextField(
@@ -151,17 +167,15 @@ class _RateTechnicianScreenState extends State<RateTechnicianScreen> {
                         _showMyDialog();
                       }
                     },
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.blueGrey),
-                    ),
+                    style: ElevatedButton.styleFrom(
+                        fixedSize: const Size(240, 60),
+                        primary: Color(0xFF1E5F74)),
                     child: const Text(
-                      "Rate Technician",
+                      "Rate technician",
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Colors.black,
-                      ),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
+                          color: Colors.white),
                     ),
                   ),
                 ],
