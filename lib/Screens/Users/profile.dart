@@ -18,15 +18,23 @@ class _ProfileState extends State<Profile> {
   late String email = widget.email;
   final _formKey = GlobalKey<FormState>();
 
-  getImage() async {
+  getImage(type) async {
     File _image;
     final picker = ImagePicker();
-
-    var _pickedFile = await picker.pickImage(
-        source: ImageSource.gallery,
-        imageQuality: 50, // <- Reduce Image quality
-        maxHeight: 500, // <- reduce the image size
-        maxWidth: 500);
+    var _pickedFile;
+    if (type == "gallery") {
+      _pickedFile = await picker.pickImage(
+          source: ImageSource.gallery,
+          imageQuality: 50, // <- Reduce Image quality
+          maxHeight: 500, // <- reduce the image size
+          maxWidth: 500);
+    } else if (type == "camera") {
+      _pickedFile = await picker.pickImage(
+          source: ImageSource.camera,
+          imageQuality: 50, // <- Reduce Image quality
+          maxHeight: 1000, // <- reduce the image size
+          maxWidth: 1000);
+    }
 
     if (_pickedFile != null) {
       _image = File(_pickedFile.path);
@@ -43,74 +51,89 @@ class _ProfileState extends State<Profile> {
     return Container(
       alignment: Alignment.topCenter,
       color: Color(0xFF1D2D50),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              //SizedBox(height: size.height * 0.02),
-              padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () async {
-                      // mark the function as async
-                      print('tap');
-                      // Show PopUp
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            //SizedBox(height: size.height * 0.02),
+            padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                GestureDetector(
+                  onTap: () async {
+                    // mark the function as async
+                    print('tap');
+                    // Show PopUp
 
-                      // await the dialog
-                      await showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            actions: <Widget>[
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  const CircleAvatar(
-                                    radius: 100,
-                                    backgroundImage: ExactAssetImage(
-                                        'assets/images/unknown.png'),
+                    // await the dialog
+                    await showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          actions: <Widget>[
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                const CircleAvatar(
+                                  radius: 100,
+                                  backgroundImage: ExactAssetImage(
+                                      'assets/images/unknown.png'),
+                                ),
+                                ElevatedButton(
+                                  onPressed: () async {
+                                    await getImage("gallery");
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                      fixedSize: const Size(240, 70),
+                                      primary: Color(0xFF1E5F74)),
+                                  child: const Text(
+                                    "Upload new photo from gallery",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
                                   ),
-                                  ElevatedButton(
-                                    onPressed: () async {
-                                      await getImage();
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                        fixedSize: const Size(240, 70),
-                                        primary: Color(0xFF1E5F74)),
-                                    child: const Text(
-                                      "Upload new photo",
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    ),
+                                ),
+                                SizedBox(height: size.height * 0.01),
+                                ElevatedButton(
+                                  onPressed: () async {
+                                    await getImage("camera");
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                      fixedSize: const Size(240, 70),
+                                      primary: Color(0xFF1E5F74)),
+                                  child: const Text(
+                                    "Upload new photo from camera",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
                                   ),
-                                ],
-                              )
-                            ],
-                          );
-                        },
-                      );
-                    },
-                    child: const CircleAvatar(
-                      radius: 20,
-                      backgroundImage:
-                          ExactAssetImage('assets/images/unknown.png'),
-                    ),
+                                ),
+                              ],
+                            )
+                          ],
+                        );
+                      },
+                    );
+                  },
+                  child: const CircleAvatar(
+                    radius: 20,
+                    backgroundImage:
+                        ExactAssetImage('assets/images/unknown.png'),
                   ),
-                  Text(
-                    email,
-                    style: TextStyle(
-                        fontSize: size.width / 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  ),
-                  IconButton(
+                ),
+                Text(
+                  email,
+                  style: TextStyle(
+                      fontSize: size.width / 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ),
+                Form(
+                  key: _formKey,
+                  child: IconButton(
                     highlightColor: COLOR_CREAM,
                     iconSize: 50,
                     onPressed: () async {
@@ -177,11 +200,11 @@ class _ProfileState extends State<Profile> {
                     },
                     icon: const Icon(Icons.settings_applications),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
