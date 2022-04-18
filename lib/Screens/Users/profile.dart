@@ -170,10 +170,27 @@ class _ProfileState extends State<Profile> {
                                   SizedBox(height: size.height * 0.05),
                                   ElevatedButton(
                                     onPressed: () {
-                                      _ipController.text = set_ip;
+                                      if(_ipController.text.isEmpty) {
+                                        _ipController.text = set_ip;
+                                      }
+
                                       if (_formKey.currentState!.validate()) {
-                                        set_ip = _ipController.text;
-                                        print(set_ip);
+                                        if (ipExp.hasMatch(_ipController.text) == false) {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            const SnackBar(
+                                              content: Text(
+                                                'This IPv4 address is not valid.',
+                                                style: TextStyle(
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.bold),
+                                              ),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        }
+                                        else {
+                                          set_ip = _ipController.text;
+                                        }
                                         //Navigator.pop(context);
                                       }
                                     },
