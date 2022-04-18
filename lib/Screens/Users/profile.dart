@@ -29,13 +29,11 @@ class _ProfileState extends State<Profile> {
     if (type == "gallery") {
       _pickedFile = await picker.pickImage(
           source: ImageSource.gallery,
-          imageQuality: 50, // <- Reduce Image quality
           maxHeight: 500, // <- reduce the image size
           maxWidth: 500);
     } else if (type == "camera") {
       _pickedFile = await picker.pickImage(
           source: ImageSource.camera,
-          imageQuality: 50, // <- Reduce Image quality
           maxHeight: 1000, // <- reduce the image size
           maxWidth: 1000);
     }

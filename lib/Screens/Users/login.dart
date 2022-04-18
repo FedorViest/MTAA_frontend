@@ -121,6 +121,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: ElevatedButton(
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
+                        var prefs = await SharedPreferences.getInstance();
+                        prefs.clear();
                         var response = await Provider.of<Auth>(context, listen: false)
                             .login(emailController.text, passwordController.text);
                         if (response == null){

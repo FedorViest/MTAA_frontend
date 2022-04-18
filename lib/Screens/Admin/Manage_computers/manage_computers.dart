@@ -37,9 +37,9 @@ class _ManageComputersScreenState extends State<ManageComputersScreen> {
   }
 
   asyncMethod() async{
-    response = await getProfileInfo();
     img = await getProfilePicture();
     response_img = await getPictureResponse();
+    response = await getProfileInfo();
     setState(() {});
   }
 

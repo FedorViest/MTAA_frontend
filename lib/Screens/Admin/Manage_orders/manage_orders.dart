@@ -40,9 +40,9 @@ class _ManageOrdersScreenState extends State<ManageOrdersScreen> {
   }
 
   asyncMethod() async{
-    response = await getProfileInfo();
     img = await getProfilePicture();
     response_img = await getPictureResponse();
+    response = await getProfileInfo();
     setState(() {});
   }
 

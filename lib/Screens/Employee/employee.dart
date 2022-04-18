@@ -35,9 +35,9 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
   }
 
   asyncMethod() async{
-    response = await getProfileInfo();
     img = await getProfilePicture();
     response_img = await getPictureResponse();
+    response = await getProfileInfo();
     print("RESPONSE");
     print(response_img);
     setState(() {});
