@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:async';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
+import 'package:frontend/Backend_calls/Users/login_calls.dart';
 
 import 'random_string.dart';
 
@@ -280,12 +281,13 @@ class Signaling {
       } catch (e) {}
     }
 
-    _socket?.onOpen = () {
+    _socket?.onOpen = () async {
+      var response = await Users().getInfo();
       print('onOpen');
       onSignalingStateChange?.call(SignalingState.ConnectionOpen);
       _send('new', {
         // TODO - toto je (localhost)
-        'name': "MG",
+        'name': response["email"],
         'id': _selfId,
         'user_agent': DeviceInfo.userAgent
       });
