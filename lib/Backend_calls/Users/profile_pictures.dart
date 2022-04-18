@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:jwt_decode/jwt_decode.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
 
 import '../../Utils/constants.dart';
 
@@ -17,12 +17,15 @@ class GetPicture with ChangeNotifier{
       final prefs = await SharedPreferences.getInstance();
       final access_token = prefs.getString("access_token") ?? '';
       dio.options.headers["authorization"] = "Bearer " + access_token;
+      Map<String, dynamic> data = Jwt.parseJwt(prefs.getString("access_token").toString());
+      print(data);
+      print(data["id"]);
 
       Map<String, String> auth = {
         'authorization' : "Bearer " + access_token,
       };
 
-      ImageProvider img = await Image.network(url + "/users/getPicture", headers: auth,).image;
+      ImageProvider img = await Image.network(url + "/users/getPicture/" + data["id"].toString(), headers: auth,).image;
       print("PICTURE");
       print(img);
 
@@ -38,7 +41,8 @@ class GetPicture with ChangeNotifier{
       final prefs = await SharedPreferences.getInstance();
       final access_token = prefs.getString("access_token") ?? '';
       dio.options.headers["authorization"] = "Bearer " + access_token;
-      Response response = await dio.get(url + '/users/getPicture');
+      Map<String, dynamic> data = Jwt.parseJwt(prefs.getString("access_token").toString());
+      Response response = await dio.get(url + '/users/getPicture/' + data["id"].toString());
 
       return response;
     }
