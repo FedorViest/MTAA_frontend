@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:frontend/Backend_calls/Admin/manage_employees.dart';
+import 'package:frontend/Utils/funcs.dart';
 
 import '../admin.dart';
 
@@ -130,7 +131,6 @@ class _ChangeEmployeeScreenState extends State<ChangeEmployeeScreen> {
                 alignment: Alignment.center,
                 child: ElevatedButton(
                   onPressed: () async {
-                    print(_formKey.currentState!.validate());
                     if (_formKey.currentState!.validate()) {
                       var response = await changeEmployee().change_employee(
                           employeeEmail, nameController.text, emailController.text,
@@ -139,8 +139,6 @@ class _ChangeEmployeeScreenState extends State<ChangeEmployeeScreen> {
                         String errorMessage = Map<String, dynamic>.from(
                                 response.response.data)["detail"]
                             .toString();
-                        print("penis");
-                        print(errorMessage);
                         if (errorMessage ==
                             "User with selected email already exists") {
                           ScaffoldMessenger.of(context).showSnackBar(
@@ -169,8 +167,7 @@ class _ChangeEmployeeScreenState extends State<ChangeEmployeeScreen> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Processing Data')),
                         );
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => AdminScreen()));
+                          showCorrectDialog(context, 'Employee\'s information has been sucessfuly changed.', 'admin');
                       }
                     }
                   },
