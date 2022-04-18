@@ -38,6 +38,9 @@ Future<bool> showCorrectDialog(BuildContext context, String text, String screen)
                         builder: (context) => AdminScreen()));
               }
               },
+            style: ElevatedButton.styleFrom(
+                fixedSize: const Size(80, 40),
+                primary: Color(0xFF1E5F74)),
             child: Text(
               "OK",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),

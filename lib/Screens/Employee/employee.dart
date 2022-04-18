@@ -88,7 +88,7 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: Color(0xFFFCDAB7),
-          title: const Text('Order status updated'),
+          title: const Text('Order status has been sucessfuly updated.'),
           alignment: Alignment.center,
           actions: <Widget>[
             ElevatedButton(

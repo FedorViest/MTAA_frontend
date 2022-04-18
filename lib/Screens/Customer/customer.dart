@@ -133,7 +133,7 @@ class _CustomerScreenState extends State<CustomerScreen> {
                       onPressed: () async {
                         var response = await getRatings().getInfo();
                         print("RESPONSE" + response.toString());
-                        response ??= [Rating(0, "RATINGS","",0, "NO")];
+                        response ??= [Rating(0, "RATINGS","NO",0, "NO")];
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => MyRatingsScreen(ratings: response)));
                       },
