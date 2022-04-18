@@ -1,6 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Backend_calls/Admin/computer_calls.dart';
+import '../../../Utils/funcs.dart';
 import '../admin.dart';
 
 class AddComputerScreen extends StatefulWidget {
@@ -116,17 +118,43 @@ class _AddComputerScreenState extends State<AddComputerScreen> {
                   Container(
                     alignment: Alignment.center,
                     child: ElevatedButton(
-                      onPressed: () {
-                        // Validate returns true if the form is valid, or false otherwise.
+                      onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          // If the form is valid, display a snackbar. In the real world,
-                          // you'd often call a server or save the information in a database.
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Processing Data')),
-                          );
-                          addComputer().add_computer(brandController.text, modelController.text, yearController.text);
-                          Navigator.of(context)
-                              .push(MaterialPageRoute(builder: (context) => AdminScreen()));
+                          var response = await  addComputer().add_computer(brandController.text, modelController.text, yearController.text);
+                          if (response.runtimeType == DioError) {
+                            String errorMessage = Map<String, dynamic>.from(
+                                response.response.data)["detail"]
+                                .toString();
+                            if (errorMessage ==
+                                "This computer already exists") {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text(
+                                    'Computer already exists',
+                                    style: TextStyle(
+                                        fontSize: 20, fontWeight: FontWeight.bold),
+                                  ),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text(
+                                    'Invalid data',
+                                    style: TextStyle(
+                                        fontSize: 20, fontWeight: FontWeight.bold),
+                                  ),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
+                            }
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Processing Data')),
+                            );
+                            showCorrectDialog(context, 'Computer has been sucessfuly created.', 'admin');
+                          }
                         }
                       },
                       child: const Text('ADD COMPUTER'),
