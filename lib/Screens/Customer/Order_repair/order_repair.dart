@@ -3,6 +3,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:frontend/Backend_calls/Customers/add_order.dart';
 import 'package:frontend/Backend_calls/Customers/get_computers.dart';
 import 'package:frontend/Utils/funcs.dart';
+import 'package:frontend/webRTC/call_sample/call_sample.dart';
 
 import '../../../Backend_calls/Users/profile_pictures.dart';
 import '../../../Utils/constants.dart';
@@ -163,7 +164,10 @@ class _OrderRepairScreenState extends State<OrderRepairScreen> {
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => CallSample(host: "192.168.0.112",)));
+                        },
                       ),
                     ),
                     Container(
