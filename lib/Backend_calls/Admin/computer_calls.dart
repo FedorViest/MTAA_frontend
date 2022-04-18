@@ -66,7 +66,7 @@ class addComputer{
 
       return response;
     } catch (e) {
-      print(e);
+        return e;
     }
   }
 }

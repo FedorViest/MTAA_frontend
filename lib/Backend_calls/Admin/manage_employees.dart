@@ -28,7 +28,7 @@ class addEmployee{
 
       return response;
     } catch (e) {
-      print(e);
+      return e;
     }
   }
 }
@@ -86,7 +86,7 @@ class changeEmployee{
 
       return response;
     } catch (e) {
-      print(e);
+      return e;
     }
   }
 }

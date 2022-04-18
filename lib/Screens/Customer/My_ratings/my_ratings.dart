@@ -108,7 +108,8 @@ class _MyRatingsScreenState extends State<MyRatingsScreen> {
                                                     style: const TextStyle(
                                                         color: Colors.white))),
                                             content: Text(
-                                                "Employee: ${ratings[_selectedIndex].employee_email}\n\n"
+                                                "Name: ${ratings[_selectedIndex].employee_name}\n\n"
+                                                    "Email: ${ratings[_selectedIndex].employee_email}\n\n"
                                                     "Rating: ${ratings[_selectedIndex].rating}\n\n"
                                                     "Comment: ${ratings[_selectedIndex].comment}",
                                                 style: const TextStyle(
@@ -120,7 +121,13 @@ class _MyRatingsScreenState extends State<MyRatingsScreen> {
                                     )
                                   },
                                   horizontalTitleGap: 30,
-                                  leading: Text(
+                                  title: Text(
+                                    ratings[index].employee_name,
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  subtitle: Text(
                                     ratings[index].employee_email,
                                     style: const TextStyle(
                                       fontSize: 20,

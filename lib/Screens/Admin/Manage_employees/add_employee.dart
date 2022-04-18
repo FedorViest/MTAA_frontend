@@ -1,6 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/Backend_calls/Admin/manage_employees.dart';
 
+import '../../../Utils/funcs.dart';
 import '../admin.dart';
 
 class AddEmployeeScreen extends StatefulWidget {
@@ -106,6 +108,7 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                       hintStyle: TextStyle(color: Colors.grey[800]),
                       hintText: "Password",
                       fillColor: Colors.white70),
+                  obscureText: true,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "This field is required.";
@@ -140,21 +143,50 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
               Container(
                 alignment: Alignment.center,
                 child: ElevatedButton(
-                  onPressed: () {
-                    // Validate returns true if the form is valid, or false otherwise.
+                  onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      addEmployee().add_employee(nameController.text, passwdController.text, emailController.text, skillsController.text);
-
-                      // If the form is valid, display a snackbar. In the real world,
-                      // you'd often call a server or save the information in a database.
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Processing Data')),
-                      );
-                      Navigator.of(context)
-                          .push(MaterialPageRoute(builder: (context) => AdminScreen()));
+                      var response = await addEmployee().add_employee(nameController.text, passwdController.text, emailController.text, skillsController.text);
+                      if (response.runtimeType == DioError) {
+                        String errorMessage = Map<String, dynamic>.from(
+                                response.response.data)["detail"]
+                            .toString();
+                        print(errorMessage);
+                        if (errorMessage ==
+                            "User with selected email already exists") {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                'Email already in use',
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                'Invalid data',
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                        }
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Processing Data')),
+                        );
+                        showCorrectDialog(
+                            context,
+                            'Employee has been sucessfuly created.',
+                            'admin');
+                      }
                     }
                   },
-                  child: const Text('REGISTER'),
+                  child: const Text('ADD EMPLOYEE'),
                   style: ElevatedButton.styleFrom(
                       fixedSize: const Size(200, 60),
                       primary: Color(0xFF1E5F74)),
