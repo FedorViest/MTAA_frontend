@@ -122,6 +122,9 @@ class _assignEmployeeScreenState extends State<assignEmployeeScreen> {
                   SizedBox(height: size.height * 0.06),
                   ElevatedButton(
                     onPressed: () async {
+                      if(_selectedIndex == 0){
+                        _selectedEmail = users[_selectedIndex].email;
+                      }
                       var response = await assignEmployee().assign_employee(_selectedEmail, order_id);
                       if(response.statusCode == 200)
                         {

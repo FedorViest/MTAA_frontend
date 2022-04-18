@@ -92,8 +92,10 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
           alignment: Alignment.center,
           actions: <Widget>[
             ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
+              onPressed:
+              (_selectedId == 0) ? null
+                  : () {
+                    Navigator.pop(context);
               },
               child: Text(
                 "OK",

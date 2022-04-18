@@ -67,7 +67,10 @@ class _ManageEmployeeScreenState extends State<ManageEmployeeScreen> {
             children: [
               response.toString() == ""
                   ? const CircularProgressIndicator()
-                  : Profile(email: response.toString(), img: img, response_img: response_img),
+                  : Profile(
+                      email: response.toString(),
+                      img: img,
+                      response_img: response_img),
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -156,11 +159,16 @@ class _ManageEmployeeScreenState extends State<ManageEmployeeScreen> {
                   SizedBox(height: size.height * 0.05),
                   ElevatedButton(
                     onPressed: () async {
-                      var response = await deleteEmployee().delete_employee(_selectedEmail);
-                      if(response.statusCode == 200)
-                        {
-                          showCorrectDialog(context, 'Employee has been sucessfuly deleted.', 'admin');
-                        }
+                      if (_selectedIndex == 0) {
+                        _selectedEmail = employees[_selectedIndex].email;
+                        _selectedName = employees[_selectedIndex].name;
+                      }
+                      var response = await deleteEmployee()
+                          .delete_employee(_selectedEmail);
+                      if (response.statusCode == 200) {
+                        showCorrectDialog(context,
+                            'Employee has been sucessfuly deleted.', 'admin');
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                         fixedSize: const Size(200, 60),
@@ -177,7 +185,10 @@ class _ManageEmployeeScreenState extends State<ManageEmployeeScreen> {
                   SizedBox(height: size.height * 0.05),
                   ElevatedButton(
                     onPressed: () {
-                      print(_selectedName);
+                      if (_selectedIndex == 0) {
+                        _selectedEmail = employees[_selectedIndex].email;
+                        _selectedName = employees[_selectedIndex].name;
+                      }
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => ChangeEmployeeScreen(
                               employeeName: _selectedName,
