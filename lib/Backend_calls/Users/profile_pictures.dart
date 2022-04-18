@@ -22,7 +22,7 @@ class GetPicture with ChangeNotifier{
         'authorization' : "Bearer " + access_token,
       };
 
-      ImageProvider img = Image.network(url + "/users/getPicture", headers: auth,).image;
+      ImageProvider img = await Image.network(url + "/users/getPicture", headers: auth,).image;
       print("PICTURE");
       print(img);
 

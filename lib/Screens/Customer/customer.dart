@@ -31,9 +31,9 @@ class _CustomerScreenState extends State<CustomerScreen> {
   }
 
   asyncMethod() async{
-    response = await getProfileInfo();
     img = await getProfilePicture();
     response_img = await getPictureResponse();
+    response = await getProfileInfo();
     print(img);
     print(response_img);
     setState(() {});
@@ -63,7 +63,7 @@ class _CustomerScreenState extends State<CustomerScreen> {
                   icon: Icon(Icons.check),
                   iconSize: 50,
                   color: Colors.green,
-                  onPressed: () {
+                  onPressed: () async {
                     Navigator.pop(context, true);
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => LoginScreen()));

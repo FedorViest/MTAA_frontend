@@ -32,9 +32,10 @@ class _AdminScreenState extends State<AdminScreen> {
   }
 
   asyncMethod() async{
-    response = await getProfileInfo();
     img = await getProfilePicture();
     response_img = await getPictureResponse();
+    response = await getProfileInfo();
+
     setState(() {});
   }
 
