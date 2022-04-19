@@ -38,7 +38,7 @@ class _ProfileState extends State<Profile> {
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: Color(0xFFFCDAB7),
-          title: Text("Picture has been sucessfuly uploaded."),
+          title: const Text("Picture has been sucessfuly uploaded. \nChanges will be visible after app restart."),
           alignment: Alignment.center,
           actions: <Widget>[
             ElevatedButton(
@@ -86,12 +86,12 @@ class _ProfileState extends State<Profile> {
     if (type == "gallery") {
       _pickedFile = await picker.pickImage(
           source: ImageSource.gallery,
-          maxHeight: 500, // <- reduce the image size
-          maxWidth: 500);
+          maxHeight: 1000,
+          maxWidth: 1000);
     } else if (type == "camera") {
       _pickedFile = await picker.pickImage(
           source: ImageSource.camera,
-          maxHeight: 1000, // <- reduce the image size
+          maxHeight: 1000,
           maxWidth: 1000);
     }
 
