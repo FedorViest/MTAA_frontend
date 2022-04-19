@@ -286,10 +286,9 @@ class Signaling {
       print('onOpen');
       onSignalingStateChange?.call(SignalingState.ConnectionOpen);
       _send('new', {
-        // TODO - toto je (localhost)
         'name': response["email"],
         'id': _selfId,
-        'user_agent': DeviceInfo.userAgent
+        'user_agent': "Name: " + response["name"].toString()
       });
     };
 
