@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../Backend_calls/Admin/get_ratings.dart';
 import '../../Backend_calls/Users/profile_pictures.dart';
 import '../../Utils/constants.dart';
+import '../../webRTC/call_sample/call_sample.dart';
 import '../Users/login.dart';
 import 'Manage_computers/manage_computers.dart';
 import '../Users/profile.dart';
@@ -102,11 +103,33 @@ class _AdminScreenState extends State<AdminScreen> {
               children: [
                 response.toString()=="" ? const CircularProgressIndicator():
                 Profile(email: response.toString(), img: img, response_img: response_img),
+                SizedBox(height: size.height * 0.05,),
+                Container(
+                  child: ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                        fixedSize: const Size(150, 60),
+                        primary: Color(0xFF1E5F74)),
+                    icon: const Icon(
+                      Icons.videocam,
+                      color: Colors.black,
+                      size: 50,
+                    ),
+                    label: const Text(
+                      "Video call",
+                      style: TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => CallSample(host: "147.175.163.54",)));
+                    },
+                  ),
+                ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(height: size.height * 0.2),
+                    SizedBox(height: size.height * 0.1),
                     ElevatedButton(
                       onPressed: () async {
                         var response2 = await getRatings().getInfo();

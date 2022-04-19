@@ -166,7 +166,7 @@ class _OrderRepairScreenState extends State<OrderRepairScreen> {
                         ),
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => CallSample(host: "192.168.0.112",)));
+                              builder: (context) => CallSample(host: "147.175.163.54",)));
                         },
                       ),
                     ),
