@@ -2,7 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Backend_calls/Admin/computer_calls.dart';
+import '../../../Utils/constants.dart';
 import '../../../Utils/funcs.dart';
+import '../../Users/profile.dart';
 import '../admin.dart';
 
 class AddComputerScreen extends StatefulWidget {
@@ -16,6 +18,26 @@ class _AddComputerScreenState extends State<AddComputerScreen> {
   final brandController = TextEditingController();
   final modelController = TextEditingController();
   final yearController = TextEditingController();
+
+  var response_email = "";
+  var response_position = "";
+  var img;
+  var response_img;
+
+  @override
+  void initState(){
+    super.initState();
+    asyncMethod();
+  }
+
+  asyncMethod() async{
+    img = await getProfilePicture();
+    response_img = await getPictureResponse();
+    response_email = await getProfileInfo();
+    response_position = await getPosition();
+
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +54,9 @@ class _AddComputerScreenState extends State<AddComputerScreen> {
             child: Form(
               key: _formKey,
               child: Column(
-                children: <Widget>[
+                children: [
+                  response_email.toString()=="" ? const CircularProgressIndicator():
+                  Profile(email: response_email.toString(), position: response_position.toString(), img: img, response_img: response_img),
                   Container(
                     alignment: Alignment.center,
                     margin: EdgeInsets.only(top: 20),

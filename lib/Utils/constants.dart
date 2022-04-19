@@ -24,6 +24,12 @@ getProfileInfo() async{
   return response["email"];
 }
 
+getPosition() async{
+  var response = await Users().getInfo();
+
+  return response["position"];
+}
+
 getProfilePicture() async{
   var response = await GetPicture().get_picture();
 

@@ -6,21 +6,76 @@ import 'package:frontend/Backend_calls/Users/profile_pictures.dart';
 import 'package:frontend/Utils/constants.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../Backend_calls/Employees/get_repairs.dart';
+import '../Admin/admin.dart';
+import '../Customer/customer.dart';
+import '../Employee/employee.dart';
+
 class Profile extends StatefulWidget {
   @override
   _ProfileState createState() => _ProfileState();
   final String email;
+  final String position;
   final img;
   final response_img;
 
-  const Profile({Key? key, required this.email, required this.img, required this.response_img}) : super(key: key);
+  const Profile({Key? key, required this.email, required this.position, required this.img, required this.response_img}) : super(key: key);
 }
 
 class _ProfileState extends State<Profile> {
   late String email = widget.email;
+  late String position = widget.position;
   late var img = widget.img;
   late var response_img = widget.response_img;
   final _formKey = GlobalKey<FormState>();
+
+  Future<bool> _showCorrectDialog(BuildContext context, String position) async {
+    return await showDialog(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Color(0xFFFCDAB7),
+          title: Text("Picture has been sucessfuly uploaded."),
+          alignment: Alignment.center,
+          actions: <Widget>[
+            ElevatedButton(
+              onPressed: () async {
+                if(position == "customer"){
+                  Navigator.pop(context);
+                  Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context) => CustomerScreen()));
+                }
+                else if(position == "employee")
+                {
+                  var response2 = await getRepairs().getInfo();
+                  print("RESPONSE ${response2}");
+                  response2 ??= [Repair("", "NO", "REPAIRS", "", "", "", 0, "")];
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => EmployeeScreen(repairs: response2)));
+                }
+                else if(position == "admin")
+                {
+                  Navigator.pop(context);
+                  Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context) => AdminScreen()));
+                }
+              },
+              style: ElevatedButton.styleFrom(
+                  fixedSize: const Size(80, 40),
+                  primary: Color(0xFF1E5F74)),
+              child: Text(
+                "OK",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   getImage(type) async {
     File _image;
@@ -81,7 +136,10 @@ class _ProfileState extends State<Profile> {
                                 ),
                                 ElevatedButton(
                                   onPressed: () async {
+                                    print("something1");
                                     await getImage("gallery");
+                                    print("something");
+                                    _showCorrectDialog(context, position);
                                   },
                                   style: ElevatedButton.styleFrom(
                                       fixedSize: const Size(240, 70),
@@ -96,7 +154,10 @@ class _ProfileState extends State<Profile> {
                                 SizedBox(height: size.height * 0.01),
                                 ElevatedButton(
                                   onPressed: () async {
+                                    print("something1");
                                     await getImage("camera");
+                                    print("something");
+                                    _showCorrectDialog(context, position);
                                   },
                                   style: ElevatedButton.styleFrom(
                                       fixedSize: const Size(240, 70),

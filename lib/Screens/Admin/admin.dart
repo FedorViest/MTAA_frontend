@@ -22,22 +22,24 @@ class AdminScreen extends StatefulWidget {
 class _AdminScreenState extends State<AdminScreen> {
   late bool back;
 
-  var response = "";
+  var response_email = "";
+  var response_position = "";
   var img;
   var response_img;
+
+  asyncMethod() async{
+    img = await getProfilePicture();
+    response_img = await getPictureResponse();
+    response_email = await getProfileInfo();
+    response_position = await getPosition();
+
+    setState(() {});
+  }
 
   @override
   void initState(){
     super.initState();
     asyncMethod();
-  }
-
-  asyncMethod() async{
-    img = await getProfilePicture();
-    response_img = await getPictureResponse();
-    response = await getProfileInfo();
-
-    setState(() {});
   }
 
   Future<bool> _showMyDialog() async {
@@ -101,8 +103,8 @@ class _AdminScreenState extends State<AdminScreen> {
             color: Color(0xFF133B5C),
             child: Column(
               children: [
-                response.toString()=="" ? const CircularProgressIndicator():
-                Profile(email: response.toString(), img: img, response_img: response_img),
+                response_email.toString()=="" ? const CircularProgressIndicator():
+                Profile(email: response_email.toString(), position: response_position.toString(), img: img, response_img: response_img),
                 SizedBox(height: size.height * 0.05,),
                 Container(
                   child: ElevatedButton.icon(

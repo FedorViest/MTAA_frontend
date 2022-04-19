@@ -55,7 +55,7 @@ class GetPicture with ChangeNotifier{
 class UploadPicture with ChangeNotifier {
   var dio = Dio();
 
-  Future<String> uploadImage(File file) async {
+  Future<dynamic> uploadImage(File file) async {
     String fileName = file.path.split('/').last;
     print(file);
     FormData formData = FormData.fromMap({
@@ -68,6 +68,7 @@ class UploadPicture with ChangeNotifier {
     print("SOM TU");
     print(formData);
     var response = await dio.post(url + "/users/uploadPicture", data: formData);
+    print("done");
     return response.data;
   }
 }

@@ -35,20 +35,23 @@ class _ManageEmployeeScreenState extends State<ManageEmployeeScreen> {
   String _selectedName = "";
   late List<User_info> employees = widget.employees;
 
-  var response = "";
+  var response_email = "";
+  var response_position = "";
   var img;
   var response_img;
 
   @override
-  void initState() {
+  void initState(){
     super.initState();
     asyncMethod();
   }
 
-  asyncMethod() async {
+  asyncMethod() async{
     img = await getProfilePicture();
     response_img = await getPictureResponse();
-    response = await getProfileInfo();
+    response_email = await getProfileInfo();
+    response_position = await getPosition();
+
     setState(() {});
   }
 
@@ -65,12 +68,8 @@ class _ManageEmployeeScreenState extends State<ManageEmployeeScreen> {
           height: size.height,
           child: Column(
             children: [
-              response.toString() == ""
-                  ? const CircularProgressIndicator()
-                  : Profile(
-                      email: response.toString(),
-                      img: img,
-                      response_img: response_img),
+              response_email.toString()=="" ? const CircularProgressIndicator():
+              Profile(email: response_email.toString(), position: response_position.toString(), img: img, response_img: response_img),
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,

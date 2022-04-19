@@ -20,7 +20,8 @@ class CustomerScreen extends StatefulWidget {
 class _CustomerScreenState extends State<CustomerScreen> {
   late bool back;
 
-  var response = "";
+  var response_email = "";
+  var response_position = "";
   var img;
   var response_img;
 
@@ -33,9 +34,9 @@ class _CustomerScreenState extends State<CustomerScreen> {
   asyncMethod() async{
     img = await getProfilePicture();
     response_img = await getPictureResponse();
-    response = await getProfileInfo();
-    print(img);
-    print(response_img);
+    response_email = await getProfileInfo();
+    response_position = await getPosition();
+
     setState(() {});
   }
 
@@ -102,8 +103,8 @@ class _CustomerScreenState extends State<CustomerScreen> {
             color: Color(0xFF133B5C),
             child: Column(
               children: [
-                response.toString()=="" ? const CircularProgressIndicator():
-                Profile(email: response.toString(), img: img, response_img: response_img),
+                response_email.toString()=="" ? const CircularProgressIndicator():
+                Profile(email: response_email.toString(), position: response_position.toString(), img: img, response_img: response_img),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

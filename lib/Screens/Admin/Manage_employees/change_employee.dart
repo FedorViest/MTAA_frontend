@@ -4,6 +4,8 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:frontend/Backend_calls/Admin/manage_employees.dart';
 import 'package:frontend/Utils/funcs.dart';
 
+import '../../../Utils/constants.dart';
+import '../../Users/profile.dart';
 import '../admin.dart';
 
 class ChangeEmployeeScreen extends StatefulWidget {
@@ -29,6 +31,26 @@ class _ChangeEmployeeScreenState extends State<ChangeEmployeeScreen> {
   final passwdController = TextEditingController();
   final skillsController = TextEditingController();
 
+  var response_email = "";
+  var response_position = "";
+  var img;
+  var response_img;
+
+  @override
+  void initState(){
+    super.initState();
+    asyncMethod();
+  }
+
+  asyncMethod() async{
+    img = await getProfilePicture();
+    response_img = await getPictureResponse();
+    response_email = await getProfileInfo();
+    response_position = await getPosition();
+
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -46,7 +68,9 @@ class _ChangeEmployeeScreenState extends State<ChangeEmployeeScreen> {
         child: Form(
           key: _formKey,
           child: Column(
-            children: <Widget>[
+            children: [
+              response_email.toString()=="" ? const CircularProgressIndicator():
+              Profile(email: response_email.toString(), position: response_position.toString(), img: img, response_img: response_img),
               Container(
                 alignment: Alignment.center,
                 margin: EdgeInsets.only(top: 20),
