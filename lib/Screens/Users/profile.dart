@@ -11,6 +11,8 @@ import '../Admin/admin.dart';
 import '../Customer/customer.dart';
 import '../Employee/employee.dart';
 
+var ip_const;
+
 class Profile extends StatefulWidget {
   @override
   _ProfileState createState() => _ProfileState();
@@ -230,10 +232,15 @@ class _ProfileState extends State<Profile> {
                                   ),
                                   SizedBox(height: size.height * 0.05),
                                   ElevatedButton(
-                                    onPressed: () {
+                                    onPressed: () async {
                                       if(_ipController.text.isEmpty) {
                                         _ipController.text = set_ip;
+
                                       }
+
+                                      print(_ipController);
+                                      ip_const = await _ipController.text;
+                                      print(ip_const);
 
                                       if (_formKey.currentState!.validate()) {
                                         if (ipExp.hasMatch(_ipController.text) == false) {
@@ -251,6 +258,8 @@ class _ProfileState extends State<Profile> {
                                         }
                                         else {
                                           set_ip = _ipController.text;
+                                          print("PRINTUJEM");
+                                          print(set_ip);
                                         }
                                         //Navigator.pop(context);
                                       }

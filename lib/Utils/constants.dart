@@ -7,7 +7,7 @@ const COLOR_CREAM = Color(0xFFFCDAB7);
 
 const url = "https://fiit-mtaa-backend.herokuapp.com";
 
-const ip = "10.10.10.10";
+const ip = "192.168.73.132";
 
 late String set_ip = ip;
 

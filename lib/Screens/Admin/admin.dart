@@ -121,9 +121,12 @@ class _AdminScreenState extends State<AdminScreen> {
                       style: TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
+                      if(ip_const == null){
+                        ip_const = await set_ip;
+                      }
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => CallSample(host: "147.175.163.54",)));
+                          builder: (context) => CallSample(host: ip_const,)));
                     },
                   ),
                 ),

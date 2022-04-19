@@ -4,6 +4,7 @@ import 'package:frontend/Backend_calls/Customers/add_order.dart';
 import 'package:frontend/Backend_calls/Customers/get_computers.dart';
 import 'package:frontend/Utils/funcs.dart';
 import 'package:frontend/webRTC/call_sample/call_sample.dart';
+import 'package:http/http.dart';
 
 import '../../../Backend_calls/Users/profile_pictures.dart';
 import '../../../Utils/constants.dart';
@@ -167,9 +168,13 @@ class _OrderRepairScreenState extends State<OrderRepairScreen> {
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
-                        onPressed: () {
+                        onPressed: () async {
+                          if(ip_const == null){
+                            ip_const = await set_ip;
+                          }
+                          print(ip_const);
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => CallSample(host: "147.175.163.54",)));
+                              builder: (context) => CallSample(host: ip_const,)));
                         },
                       ),
                     ),
